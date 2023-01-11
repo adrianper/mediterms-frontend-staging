@@ -1,0 +1,31 @@
+$radioSize: 16px;
+$radioMargin: 6px;
+.radio_button {
+    .radio_button__input {
+        display: flex;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &.checked {
+            .radio_button__circle {
+                visibility: visible;
+            }
+        }
+        .radio_button__circle {
+            width: $radioSize;
+            height: $radioSize;
+            margin: $radioMargin;
+            border-radius: 50%;
+            visibility: hidden;
+            @each $size in 2, 3, 4 {
+                &.size__#{$size} {
+                    width: calc($radioSize + ($radioSize/3)*($size - 1));
+                    height: calc($radioSize + ($radioSize/3)*($size - 1));
+                    // margin: calc(#{$radioMargin} + #{$size - 1}px);
+                }
+            }
+        }
+    }
+}
