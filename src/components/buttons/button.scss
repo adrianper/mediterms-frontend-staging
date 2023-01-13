@@ -1,0 +1,14 @@
+.button {
+    font-weight: bold;
+    padding: 10px;
+    border: none; //2px solid var(--border-color--second);
+    border-radius: 0.5em;
+    background-color: var(--bg-color--second);
+    margin-top: 1em;
+    cursor: pointer;
+    color: var(--text-color--white);
+
+    &:hover {
+        background-color: var(--bg-color--third-alter);
+    }
+}
