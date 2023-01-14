@@ -10,6 +10,14 @@
         &.label2 { }
     } 
 
+    &--size-l {
+        gap: 1em;
+        margin: 4px 0 4px 0;
+        .toggle_switch__switch {
+            transform: scale(1.5);
+        }
+    }
+    
     .toggle_switch__switch {
         position: relative;
         display: inline-block;
@@ -40,7 +48,8 @@
             }
     
             &.active {
-                background-color: #24be58;
+                // background-color: #24be58;
+                background-color: var(--bg-color--third);
     
                 &:before {
                     transform: translateX(15px);

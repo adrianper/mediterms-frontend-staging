@@ -8,6 +8,7 @@ const Toggle = (props, ref) => {
         label2,
         value = false,
         onChange,
+        large = false
     } = props
 
     const handleChange = useCallback(() => {
@@ -15,7 +16,7 @@ const Toggle = (props, ref) => {
     }, [])
 
     return (
-        <div className="toggle_switch">
+        <div className={`toggle_switch${large ? ' toggle_switch--size-l':''}`}>
             {label1 && <label className="toggle_switch__label label1">{label1}</label>}
             <div className="toggle_switch__switch" onClick={handleChange}>
                 <span className={`toggle_switch__slider${value ? ' active' : ''}`}></span>
