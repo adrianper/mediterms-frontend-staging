@@ -1,3 +1,5 @@
+@import 'styles/general/variables.scss';
+
 .side_menu {
     height: calc(100vh - 60px);
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s width;
@@ -9,8 +11,11 @@
     }
 
     &.open {
-        width: 25rem;
+        width: 100vw;
         border-right: 2px solid var(--border-color--third-alter);
+        @media screen and (min-width: #{$size--tablet}) {
+            width: 25rem;
+        }
     }
 
     .side_menu__link_container {

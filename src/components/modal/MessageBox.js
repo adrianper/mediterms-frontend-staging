@@ -1,7 +1,7 @@
 
 import React, { forwardRef, memo, useCallback, useImperativeHandle, useRef, useReducer } from 'react'
 
-import { Flex, Grid } from 'components'
+import { Button, Flex, Grid } from 'components'
 
 const initReducer = {
     isOpen: false,
@@ -108,7 +108,7 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
                     {messageTitle != '' && <p className='message_box__title'>{messageTitle}</p>}
                     {contentRender}
                     <Flex wrap className='message_box__buttons' justify='center'>
-                        <button onClick={hide}>Cerrar</button>
+                        <Button onClick={hide}>Cerrar</Button>
                     </Flex>
                 </Grid>
             </Flex>

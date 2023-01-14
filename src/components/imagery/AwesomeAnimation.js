@@ -23,12 +23,12 @@ const AwesomeAnimation = forwardRef(function AwesomeAnimation(props, ref) {
         hover,
         ref
     }
-    
+
     const iconProps = {
         spin,
         title,
         icon: [gallery, icon],
-        style: {width: 'auto', height: size},
+        style: { width: 'auto', height: size },
         ...extras
     }
 
@@ -36,7 +36,6 @@ const AwesomeAnimation = forwardRef(function AwesomeAnimation(props, ref) {
 
     return (
         <AnimationPlayer {...playerProps}>
-            <div>🌵</div>
             {/* <FontAwesomeIcon {...iconProps} /> */}
         </AnimationPlayer>
     )
@@ -44,7 +43,7 @@ const AwesomeAnimation = forwardRef(function AwesomeAnimation(props, ref) {
 
 AwesomeAnimation.propTypes = {
     style: PropTypes.string,
-    icon: PropTypes.string,
+    icon: PropTypes.node,
     spin: PropTypes.bool,
     title: PropTypes.string,
     animation: PropTypes.string,
