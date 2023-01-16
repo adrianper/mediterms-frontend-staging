@@ -2,18 +2,19 @@ import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, u
 import reactFastCompare from 'react-fast-compare'
 
 const AnimationPlayer = (props, ref) => {
-    let { duration } = props
     const {
+        duration,
         children,
         animation,
         hover = false,
     } = props
-
+    
     /*------------------------------------STATE---------------------------------*/
     const [animate, setAnimate] = useState(false)
 
     /*------------------------------------REF---------------------------------*/
     const containerRef = useRef() //{current: undefined}
+    const durationRef = useRef(duration)
 
     /*------------------------------------FUNCTIONS---------------------------------*/
     const playAnimation = useCallback(() => {
@@ -28,17 +29,17 @@ const AnimationPlayer = (props, ref) => {
     /*------------------------------------EFFECT---------------------------------*/
     useEffect(() => {
         containerRef.current.style.animationDuration = `${duration}s`
-    }, [])
+    }, [duration])
 
     useEffect(() => {
-        if(!duration) duration = 0.6
+        if(!duration) durationRef.current = 0.6
 
         if (animate)
             setTimeout(() => {
                 containerRef.current.classList.remove(`animation--${animation}`)
                 setAnimate(false)
             }, duration*1000 )
-    }, [animate])
+    }, [animate, animation, duration])
 
     /*------------------------------------RENDER---------------------------------*/
     const playerProps = {

@@ -1,16 +1,16 @@
-import {useEffect} from 'react'
+import { useCallback, useEffect } from 'react'
 
-const useOnResizeWindow = (callback, v = []) => {
-    const onResize = e => {
+const useOnResizeWindow = (callback) => {
+    const onResize = useCallback(e => {
         callback(e)
-    }
-    
+    }, [callback])
+
     useEffect(() => {
         window.addEventListener('resize', onResize)
         return () => {
             window.removeEventListener('resize', onResize)
         }
-    }, v)
+    }, [onResize])
 }
 
 export default useOnResizeWindow
