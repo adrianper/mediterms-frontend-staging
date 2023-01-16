@@ -2,6 +2,7 @@ import React, { forwardRef, memo, useCallback, useEffect, useImperativeHandle, u
 import reactFastCompare from 'react-fast-compare'
 
 const AnimationPlayer = (props, ref) => {
+    
     const {
         duration,
         children,
@@ -28,7 +29,7 @@ const AnimationPlayer = (props, ref) => {
 
     /*------------------------------------EFFECT---------------------------------*/
     useEffect(() => {
-        containerRef.current.style.animationDuration = `${duration}s`
+        containerRef.current.style.animationDuration = `${durationRef.current}s`
     }, [duration])
 
     useEffect(() => {
@@ -38,7 +39,7 @@ const AnimationPlayer = (props, ref) => {
             setTimeout(() => {
                 containerRef.current.classList.remove(`animation--${animation}`)
                 setAnimate(false)
-            }, duration*1000 )
+            }, durationRef.current*1000 )
     }, [animate, animation, duration])
 
     /*------------------------------------RENDER---------------------------------*/
