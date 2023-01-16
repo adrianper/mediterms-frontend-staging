@@ -18,9 +18,7 @@
 ### Set Backend HostURL
 1. Open scripts/generalVariables.js
 2. Change the hostURL for development value
-
 ### Run
 - To start server run in terminal `npm start` and you could see the console output in the terminal.
-
 ### Preview
 - To see the app open in your browser http://localhost:5000
