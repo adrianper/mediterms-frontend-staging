@@ -19,7 +19,7 @@ const TextField = forwardRef(function TextField(props, ref) {
 
     const handleChange = useCallback((e) => {
         onChange(e.target.value)
-    }, [])
+    }, [onChange])
 
     /*------------------------------------EXTERNAL FUNCTIONS-------------------------------*/
     useImperativeHandle(ref, () => ({
@@ -40,7 +40,7 @@ const TextField = forwardRef(function TextField(props, ref) {
         height: h100 && '100%',
         maxWidth,
         ...style
-    }), [padding, margin, w100, h100, maxWidth])
+    }), [padding, margin, w100, h100, maxWidth, style])
 
     !label && (className += ' no_label')
     if (value !== '' || focused) className += ' label_up'

@@ -34,8 +34,8 @@ const Grid = (props, ref) => {
         maxWidth,
         ...style
     }), [padding, margin, gap, columns, rows, autoColumns, autoRows,
-        direction, centerContent, centerItems,
-        itemsX, itemsY, contentX, contentY, w100, h100])
+        direction, //centerContent, centerItems,
+        itemsX, itemsY, contentX, contentY, w100, h100, maxWidth, style])
 
     className = className ? `${className} grid` : 'grid'
     

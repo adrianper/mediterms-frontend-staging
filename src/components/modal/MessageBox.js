@@ -19,6 +19,8 @@ const reducer = (state, action) => {
             return { ...state, ...action.payload, isOpen: true }
         case 'hide':
             return { ...initReducer, isOpen: false }
+        default:
+            return initReducer
     }
 }
 
@@ -26,14 +28,14 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
 
     let {
         className = '',
-        buttons
+        // buttons
     } = props
 
     const [state, dispatch] = useReducer(reducer, initReducer)
 
     /*---------------------------------------STATE-------------------------------------------*/
     const {
-        messageContent, messageType, messageTitle, messageAnimation, isOpen
+        messageContent, messageType, messageTitle, /*messageAnimation,*/ isOpen
     } = state
 
     /*---------------------------------------REFS--------------------------------------------*/
@@ -70,7 +72,7 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
     }))
 
     /*--------------------------------------RENDER-------------------------------------------*/
-    className = className ? `message_box ${className}`:'message_box'
+    className = className ? `message_box ${className}` : 'message_box'
 
     const containerProps = { className: 'message_box__content', gap: '1em', w100: true }
 
@@ -97,15 +99,16 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
                     </Grid>
                 )
                 break
+            default: contentRender = null
         }
 
         return (
             <Flex w100 h100 align='center' justify='center' className='message_box_modal' ref={messageBoxRef}>
-                <Grid w100 className={className} padding='1em' gap='2em' rows={messageTitle !== '' ? 'auto 1fr auto':'1fr auto'}>
+                <Grid w100 className={className} padding='1em' gap='2em' rows={messageTitle !== '' ? 'auto 1fr auto' : '1fr auto'}>
                     {/* <Flex centerX maxHeight='10em'>
                         <Animation autoplay loop animation={messageAnimation} />
                     </Flex> */}
-                    {messageTitle != '' && <p className='message_box__title'>{messageTitle}</p>}
+                    {messageTitle !== '' && <p className='message_box__title'>{messageTitle}</p>}
                     {contentRender}
                     <Flex wrap className='message_box__buttons' justify='center'>
                         <button onClick={hide}>Cerrar</button>

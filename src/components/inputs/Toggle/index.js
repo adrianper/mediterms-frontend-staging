@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useCallback, useState } from 'react'
+import React, { forwardRef, memo, useCallback } from 'react'
 
 import './styles.scss'
 
@@ -12,7 +12,7 @@ const Toggle = (props, ref) => {
 
     const handleChange = useCallback(() => {
         onChange(value => !value)
-    }, [])
+    }, [onChange])
 
     return (
         <div className="toggle_switch">

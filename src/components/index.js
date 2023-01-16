@@ -11,6 +11,7 @@ export { default as AwesomeAnimation } from './imagery/AwesomeAnimation'
 export { default as CharacterField } from './inputs/CharacterField'
 export { default as RadioButton } from './inputs/RadioButton'
 export { default as TextField } from './inputs/TextField'
+export { default as Toggle } from './inputs/Toggle'
 
 // ---------------------------LOADING---------------------------
 export { default as Loading } from './loading/Loading'

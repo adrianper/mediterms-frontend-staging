@@ -1,11 +1,10 @@
-import { Home, /*TestComponents*/ } from 'pages'
-// import { FaReact } from 'react-icons/fa'
-import { AiFillHome/*, AiOutlineLogin, AiOutlineCalculator */} from 'react-icons/ai'
-// import { BsFilePost, BsFillChatLeftDotsFill } from 'react-icons/bs'
+import { Home, Login, ReduxCounter, Signup, TestComponents } from 'pages'
+import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
+import { RiTestTubeFill } from 'react-icons/ri'
 
-export const headerRoutes = ['home']//, 'login', 'signup']
+export const headerRoutes = ['home', 'login', 'signup']
 
-export const sideMenuRoutes = []//['chat', 'users_posts', 'app', 'redux_counter']
+export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const routes = {
     home: {
@@ -14,26 +13,27 @@ export const routes = {
         element: <Home />,
         icon: <AiFillHome />
     },
-    // login: {
-    //     path: '/login',
-    //     linkName: 'Login',
-    //     element: <Login />,
-    //     icon: <AiOutlineLogin />
-    // },
-    // signup: {
-    //     path: '/signup',
-    //     linkName: 'Signup',
-    //     element: <Signup />
-    // },
-    // redux_counter: {
-    //     path: '/redux_counter',
-    //     linkName: 'Counter',
-    //     element: <ReduxCounter />,
-    //     // icon: <AiOutlineCalculator />
-    // },
-    // testComponents: {
-    //   path: '/testComponents',
-    //   linkName: 'Test Components',
-    //   element: <TestComponents />
-    // },
+    login: {
+        path: '/login',
+        linkName: 'Login',
+        element: <Login />,
+        icon: <AiOutlineLogin />
+    },
+    signup: {
+        path: '/signup',
+        linkName: 'Signup',
+        element: <Signup />
+    },
+    redux_counter: {
+        path: '/redux_counter',
+        linkName: 'Counter',
+        element: <ReduxCounter />,
+        icon: <AiOutlineCalculator />
+    },
+    testComponents: {
+        path: '/testComponents',
+        linkName: 'Test Components',
+        element: <TestComponents />,
+        icon: <RiTestTubeFill />
+    },
 }

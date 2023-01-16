@@ -9,12 +9,12 @@ const AwesomeAnimation = forwardRef(function AwesomeAnimation(props, ref) {
         animation,
         duration,
         hover,
-        gallery = 'fas',
+        // gallery = 'fas',
         icon,
-        spin,
-        title,
-        size,
-        ...extras
+        // spin,
+        // title,
+        // size,
+        // ...extras
     } = props
 
     const playerProps = {
@@ -24,13 +24,13 @@ const AwesomeAnimation = forwardRef(function AwesomeAnimation(props, ref) {
         ref
     }
     
-    const iconProps = {
-        spin,
-        title,
-        icon: [gallery, icon],
-        style: {width: 'auto', height: size},
-        ...extras
-    }
+    // const iconProps = {
+    //     spin,
+    //     title,
+    //     icon: [gallery, icon],
+    //     style: {width: 'auto', height: size},
+    //     ...extras
+    // }
 
     if (!icon) return null
 

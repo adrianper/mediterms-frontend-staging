@@ -7,7 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
 import { routes } from './routes'
 
-// import store from 'redux/store'
+import store from 'redux/store'
 
 import Layout from 'pages/Layout'
 // import { ToastContainer } from 'react-toastify'
@@ -19,8 +19,8 @@ const App = () => {
     const AppProviders = useComposeProviders(/*SocketContextProvider,*/ ScreenSizeContextProvider, SideMenuContextProvider)
 
     return (
-        // <ReduxProvider store={store}>
-        //     <ToastContainer />
+        <ReduxProvider store={store}>
+            {/* <ToastContainer /> */}
             <AppProviders>
                 <RouterProviders>
                     <Route path={routes.home.path} element={<Layout />}>
@@ -28,10 +28,9 @@ const App = () => {
                             <Route key={route} path={routes[route].path} element={routes[route].element} />
                         )}
                     </Route>
-                    {/* <Route path='' */}
                 </RouterProviders>
             </AppProviders>
-        // </ReduxProvider>
+        </ReduxProvider>
     )
 }
 
