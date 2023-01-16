@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useOnResizeWindow } from 'hooks'
 
@@ -7,7 +7,7 @@ import { screenSizes } from 'scripts/generalVariables'
 const useScreenSize = () => {
     const [screenSize, setScreenSize] = useState('')
 
-    const checkscreenSizes = () => {
+    const checkscreenSizes = useCallback(() => {
 
         if (window.matchMedia(`(min-width: ${screenSizes['4k']}px)`).matches)
             return screenSize !== screenSizes['$4k'] ? setScreenSize(screenSizes['$4k']) : null
@@ -26,15 +26,13 @@ const useScreenSize = () => {
             return screenSize !== screenSizes['tablet'] ? setScreenSize(screenSizes['tablet']) : null
 
         return screenSize !== screenSizes['mobile'] ? setScreenSize(screenSizes['mobile']) : null
-    }
-
-    useOnResizeWindow(() => {
-        checkscreenSizes()
     }, [screenSize])
+
+    useOnResizeWindow(checkscreenSizes)
 
     useEffect(() => {
         checkscreenSizes()
-    }, [])
+    }, [checkscreenSizes])
 
     return screenSize
 }

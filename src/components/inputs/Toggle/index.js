@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useCallback, useState } from 'react'
+import React, { forwardRef, memo, useCallback } from 'react'
 
 import './styles.scss'
 
@@ -8,15 +8,14 @@ const Toggle = (props, ref) => {
         label2,
         value = false,
         onChange,
-        large = false
     } = props
 
     const handleChange = useCallback(() => {
         onChange(value => !value)
-    }, [])
+    }, [onChange])
 
     return (
-        <div className={`toggle_switch${large ? ' toggle_switch--size-l':''}`}>
+        <div className="toggle_switch">
             {label1 && <label className="toggle_switch__label label1">{label1}</label>}
             <div className="toggle_switch__switch" onClick={handleChange}>
                 <span className={`toggle_switch__slider${value ? ' active' : ''}`}></span>

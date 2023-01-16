@@ -3,7 +3,7 @@ global.setCookieOnce = (name, value) => {
 }
 
 global.getCookieToken = () =>
-    document.cookie.replace(/(?:(?:^|.*;\s*)x-access-token\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+    document.cookie.replace(/(?:(?:^|.*;\s*)x-access-token\s*=\s*([^;]*).*$)|^.*$/, "$1")
 
 // global.getCookieValue = (name) =>
 //     document.cookie.replace(new RegExp('/(?:(?:^|.*;\s*)' + name + '\s*\=\s*([^;]*).*$)|^.*$/'), "$1")
