@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './home.scss';
+import React from 'react'
 
-function Home() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { Flex, Grid } from 'components'
+
+import './home.scss'
+import { useNavigate } from 'react-router-dom'
+
+const Home = () => {
+
+    const navigate = useNavigate()
+
+    return (
+        <Grid className="home_page" gap="1.5rem">
+            <Flex onClick={() => { navigate(`/terms/all`) }} className="section_card">
+                <b>Todos los terminos</b>
+            </Flex>
+            <Grid gap="1rem">
+                <Flex onClick={() => { navigate(`/terms/suffixes`) }} className="section_card" direction="column">
+                    <b>Subfijos</b>
+                    <p>Principiante</p>
+                </Flex>
+                <Flex onClick={() => { navigate(`/terms/prefixes`) }} className="section_card" direction="column">
+                    <b>Prefijos</b>
+                    <p>Principiante</p>
+                </Flex>
+                <Flex onClick={() => { navigate(`/terms/hospital`) }} className="section_card" direction="column">
+                    <b>Terminos hospitalarios</b>
+                    <p>Principiante</p>
+                </Flex>
+            </Grid>
+        </Grid>
+    )
 }
 
-export default Home;
+export default Home
