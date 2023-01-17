@@ -72,7 +72,8 @@ const FormHandler = (props, ref) => {
     /*--------------------------------------RENDER-----------------------------------*/
     let fieldCount = 0
     return Object.keys(fields).map((key, i) => key.includes('label') ?
-        <Text {...{ key, children: fields[key] }} />
+        <p key={key}>{fields[key]}</p>
+        // <Text {...{ key, children: fields[key] }} />
         :
         renderInput(fields[key].input, { key, ref: fieldsRef.current[fieldCount++], ...fields[key].inputProps, ...setInputProps(key) })
     )
