@@ -51,8 +51,8 @@
     
     //-----------------------------COLOR--------------------------------------
     @each $color in error, first, second, third, fourth, alter--first, alter--second, alter--third, alter--fourth {
-        &.text--color--#{$color}{
-            color: RGB(var(--text--color--#{$color}));
+        &.text-color--#{$color}{
+            color: var(--text-color--#{$color});
         }    
     }
 }
@@ -65,7 +65,7 @@ h1, h2, h3 {
     }
 }
 .text {
-    color: RGB(var(--text--color--first));
+    color: var(--text-color--black-alter);
     text-align: left;
     font-size: getTextSize(3);
     font-family: var(--font--family--main);
