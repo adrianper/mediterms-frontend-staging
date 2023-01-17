@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, TestComponents } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -36,4 +36,9 @@ export const routes = {
         element: <TestComponents />,
         icon: <RiTestTubeFill />
     },
+    terms: {
+        path: '/terms/:id',
+        linkName: 'Terms',
+        element: <Terms />,
+    }
 }
