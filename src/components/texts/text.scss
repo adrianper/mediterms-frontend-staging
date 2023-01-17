@@ -1,0 +1,84 @@
+@import '../../styles/general/fonts.scss';
+
+@mixin text_elipsis{
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@function getTextSize($i){
+    $size: map-get((
+        1: var(--text-size--1),
+        2: var(--text-size--2),
+        3: var(--text-size--3),
+        4: var(--text-size--4),
+        5: var(--text-size--5),
+        6: var(--text-size--6),
+        7: var(--text-size--7),
+    ), $i);
+
+    @return $size;
+}
+
+@mixin text_props(){
+    //------------------------------SIZE--------------------------------------
+    @for $i from 1 through 11{
+        &.text-size--#{$i}{ font-size: getTextSize($i); } 
+    }
+    
+    //----------------------------ALIGN--------------------------------------
+    @each $align in left, center, right, justify {
+        &.text-align--#{$align}{ text-align: $align; }    
+    }
+    
+    //----------------------------WEIGHT--------------------------------------
+    &.text--regular{ font-weight: $font--regular; }
+    &.text--medium{ font-weight: $font--medium; }
+    &.text--bold{ font-weight: $font--bold; }
+    
+    
+    //----------------------------DECORATION--------------------------------------
+    &.text--underline{ text-decoration: underline; }
+    
+    //----------------------------SELECTABLE--------------------------------------
+    &.text--unselectable{ user-select: none; }
+    
+    //------------------------------ELIPSIS---------------------------------------
+    &.text--elipsis{
+        @include text_elipsis;
+    }
+    
+    //-----------------------------COLOR--------------------------------------
+    @each $color in error, first, second, third, fourth, alter--first, alter--second, alter--third, alter--fourth {
+        &.text--color--#{$color}{
+            color: RGB(var(--text--color--#{$color}));
+        }    
+    }
+}
+
+
+h1, h2, h3 {
+    &.text {
+        font-weight: bold;
+        color: RGB(var(--color--black--4));
+    }
+}
+.text {
+    color: RGB(var(--text--color--first));
+    text-align: left;
+    font-size: getTextSize(3);
+    font-family: var(--font--family--main);
+}
+
+.text {
+    @include text_props();
+}
+
+.text {
+    .icon {
+        margin: 0.3em 0.5em -0.5em 0.5em;
+        width: 1.8em;
+        height: 1.8em;
+    }
+}
