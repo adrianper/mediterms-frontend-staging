@@ -24,7 +24,7 @@ const FormHandler = (props, ref) => {
     /*--------------------------------------FUNCTIONS-----------------------------------*/
     const handleChangeData = useCallback((name, value) => {
         setFormData(formData => ({ ...formData, [name]: value }))
-    }, [])
+    }, [setFormData])
 
     const setInputProps = (name) => {
         const {
@@ -38,7 +38,7 @@ const FormHandler = (props, ref) => {
 
         return ({
             onChange: handleChangeField,
-            value: formData[name] || fields[name].inputProps && fields[name].inputProps.defaultValue
+            value: formData[name] || (fields[name].inputProps && fields[name].inputProps.defaultValue)
         })
     }
 
@@ -47,10 +47,10 @@ const FormHandler = (props, ref) => {
         const errors = []
         let valid = true
 
-        fieldsRef.current.map(f => {
+        fieldsRef.current.forEach(f => {
             if (f.current.validate && !f.current.validate()) {
                 valid = false
-                if (f.current.errorMessage != '')
+                if (f.current.errorMessage !== '')
                     errors.push(f.current.errorMessage)
             }
         })
@@ -61,7 +61,7 @@ const FormHandler = (props, ref) => {
         }
 
         return valid
-    }, [fieldsRef.current/*, messageBox.current*/])
+    }, [])
 
     useImperativeHandle(ref, () => ({
         validate: validateFields,

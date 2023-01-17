@@ -2,6 +2,7 @@
 export { default as Accordion } from './containers/accordions/Accordion'
 export { default as Grid } from './containers/Grid'
 export { default as Flex } from './containers/Flex'
+export { default as FormHandler } from './containers/FormHandler/FormHandler'
 
 // ---------------------------IMAGERY--------------------------
 export { default as AnimationPlayer } from './imagery/AnimationPlayer'
