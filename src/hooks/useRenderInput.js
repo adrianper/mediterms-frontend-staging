@@ -25,6 +25,8 @@ const useRenderInput = () => (input, inputProps) => {
             return null//<RecordGroupCheckBox {...inputProps} />
         case 'text_field':
             return <TextField {...inputProps} />
+        default:
+            return null
     }
 }
 

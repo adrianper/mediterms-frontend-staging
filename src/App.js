@@ -13,7 +13,6 @@ import Layout from 'pages/Layout'
 // import { ToastContainer } from 'react-toastify'
 // import 'react-toastify/dist/ReactToastify.css'
 import { SideMenuContextProvider } from 'context/SideMenuContext'
-import { Terms } from 'pages'
 
 const App = () => {
     const RouterProviders = useComposeProviders(Router, Routes)
