@@ -9,6 +9,7 @@
 // ----------------------CUSTOM COLORS-------------------
 
 $black--1: hexToRgb(#000000);
+$black--2: hexToRgb(#162127);
 $white--1: hexToRgb(#FFFFFF);
 $white--2: hexToRgb(#f3f3f3);
 $red--1: hexToRgb(#F00);
@@ -18,6 +19,8 @@ $gray--2: hexToRgb(#a6b1e1);
 $gray--3: hexToRgb(#17192e);
 $purple--1: hexToRgb(#DCD6F7);
 $purple--2: hexToRgb(#bf85d6);
+$blue--1: hexToRgb(#0077B6);
+$blue--2: hexToRgb(#00B4D8);
 
 
 @mixin colorVariants($colorVariant, $color) {
@@ -28,9 +31,9 @@ $purple--2: hexToRgb(#bf85d6);
 
 body {
 
-    @include colorVariants(first, $gray--3);
+    @include colorVariants(first, $blue--1);
     @include colorVariants(first-alter, $gray--2);
-    @include colorVariants(second, $gray--2);
+    @include colorVariants(second, $blue--2);
     @include colorVariants(second-alter, $gray--1);
     @include colorVariants(third, $purple--2);
     @include colorVariants(third-alter, $purple--1);
@@ -39,6 +42,7 @@ body {
     @include colorVariants('white', $white--1);
     @include colorVariants(white-alter, $white--2);
     @include colorVariants('black', $black--1);
+    @include colorVariants(black-alter, $black--2);
 
     &.theme--first {
         background-color: RGB(#{$white--1});
