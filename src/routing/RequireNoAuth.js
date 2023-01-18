@@ -4,7 +4,10 @@ import { Navigate } from "react-router-dom"
 const RequireNoAuth = ({ children }) => {
     const { authenticated } = useSelector(store => store.auth)
 
-    return authenticated ? children : <Navigate to="/" replace />
+    console.log('Authenticated: ', authenticated)
+
+
+    return !authenticated ? children : <Navigate to="/" replace />
 }
 
 export default RequireNoAuth
