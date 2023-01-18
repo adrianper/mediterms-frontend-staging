@@ -6,12 +6,21 @@ export const headerRoutes = ['home', 'login', 'signup']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
+export const publicRoutes = ['home', 'terms']
+export const requireNoAuthRoutes = ['login', 'signup']
+export const requireAuthRoutes = ['redux_counter', 'testComponents']
+
 export const routes = {
     home: {
         path: '/',
         linkName: 'Home',
         element: <Home />,
         icon: <AiFillHome />
+    },
+    terms: {
+        path: '/terms/:id',
+        linkName: 'Terms',
+        element: <Terms />,
     },
     login: {
         path: '/login',
@@ -36,9 +45,4 @@ export const routes = {
         element: <TestComponents />,
         icon: <RiTestTubeFill />
     },
-    terms: {
-        path: '/terms/:id',
-        linkName: 'Terms',
-        element: <Terms />,
-    }
 }
