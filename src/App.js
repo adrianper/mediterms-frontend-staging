@@ -5,7 +5,7 @@ import { useComposeProviders } from 'hooks'
 import { Provider as ReduxProvider } from 'react-redux'
 // import { SocketContextProvider } from 'context/SocketContext'
 import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
-import { publicRoutes, requireAuthRoutes, requireNoAuthRoutes, routes } from './routes'
+import { publicRoutes, requireAuthRoutes, requireNoAuthRoutes, routes } from 'routing/routes'
 
 import store from 'redux/store'
 

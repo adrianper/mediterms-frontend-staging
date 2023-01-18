@@ -1,5 +1,5 @@
 import { Grid } from 'components'
-import { routes, sideMenuRoutes } from 'routes'
+import { routes, sideMenuRoutes } from 'routing/routes'
 import useSideMenuContext from 'hooks/useSideMenuContext'
 import React from 'react'
 import { Link as PageLink } from 'react-router-dom'

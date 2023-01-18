@@ -3,7 +3,7 @@ import { Link as PageLink } from 'react-router-dom'
 
 import { AiOutlineBars } from 'react-icons/ai'
 
-import { headerRoutes, routes } from 'routes'
+import { headerRoutes, routes } from 'routing/routes'
 import { Flex, Grid } from 'components'
 
 import './header.scss'
