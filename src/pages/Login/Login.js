@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link as PageLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Grid, TextField, Text } from 'components'
+import { routes } from 'routing/routes'
 
 import './login.scss'
 import { login, reset } from 'redux/reducers/auth/authSlice'
@@ -68,7 +69,9 @@ const Login = () => {
                     <Button type="submit" selfCenter>Ingresar</Button>
 
                     <Grid gap="2em" margin="1em 0em 0em 0em">
+                    <PageLink to={routes.signup.path} >
                         <Text medium align="center" color="first">Abrir una cuenta</Text>
+                    </PageLink>
                         <Text medium align="center" color="second">Olvidé mi contraseña</Text>
                     </Grid>
                 </Grid>

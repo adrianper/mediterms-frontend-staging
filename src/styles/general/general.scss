@@ -7,6 +7,8 @@
     --text-size--5: 18px;
     --text-size--6: 20px;
     --text-size--7: 22px;
+    --text-size--8: 24px;
+    --text-size--9: 56px;
 
     @media screen and (min-width: $size--laptop) {
         --text-size--5: 20px;
@@ -66,6 +68,8 @@ body {
 #root {
     display: grid;
     height: 100%;
+    background: linear-gradient(141deg, rgba(0,180,216,1) 15%, rgba(0,119,182,1) 85%);
+
 }
 
 .layout__content {
