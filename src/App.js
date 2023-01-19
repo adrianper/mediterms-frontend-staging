@@ -30,23 +30,17 @@ const App = () => {
                         {publicRoutes.map(routeName =>
                             <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
                         )}
-                        {requireAuthRoutes.map(routeName => (
-                            <Route key={routeName}
-                                path={routes[routeName].path}
-                                element={
-                                    <RequireAuth children={routes[routeName].element} />
-                                }
-                            />
-                        ))}
+                        <Route element={<RequireAuth />}>
+                            {requireAuthRoutes.map(routeName =>
+                                <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
+                            )}
+                        </Route>
                     </Route>
-                    {requireNoAuthRoutes.map(routeName => (
-                        <Route key={routeName}
-                            path={routes[routeName].path}
-                            element={
-                                <RequireNoAuth children={routes[routeName].element} />
-                            }
-                        />
-                    ))}
+                    <Route element={<RequireNoAuth />}>
+                        {requireNoAuthRoutes.map(routeName =>
+                            <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
+                        )}
+                    </Route>
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </RouterProviders>
             </AppProviders>
