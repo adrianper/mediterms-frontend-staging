@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux"
-import { Navigate } from "react-router-dom"
+import { Navigate, Outlet, useLocation } from "react-router-dom"
+import { routes } from "./routes"
 
-const RequireNoAuth = ({ children }) => {
+const RequireNoAuth = () => {
     const { authenticated } = useSelector(store => store.auth)
+    const location = useLocation()
 
-    console.log('Authenticated: ', authenticated)
-
-
-    return !authenticated ? children : <Navigate to="/" replace />
+    return !authenticated ? <Outlet /> : <Navigate to={location.state?.from.pathname || routes.home.path} replace />
 }
 
 export default RequireNoAuth
