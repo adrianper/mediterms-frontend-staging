@@ -10,7 +10,7 @@ axios.interceptors.response.use((response) => {
 }, (error) => {
     //Any status code that falls outside the range of 2xx
     if (error.response.data.errors) {
-        if (response.data.code === 'TOKEN_EXPIRED')
+        if (error.response.data.code === 'TOKEN_EXPIRED')
             window.location.href = window.location.href.split('#')[0] + '#/login'
 
         console.error('Error code: ', error.response.data.code)
