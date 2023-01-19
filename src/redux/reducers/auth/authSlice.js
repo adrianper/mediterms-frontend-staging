@@ -3,9 +3,9 @@ import authService from './authService'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
-const initState = {
-    user: null,
-    authenticated: false,
+const initialState = {
+    user: user,
+    authenticated: !!user,
     isLoading: false,
     message: '',
 }
@@ -34,15 +34,13 @@ export const login = createAsyncThunk('/auth/login', async (userData, thunkAPI) 
 
 const authSlice = createSlice({
     name: 'counter',
-    initialState: {
-        ...initState,
-        user: user ?? null
-    },
+    initialState,
     reducers: {
         reset: state => {
-            Object.keys(state).forEach(key => {
-                state[key] = initState[key]
-            })
+            state.user = null
+            state.authenticated = false,
+            state.isLoading = false,
+            state.message = ''
         },
     },
     extraReducers: (builder) => {
