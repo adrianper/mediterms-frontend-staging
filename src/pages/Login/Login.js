@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useCallback,/* useEffect,*/ useState } from 'react'
+import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { /*useSelector,*/ useDispatch } from 'react-redux'
 
 import { Button, Grid, TextField, Text } from 'components'
+import { routes } from 'routing/routes'
 
 import './login.scss'
-import { login, reset } from 'redux/reducers/auth/authSlice'
+import { login/*, reset*/ } from 'redux/reducers/auth/authSlice'
 // import { toast } from 'react-toastify'
 
 // withCredentials: true, //[allow sert 3rd party cookies] / [send cookies]
@@ -14,10 +15,11 @@ import { login, reset } from 'redux/reducers/auth/authSlice'
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' })
 
-    const { auth } = useSelector(store => store)
-    const { /*user, */authenticated } = auth
+    // const { auth } = useSelector(store => store)
+    // const { /*user, */authenticated } = auth
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
+    // const location = useLocation()
     const dispatch = useDispatch()
 
     const handleChange = useCallback((value, name) => {
@@ -43,13 +45,13 @@ const Login = () => {
         })
     }
 
-    useEffect(() => {
-        if (authenticated) navigate('/users')
-    }, [authenticated, navigate])
+    // useEffect(() => {
+    //     if (authenticated) navigate(location.state?.from.pathname || '/users')
+    // }, [authenticated, navigate])
 
     return (
         <Grid className="login" itemsX="center" gap="4.28em" padding="4.28em 0em 0em 0em">
-            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png"/>
+            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
 
             <form onSubmit={handleSumbit}>
                 <Grid w100 padding="1.72em 1.1em" className="login__form" gap="1.3em" maxWidth="22em">
@@ -68,7 +70,9 @@ const Login = () => {
                     <Button type="submit" selfCenter>Ingresar</Button>
 
                     <Grid gap="2em" margin="1em 0em 0em 0em">
-                        <Text medium align="center" color="first">Abrir una cuenta</Text>
+                        <PageLink to={routes.signup.path} >
+                            <Text medium align="center" color="first">Abrir una cuenta</Text>
+                        </PageLink>
                         <Text medium align="center" color="second">Olvidé mi contraseña</Text>
                     </Grid>
                 </Grid>
