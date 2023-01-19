@@ -38,8 +38,8 @@ const authSlice = createSlice({
     reducers: {
         reset: state => {
             state.user = null
-            state.authenticated = false,
-            state.isLoading = false,
+            state.authenticated = false
+            state.isLoading = false
             state.message = ''
         },
     },
