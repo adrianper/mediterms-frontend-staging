@@ -1,0 +1,19 @@
+.account{
+    .account__user_info{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+        img{
+            width: 4.57em;
+            filter: invert(53%) sepia(92%) saturate(1346%) hue-rotate(149deg) brightness(91%) contrast(103%);
+        }
+    }
+    .account__user_points{
+        background: var(--bg-color--blue-alter);
+        border-radius: 16px;
+    }
+    .account__logout{
+        border: solid 2px var(--border-color--white);
+        background: transparent;
+        margin-top: 0.46em;
+    }
+}
