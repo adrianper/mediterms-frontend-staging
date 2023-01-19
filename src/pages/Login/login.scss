@@ -1,5 +1,17 @@
 .login {
+    background: linear-gradient(141deg, rgba(0,180,216,1) 15%, rgba(0,119,182,1) 85%);
+    padding: 0.5em;
+    form{
+        width: 100%;
+        display: grid;
+        justify-items: center
+    }
+    img{
+        width: 9.8em;
+    }
     .login__form {
+        background: var(--bg-color--white);
+        border-radius: 16px;
         .submit_btn {
         }
     }

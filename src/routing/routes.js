@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, TestComponents } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -6,12 +6,21 @@ export const headerRoutes = ['home', 'login', 'signup']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
+export const publicRoutes = ['home', 'terms']
+export const requireNoAuthRoutes = ['login', 'signup']
+export const requireAuthRoutes = ['redux_counter', 'testComponents']
+
 export const routes = {
     home: {
         path: '/',
         linkName: 'Home',
         element: <Home />,
         icon: <AiFillHome />
+    },
+    terms: {
+        path: '/terms/:id',
+        linkName: 'Terms',
+        element: <Terms />,
     },
     login: {
         path: '/login',
