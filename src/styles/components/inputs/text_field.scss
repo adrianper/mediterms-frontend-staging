@@ -12,6 +12,7 @@
     }
 
     .text_field__label {
+        color: var(--text-color--black-alter);
         font-size: getTextSize(2);
         line-height: 1.5em;
         display: block;
