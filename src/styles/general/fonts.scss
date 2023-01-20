@@ -5,23 +5,23 @@ $font--bold: 700;
 
 // --------------------------------COMFORTAA--------------------------------
 @font-face{
-    font-family: "Comfortaa";
-    src: url('../fonts/Comfortaa-Light.ttf') format('truetype');
+    font-family: "Montserrat";
+    src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
     font-weight: $font--light;
 }
 @font-face{
-    font-family: "Comfortaa";
-    src: url('../fonts/Comfortaa-Regular.ttf') format('truetype');
+    font-family: "Montserrat";
+    src: url('../fonts/Montserrat-Regular.ttf') format('truetype');
     font-weight: $font--regular;
 }
 @font-face{
-    font-family: "Comfortaa";
-    src: url('../fonts/Comfortaa-Medium.ttf') format('truetype');
+    font-family: "Montserrat";
+    src: url('../fonts/Montserrat-Medium.ttf') format('truetype');
     font-weight: $font--medium;
 }
 @font-face{
-    font-family: "Comfortaa";
-    src: url('../fonts/Comfortaa-Bold.ttf') format('truetype');
+    font-family: "Montserrat";
+    src: url('../fonts/Montserrat-Bold.ttf') format('truetype');
     font-weight: $font--bold;
 }
 

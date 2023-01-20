@@ -1,13 +1,25 @@
 .home_page {
+    .home_page__list{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+    }
     .section_card {
-        padding: 1rem;
+        padding: 1.5em 2em;
         border-radius: 1rem;
-        background-color: #80cdf1;
-        color: #0f87bf;
+        background-color: var(--bg-color--blue-alter);
         cursor: pointer;
-
+        text-align: center;
+        gap: 0.42em;
+        p{
+            text-align: center;
+            color: var(--text-color--first);
+        }
         &:hover {
             background-color: #20b1f4;
+        }
+        &.all_terms{
+            background-color: var(--bg-color--blue-alter-2);
+            padding: 2.23em 2em;;
         }
     }
 }
