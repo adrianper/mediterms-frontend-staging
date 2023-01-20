@@ -84,11 +84,11 @@
 
     &.focused {
         .text_field__label {
-            color: var(--text-color--third);
+            color: var(--text-color--second);
         }
 
         .text_field .text_field__fieldset {
-            border-color: var(--border-color--third);
+            border-color: var(--border-color--second);
         }
     }
 
