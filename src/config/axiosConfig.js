@@ -2,8 +2,8 @@ import axios from "axios"
 import { hostURL } from "scripts/generalVariables"
 
 axios.defaults.baseURL = hostURL
-axios.defaults.withCredentials = true
-axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token') ?? ''}`
+// axios.defaults.withCredentials = true
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}}` : ''
 axios.interceptors.response.use((response) => {
     //Any status code within the range 2xx
     return response
