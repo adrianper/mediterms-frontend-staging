@@ -11,17 +11,19 @@ const LoadingAppContext = createContext(initialState)
 export const LoadingAppContextProvider = ({ children }) => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [loadingCount, setLoadingCount] = useState(false)
+    const setLoadingCount = useState(0)[1]
 
     const startLoading = useCallback(() => {
         setIsLoading(true)
-        setLoadingCount(loadingCount => loadingCount++)
-    }, [])
+        setLoadingCount(loadingCount => ++loadingCount)
+    }, [setLoadingCount])
 
     const stopLoading = useCallback(() => {
-        if (loadingCount === 1) setIsLoading(false)
-        setLoadingCount(loadingCount => loadingCount--)
-    }, [loadingCount])
+        setLoadingCount(loadingCount => {
+            if (loadingCount === 1) setIsLoading(false)
+            return --loadingCount
+        })
+    }, [setLoadingCount])
 
     return (
         <LoadingAppContext.Provider value={{ startLoading, stopLoading }}>
