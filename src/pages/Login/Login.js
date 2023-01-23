@@ -46,6 +46,10 @@ const Login = () => {
         })
     }
 
+    const createAccount = () =>{
+        
+    }
+
     // useEffect(() => {
     //     if (authenticated) navigate(location.state?.from.pathname || '/users')
     // }, [authenticated, navigate])
@@ -74,7 +78,7 @@ const Login = () => {
 
                         <Grid gap="2em" margin="1em 0em 0em 0em">
                             <PageLink to={routes.signup.path} >
-                                <Text medium align="center" color="first">Abrir una cuenta</Text>
+                                <Text onClick={() => {createAccount()}} medium align="center" color="first">Abrir una cuenta</Text>
                             </PageLink>
                             <Text onClick={() => {setRecoverPassword(true)}} medium align="center" color="second">Olvidé mi contraseña</Text>
                         </Grid>
