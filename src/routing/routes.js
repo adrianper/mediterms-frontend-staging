@@ -18,7 +18,7 @@ export const routes = {
         icon: <AiFillHome />
     },
     terms: {
-        path: '/terms/:id',
+        path: '/terms/:topic?',
         linkName: 'Terms',
         element: <Terms />,
     },
