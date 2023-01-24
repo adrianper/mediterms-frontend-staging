@@ -2,7 +2,7 @@ import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account } fro
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
-export const headerRoutes = ['home', 'login', 'signup', 'account']
+export const headerRoutes = ['account']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
@@ -48,6 +48,7 @@ export const routes = {
     account: {
         path: '/account',
         linkName: 'Account',
-        element: <Account />
+        element: <Account />,
+        icon: <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" className='account-icon' />
     },
 }
