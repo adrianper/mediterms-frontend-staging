@@ -15,14 +15,15 @@ const Header = () => {
 
     return (
         <Flex className="header" align="center" justify="space-between" padding="0.8em">
-            <Flex className="side_menu_bars" onClick={toggleSideMenu}>
+            {/* <Flex className="side_menu_bars" onClick={toggleSideMenu}>
                 <AiOutlineBars size="25" />
-            </Flex>
+            </Flex> */}
+            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
             <Grid gap="1em" direction="column">
-                {headerRoutes.map(route =>
+                {[headerRoutes].map(route =>
                     <PageLink key={route} to={routes[route].path} >
                         {routes[route].icon} &nbsp;
-                        {routes[route].linkName}
+                        {/* {routes[route].linkName} */}
                     </PageLink>
                 )}
             </Grid>
