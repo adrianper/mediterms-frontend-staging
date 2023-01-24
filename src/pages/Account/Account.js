@@ -1,5 +1,7 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
+import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { Button, Grid, TextField, Text } from 'components'
+import { routes } from 'routing/routes'
 
 import './account.scss'
 
@@ -13,7 +15,9 @@ const Account = () =>{
                     <Text medium>Eduardo Enigma</Text>
                     <Text medium>riddlemethis@gmail.com</Text>
                 </Grid>
-                <Button>Cambiar contraseña</Button>
+                <PageLink to={routes.changePassword.path} >
+                    <Button>Cambiar contraseña</Button>
+                </PageLink>
             </Grid>
             <Grid gap="1.14em" padding="1.71em 1.14em" className="account__user_points">
                 <Text>Términos respondidos correctamente:</Text>
