@@ -14,7 +14,7 @@ const Header = () => {
     const { toggleSideMenu } = useSideMenuContext()
 
     return (
-        <Flex className="header" align="center" justify="space-between" padding="0.8em">
+        <Flex className="header" align="center" justify="space-between" padding="1.14em">
             {/* <Flex className="side_menu_bars" onClick={toggleSideMenu}>
                 <AiOutlineBars size="25" />
             </Flex> */}
