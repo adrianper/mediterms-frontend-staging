@@ -5,6 +5,7 @@ import './recover_password.scss'
 const RecoverPassword = (props) =>{
     const { setRecoverPassword } = props
     const [recoveredPassword, setRecoveredPassword] = useState(false)
+    const [email, setEmail] = useState('')
 
     return(
         <Grid>
@@ -14,8 +15,8 @@ const RecoverPassword = (props) =>{
                     <Text bold align="center" size="5">Recuperar tu contraseña</Text>
                     <TextField label="Correo electrónico"
                         type="email"
-                        
-                        // onChange={v => handleChange(v, 'recover_password')}
+                        value={email}
+                        onChange={v => setEmail(v)}
                     />
                     <Text medium align="center">Enviaremos información a este correo electrónico para recuperar tu contraseña.</Text>
                     <Button selfCenter onClick={() => {setRecoveredPassword(true)}}>Recuperar</Button>
