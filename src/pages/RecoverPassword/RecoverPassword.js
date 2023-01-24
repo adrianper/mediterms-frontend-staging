@@ -1,11 +1,19 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
 import { Button, Grid, TextField, Text } from 'components'
+import axios from "axios"
+
 import './recover_password.scss'
 
 const RecoverPassword = (props) =>{
     const { setRecoverPassword } = props
     const [recoveredPassword, setRecoveredPassword] = useState(false)
     const [email, setEmail] = useState('')
+    
+    const sendEmail = async() => {
+        const response = await axios.post("user/reset_password", {email})
+        if(response.data && !response.data.error)
+            setRecoveredPassword(true)
+    }  
 
     return(
         <Grid>
@@ -19,7 +27,7 @@ const RecoverPassword = (props) =>{
                         onChange={v => setEmail(v)}
                     />
                     <Text medium align="center">Enviaremos información a este correo electrónico para recuperar tu contraseña.</Text>
-                    <Button selfCenter onClick={() => {setRecoveredPassword(true)}}>Recuperar</Button>
+                    <Button selfCenter onClick={() => {sendEmail()}}>Recuperar</Button>
                 </Grid>
                 :
                 <Grid padding="3.78em 0em" gap="1.71em">
