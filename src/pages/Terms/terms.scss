@@ -1,0 +1,21 @@
+.terms{
+    .terms__term_container{
+        background: var(--bg-color--white);
+        border-radius: 1em;
+        overflow: hidden;
+        .terms__definition_btn{
+            border: 2px solid var(--border-color--second);
+            border-radius: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .terms__result_banner{
+            padding: 1em;
+            user-select: none;
+            align-self: end;
+            left: -1em;
+            bottom: -1.7em;
+            width: calc(100% + 2em);
+        }
+    }
+}

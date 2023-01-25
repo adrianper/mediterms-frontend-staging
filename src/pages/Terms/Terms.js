@@ -2,30 +2,14 @@ import React, { useCallback, useEffect, useReducer, useRef, useState } from 'rea
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Button, Grid } from 'components'
+import { Button, Grid, Text } from 'components'
 import axios from 'axios'
 import { actions, initialState, reducer } from './termsReducer'
 import { useLoadingAppContext } from 'hooks'
 import { routes } from 'routing/routes'
 import { reset } from 'redux/reducers/auth/authSlice'
 
-const definitionBtnStyle = {
-    padding: '1em',
-    border: '1px solid var(--text-color--first)',
-    borderRadius: '1em',
-    cursor: 'pointer',
-    userSelect: 'none'
-}
-
-const resultBannerStyles = {
-    padding: '1em',
-    userSelect: 'none',
-    alignSelf: 'end',
-    color: 'white',
-    left: '-1em',
-    bottom: '-1em',
-    width: 'calc(100% + 2em)',
-}
+import './terms.scss'
 
 const initErrorLbl = 'Error al cargar la información'
 
@@ -128,26 +112,28 @@ const Terms = () => {
 
     /*--------RENDER--------*/
     return (
-        <Grid className="terms" itemsX="center">
-            <Grid className="terms__term_container" gap="1em" padding="1em" contentY="stretch"
-                style={{ minHeight: '400px', minWidth: '350px', background: 'white', borderRadius: '1em', overflow: 'hidden' }}>
+        <Grid className="terms" itemsX="center" padding="1.41em 0.62em">
+            <Grid w100 className="terms__term_container" gap="1.71em" padding="1.71em 0.62em">
 
-                {term && <h1 className="terms__term">{term.term}</h1>}
+                {term && <Text bold align="center" size="5" className="terms__term">{term.term}</Text>}
 
-                <Grid gap="1em" itemsX="center">
+                <Grid gap="0.71em" itemsX="center">
                     {term && term.definitions.map((definition, i) =>
-                        <Grid key={i}
+                        <Grid w100 key={i}
                             className="terms__definition_btn"
+                            padding="1.71em 0.85em"
                             onClick={() => { handleClickDefinitionBtn(i, definition.correct_answer, term.topicId) }}
                             style={{
-                                ...definitionBtnStyle,
                                 backgroundColor: (selectedAnswer === null ? '' :
-                                    definition.correct_answer ? '#00ff0066' :
-                                        i === selectedAnswer ? '#ff000066' : ''),
-                                pointerEvents: selectedAnswer !== null ? 'none' : ''
+                                    definition.correct_answer ? '#D9FFCC' :
+                                        i === selectedAnswer ? '#E6A4A4' : ''),
+                                pointerEvents: selectedAnswer !== null ? 'none' : '',
+                                border: (selectedAnswer === null ? '' :
+                                    definition.correct_answer ? 'solid 2px #39E600' :
+                                        i === selectedAnswer ? 'solid 2px #ff0000' : ''),
                             }}
                         >
-                            {definition.answer}
+                            <Text medium align="center">{definition.answer}</Text>
                         </Grid>
                     )}
                 </Grid>
@@ -161,11 +147,10 @@ const Terms = () => {
 
                 <Grid className="terms__result_banner"
                     style={{
-                        ...resultBannerStyles,
                         visibility: selectedAnswer === null ? 'hidden' : '',
                         backgroundColor: answeredCorrect ? '#00ff00' : '#ff0000'
                     }}>
-                    {answeredCorrect ? 'Correcto' : 'Incorrecto'}
+                    <Text bold size="5" color="white" align="center">{answeredCorrect ? 'Correcto' : 'Incorrecto'}</Text>
                 </Grid>
             </Grid>
         </Grid >
