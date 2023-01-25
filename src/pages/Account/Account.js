@@ -52,8 +52,8 @@ const Account = () => {
                 {
                     topicWithTotal.map(topic =>
                         <Grid  key={topic.id} columns="3fr 1fr" gap="1.14em 3.78em">
-                            <Text  medium>{topic.topic_name}</Text>
-                            <Text  bold color="first" size="6" >{topic.total}</Text>
+                            <Text   medium className={`${topic.topic_name === 'Total' ? 'account__total_bold' : ''}`}>{topic.topic_name === 'Total' ? topic.topic_name.toUpperCase(): topic.topic_name}:</Text>
+                            <Text bold color="first" size="6" >{topic.total}</Text>
                         </Grid>
                     )}
             </Grid>
