@@ -7,8 +7,8 @@ export const headerRoutes = ['home', 'login', 'signup', 'account']
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const publicRoutes = ['home', 'terms']
-export const requireNoAuthRoutes = ['login', 'signup','account']
-export const requireAuthRoutes = ['redux_counter', 'testComponents']
+export const requireNoAuthRoutes = ['login', 'signup']
+export const requireAuthRoutes = ['redux_counter', 'testComponents', 'account']
 
 export const routes = {
     home: {
