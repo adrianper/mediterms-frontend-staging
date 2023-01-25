@@ -18,7 +18,9 @@ const Account = () => {
     
     const [topicWithTotal, setTopicsWithTotal] = useState([])
     const [error, setError] = useState([])
-
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    
     useEffect(() => {
         axios.get('http://localhost:3000/scores/', {
             headers: {
@@ -27,10 +29,14 @@ const Account = () => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => {
-            setTopicsWithTotal(res.data)    
+            setTopicsWithTotal(res.data)
+            let data = JSON.parse(localStorage.getItem('user'))
+            setName(data.name)
+            setEmail(data.email)   
         }).catch(err => {
             console.log(err.response.statusText)
             setError(err.response.statusText)
+            
         })
     },[])
 
@@ -40,8 +46,8 @@ const Account = () => {
             <Grid gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
                     <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" />
-                    <Text medium>Eduardwerwelkjllkjlkjo Enigma</Text>
-                    <Text medium>riddlemethis@gmail.com</Text>
+                    <Text medium>{name}</Text>
+                    <Text medium>{email}</Text>
                 </Grid>
                 <PageLink to={routes.changePassword.path} >
                     <Button>Cambiar contraseña</Button>
