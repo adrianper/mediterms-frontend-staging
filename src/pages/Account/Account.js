@@ -46,7 +46,7 @@ const Account = () => {
                 <Text>Términos respondidos correctamente:</Text>
                 {
                     topicWithTotal.map(topic =>
-                        <Grid  key={topic.id} columns="auto 1fr" gap="1.14em 3.78em">
+                        <Grid  key={topic.id} columns="3fr 1fr" gap="1.14em 3.78em">
                             <Text  medium>{topic.topic_name}</Text>
                             <Text  bold color="first" size="6" >{topic.total}</Text>
                         </Grid>
