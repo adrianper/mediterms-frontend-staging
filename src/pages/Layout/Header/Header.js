@@ -18,7 +18,9 @@ const Header = () => {
             {/* <Flex className="side_menu_bars" onClick={toggleSideMenu}>
                 <AiOutlineBars size="25" />
             </Flex> */}
-            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+            <PageLink to={routes.home.path} >
+                <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+            </PageLink>
             <Grid gap="1em" direction="column">
                 {[headerRoutes].map(route =>
                     <PageLink key={route} to={routes[route].path} >
