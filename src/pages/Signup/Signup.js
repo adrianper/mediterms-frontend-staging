@@ -19,6 +19,7 @@ const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjb
 const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' })
     const [clientSecret, setClientSecret] = useState('')
+    const [emailError, setEmailError] = useState('')
 
     const { auth } = useSelector(store => store)
     const { /*user, */authenticated } = auth
@@ -63,6 +64,15 @@ const Signup = () => {
         })
     }
 
+    const validateEmail = useCallback(async () => {
+        try {
+            const response = await axios.get(`/user/email/validate?email=${formData.email}`)
+            if(response.data.valid) setEmailError('')
+        } catch (error) {
+            setEmailError(error.response.data?.errors[0] || 'El correo ya esta en uso. Elige otro.' )
+        }
+    }, [formData.email])
+
     useEffect(() => {
         if (authenticated) navigate('/users')
         
@@ -91,7 +101,9 @@ const Signup = () => {
                         type="email"
                         value={formData.email}
                         onChange={v => handleChange(v, 'email')}
+                        onBlur={validateEmail}
                     />
+                    {emailError && <div>{emailError}</div>}
                     <TextField label="Contraseña"
                         type="password"
                         value={formData.password}
