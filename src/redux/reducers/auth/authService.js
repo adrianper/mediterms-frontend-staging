@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const signup = async (userData) => {
-    const response = await axios.post('/auth/signup', userData)
+    const response = await axios.post('/user/signup', userData)
 
     if (response.data && !response.data.error) {
         localStorage.setItem('user', JSON.stringify(response.data.user))
@@ -16,7 +16,7 @@ const signup = async (userData) => {
 }
 
 const login = async (userData) => {
-    const response = await axios.post('/auth/login', userData)
+    const response = await axios.post('/user/login', userData)
 
     if (response.data && !response.data.error) {
         localStorage.setItem('user', JSON.stringify(response.data.user))
