@@ -16,6 +16,7 @@ import { login/*, reset*/ } from 'redux/reducers/auth/authSlice'
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' })
     const [recoverPassword, setRecoverPassword] = useState(false)
+    const [showError, setShowError] = useState(false)
     // const { auth } = useSelector(store => store)
     // const { /*user, */authenticated } = auth
 
@@ -42,7 +43,10 @@ const Login = () => {
         if (!verifyEmptyValues()) return
 
         dispatch(login(formData)).then(res => {
-            if (res.payload.error) return console.error(res.payload.error)//toast.error(res.payload.error)
+            if(res.error){
+                setShowError(true)
+            }
+            // if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
         })
     }
 
@@ -73,7 +77,9 @@ const Login = () => {
                             value={formData.password}
                             onChange={v => handleChange(v, 'password')}
                         />
-                        <Text size="2" color="error">El correo electrónico o la contraseña son incorrectos, intenta de nuevo.</Text>
+                        {showError &&
+                            <Text size="2" color="error">El correo electrónico o la contraseña son incorrectos, intenta de nuevo.</Text>
+                        }
                         <Button type="submit" selfCenter>Ingresar</Button>
 
                         <Grid gap="2em" margin="1em 0em 0em 0em">
