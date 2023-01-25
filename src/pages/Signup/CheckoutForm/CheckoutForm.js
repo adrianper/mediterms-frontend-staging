@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { Button } from 'components'
+import { useDispatch } from 'react-redux';
+import { login, reset } from 'redux/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
   const { formData, clientSecret } = props
@@ -10,7 +12,10 @@ const CheckoutForm = (props) => {
 
   const [errorMessage, setErrorMessage] = useState(null)
 
+  const dispatch = useDispatch()
+
   const handleSubmit = async event => {
+    let signupToken = null
     console.log("entra al handleSubmit")
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -22,6 +27,18 @@ const CheckoutForm = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
+    try {
+      const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
+      signupToken = signupResponse.data?.token || null
+    } catch (error) {
+      if (error.response.data)
+        setErrorMessage(error.response.data.errors[0])
+      else
+        setErrorMessage(error.message)
+      return
+    }
+    console.log('user created')
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -38,25 +55,20 @@ const CheckoutForm = (props) => {
       // confirming the payment. Show error to your customer (for example, payment
       // details incomplete)
       console.log("error",error)
-      setErrorMessage(error.message);
+      console.log('Delete user')
+      axios.delete('/user/delete', {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
+        .then(() => {
+          dispatch(reset())
+          global.clearSession()
+        })
+      setErrorMessage(error.message)
     } else {
       
-      const options = {
-        url: 'http://localhost:3000/user/signup',
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json;charset=UTF-8'
-        },
-        data: {
-          ...formData,
-          clientSecret: {clientSecret}
-        }
-      }
-      axios(options)
-        .then(response => {
-          console.log("response",response);
-      });
+      dispatch(login({ email: formData.email, password: formData.password }))
 
       console.log("entra al else", error)
       // Your customer will be redirected to your `return_url`. For some payment
