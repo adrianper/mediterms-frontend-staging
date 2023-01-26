@@ -43,7 +43,7 @@ const Account = () => {
 
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
-            <Grid gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
+            <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
                     <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" />
                     <Text medium>{name}</Text>
@@ -53,17 +53,17 @@ const Account = () => {
                     <Button>Cambiar contraseña</Button>
                 </PageLink>
             </Grid>
-            <Grid gap="1.14em" padding="1.71em 1.14em" className="account__user_points">
+            <Grid w100 gap="1.14em" padding="1.71em 1.14em" className="account__user_points">
                 <Text>Términos respondidos correctamente:</Text>
                 {
                     topicWithTotal.map(topic =>
-                        <Grid  key={topic.id} columns="3fr 1fr" gap="1.14em 3.78em">
-                            <Text   medium className={`${topic.topic_name === 'Total' ? 'account__total_bold' : ''}`}>{topic.topic_name === 'Total' ? topic.topic_name.toUpperCase(): topic.topic_name}:</Text>
+                        <Grid  key={topic.id} columns="2fr 1fr" gap="1.14em 3.78em">
+                            <Text style={{alignSelf: 'center'}} medium className={`${topic.topic_name === 'Total' ? 'account__total_bold' : ''}`}>{topic.topic_name === 'Total' ? topic.topic_name.toUpperCase(): topic.topic_name}:</Text>
                             <Text bold color="first" size="6" >{topic.total}</Text>
                         </Grid>
                     )}
             </Grid>
-            <Button className="account__logout">Cerrar sesión</Button>
+            <Button style={{marginTop: '0.52em'}} className="account__logout">Cerrar sesión</Button>
         </Grid>
     )
 }

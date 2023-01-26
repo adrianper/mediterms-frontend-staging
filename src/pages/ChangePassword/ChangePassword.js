@@ -39,7 +39,7 @@ const ChangePassword = () =>{
     return(
         <Grid className="change_password" itemsX="center" gap="4.28em" padding="1.42em 0.42em 0em 0.42em">
             {successfulChange ?
-                <Grid w100 padding="3.78em 0em" gap="1.71em" className="change_password__form" maxWidth="22em">
+                <Grid w100 padding="3.78em 0em" gap="1.71em" className="change_password__form">
                     <Text align="center">Tu contraseña ha sido actualizada exitosamente</Text>
                     <PageLink to={routes.account.path} >
                         <Grid>
@@ -49,7 +49,7 @@ const ChangePassword = () =>{
                 </Grid>
             :
                 <form onSubmit={handleSumbit}>
-                    <Grid w100 padding="1.72em 1.1em" className="change_password__form" gap="1.3em" maxWidth="22em">
+                    <Grid w100 padding="1.72em 1.1em" className="change_password__form" gap="1.3em">
                         <Text size="5" align="center" bold>Cambiar contraseña</Text>
                         <TextField label="Contraseña actual"
                             type="password"
