@@ -64,7 +64,7 @@ const ChangePassword = () =>{
                     </PageLink>
                 </Grid>
             :
-                <form onSubmit={handleSumbit}>
+                <form onSubmit={(e)=>{handleSumbit(); e.preventDefault()}}>
                     <Grid w100 padding="1.72em 1.1em" className="change_password__form" gap="1.3em">
                         <Text size="5" align="center" bold>Cambiar contraseña</Text>
                         <TextField label="Contraseña actual"
