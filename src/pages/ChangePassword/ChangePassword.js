@@ -55,7 +55,7 @@ const ChangePassword = () =>{
     return(
         <Grid className="change_password" itemsX="center" gap="4.28em" padding="1.42em 0.42em 0em 0.42em">
             {successfulChange ?
-                <Grid w100 padding="3.78em 0em" gap="1.71em" className="change_password__form">
+                <Grid w100 padding="3.78em 1em" gap="1.71em" className="change_password__form">
                     <Text align="center">Tu contraseña ha sido actualizada exitosamente</Text>
                     <PageLink to={routes.account.path} >
                         <Grid>
