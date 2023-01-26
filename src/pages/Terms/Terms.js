@@ -86,7 +86,7 @@ const Terms = () => {
 
     const handleClickDefinitionBtn = useCallback((index, isCorrectAnswer, termTopic) => {
         answeredIdsRef.current[answeredTermsRef.current] = term.id
-        answeredTermsRef.current = answeredTermsRef.current < 19 ? answeredTermsRef.current + 1 : 0
+        answeredTermsRef.current = answeredTermsRef.current < 7 ? answeredTermsRef.current + 1 : 0
 
         if (authenticated && isCorrectAnswer) {
             const topicId = topic ? topic : termTopic
