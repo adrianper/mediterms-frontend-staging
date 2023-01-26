@@ -1,0 +1,13 @@
+.final_demo{
+    
+    .final_demo__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+
+        .open_account_button{
+            background: transparent;
+            color: var(--text-color--first);
+            border: solid 2px var(--bg-color--first);
+        }
+    }
+}
