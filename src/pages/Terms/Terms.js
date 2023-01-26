@@ -16,6 +16,7 @@ const initErrorLbl = 'Error al cargar la información'
 const Terms = () => {
     /*--------STATE--------*/
     const [errorLabel, setErrorLabel] = useState(initErrorLbl)
+    const [showFinalDemo, setShowFinalDemo] = useState(false)
     const [state, dispatch] = useReducer(reducer, initialState)
     const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
 
@@ -54,11 +55,10 @@ const Terms = () => {
                 if (error.response.data.code) {
                     switch (error.response.data.code) {
                         case "MDT_DB_OUT_BOUNDARIES":
-                            setErrorLabel(error.response.data.errors[0])
-                            setTimeout(() => {
-                                navigate(authenticated ? routes.home.path : routes.signup.path,
+                        setTimeout(() => {
+                                navigate(authenticated ? routes.home.path : (setShowFinalDemo(true),routes.finalDemo.path) ,
                                     { state: { from: location } })
-                            }, 3000)
+                            }, 1000)
                             break
                         case "FST_JWT_AUTHORIZATION_TOKEN_INVALID":
                         case "MDT_APP_TOKEN_NOT_VALID":
@@ -138,7 +138,7 @@ const Terms = () => {
                     )}
                 </Grid>
 
-                {fetchTermError &&
+                {(fetchTermError && showFinalDemo ) &&
                     <Grid className="terms__error_label" style={{ color: 'red' }}>
                         {errorLabel}
                         {retryFetchTerm && <Button onClick={() => requestNextTerm()}>Reintentar</Button>}
