@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
 
@@ -20,7 +20,7 @@ const Account = () => {
     const [error, setError] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    
+    const navigate = useNavigate()
     useEffect(() => {
         axios.get('http://localhost:3000/scores/', {
             headers: {
@@ -40,6 +40,10 @@ const Account = () => {
         })
     },[])
 
+    const logOut = () => {
+        localStorage.clear();
+        navigate(0)
+    }
 
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
@@ -63,7 +67,7 @@ const Account = () => {
                         </Grid>
                     )}
             </Grid>
-            <Button style={{marginTop: '0.52em'}} className="account__logout">Cerrar sesión</Button>
+            <Button style={{marginTop: '0.52em'}} onClick = {()=>{logOut()}} className="account__logout">Cerrar sesión</Button>
         </Grid>
     )
 }
