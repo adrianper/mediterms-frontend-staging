@@ -16,25 +16,41 @@ const ChangePassword = () =>{
     }, [])
 
     const handleSumbit = () =>{
-        const options = {
-            url: 'http://localhost:3000/user/change_password',
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json;charset=UTF-8',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            data: {
-              ...formData,
+        let valid = false
+
+        if ((formData.password != '' && formData.newPassword != '' && formData.confirmedPassword != '') && (formData.newPassword === formData.confirmedPassword)){
+            valid = true
+        }
+
+        if(valid){
+            const options = {
+                url: 'http://localhost:3000/user/change_password',
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8',
+                  'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                data: {
+                  ...formData,
+                }
+            }
+            axios(options)
+            .then(response => {
+                setSuccessfulChange(true)
+            })
+            .catch(err =>{
+                setError(err.response.data.errors[0])
+            })
+        }else{
+            if (formData.newPassword == '' && formData.confirmedPassword == ''){
+                setError('Hay campos vacios')
+            }
+            if(formData.newPassword != formData.confirmedPassword){
+                setError('Las contraseñas no coinciden')
             }
         }
-        axios(options)
-        .then(response => {
-            setSuccessfulChange(true)
-        })
-        .catch(err =>{
-            setError(err.response.data.errors[0])
-        })
+        
     }
     return(
         <Grid className="change_password" itemsX="center" gap="4.28em" padding="1.42em 0.42em 0em 0.42em">

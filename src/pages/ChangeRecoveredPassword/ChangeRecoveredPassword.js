@@ -20,7 +20,6 @@ const ChangeRecoveredPassword = () =>{
         let valid = false
         if ((formData.newPassword != '' && formData.confirmedPassword != '') && (formData.newPassword === formData.confirmedPassword)){
             valid = true
-            console.log("entra al if de no cmapos vacios")
         }
         if(valid){
             console.log("entra al valid")
@@ -48,13 +47,10 @@ const ChangeRecoveredPassword = () =>{
                 setError(err.response.data.errors[0])
             })
         }else{
-            console.log("entral al else")
             if (formData.newPassword == '' && formData.confirmedPassword == ''){
-                console.log('entra al campos vacios')
                 setError('Hay campos vacios')
             }
             if(formData.newPassword != formData.confirmedPassword){
-                console.log('entra al contrase;as no coinciden')
                 setError('Las contraseñas no coinciden')
             }
         }
