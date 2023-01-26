@@ -1,14 +1,14 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
-export const headerRoutes = ['home', 'login', 'signup']
+export const headerRoutes = ['account']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
-export const publicRoutes = ['home', 'terms']
+export const publicRoutes = ['terms', 'finalDemo']
 export const requireNoAuthRoutes = ['login', 'signup']
-export const requireAuthRoutes = ['redux_counter', 'testComponents']
+export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword']
 
 export const routes = {
     home: {
@@ -18,7 +18,7 @@ export const routes = {
         icon: <AiFillHome />
     },
     terms: {
-        path: '/terms/:id',
+        path: '/terms/:topic?',
         linkName: 'Terms',
         element: <Terms />,
     },
@@ -44,5 +44,21 @@ export const routes = {
         linkName: 'Test Components',
         element: <TestComponents />,
         icon: <RiTestTubeFill />
+    },
+    account: {
+        path: '/account',
+        linkName: 'Account',
+        element: <Account />,
+        icon: <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" className='account-icon' />
+    },
+    changePassword: {
+        path: '/changePassword',
+        linkName: 'changePassword',
+        element: <ChangePassword />
+    },
+    finalDemo: {
+        path: '/finalDemo',
+        linkName: 'finalDemo',
+        element: <FinalDemo />
     },
 }

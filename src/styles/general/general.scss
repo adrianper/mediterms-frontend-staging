@@ -1,5 +1,5 @@
 :root {
-    --font-family--main: 'Comfortaa';
+    --font-family--main: 'Montserrat';
     --text-size--1: 10px;
     --text-size--2: 12px;
     --text-size--3: 14px;
@@ -67,7 +67,6 @@ body {
 
 #root {
     display: grid;
-    height: 100%;
     background: linear-gradient(141deg, rgba(0,180,216,1) 15%, rgba(0,119,182,1) 85%);
 
 }

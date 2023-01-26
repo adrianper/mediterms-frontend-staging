@@ -15,11 +15,13 @@ import Layout from 'pages/Layout'
 import { SideMenuContextProvider } from 'context/SideMenuContext'
 import RequireNoAuth from 'routing/RequireNoAuth'
 import RequireAuth from 'routing/RequireAuth'
+import { LoadingAppContextProvider } from 'context/LoadingAppContext'
 
 const App = () => {
 
     const RouterProviders = useComposeProviders(Router, Routes)
-    const AppProviders = useComposeProviders(/*SocketContextProvider,*/ ScreenSizeContextProvider, SideMenuContextProvider)
+    const AppProviders = useComposeProviders(/*SocketContextProvider,*/ ScreenSizeContextProvider,
+        SideMenuContextProvider, LoadingAppContextProvider)
 
     return (
         <ReduxProvider store={store}>

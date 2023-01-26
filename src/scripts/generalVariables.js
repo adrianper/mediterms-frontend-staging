@@ -1,5 +1,5 @@
 export const hostURL = 'https://fp-api.magiei.app' 
-// export const hostURL = http://localhost:[port] /*(Development API Host)*/
+// export const hostURL = 'http://localhost:3000' /*(Development API Host)*/
 
 export const screenSizes = {
     'mobile': 0,

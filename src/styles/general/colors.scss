@@ -22,6 +22,7 @@ $purple--2: hexToRgb(#bf85d6);
 $blue--1: hexToRgb(#0077B6);
 $blue--2: hexToRgb(#00B4D8);
 $blue--3: hexToRgb(#C9F0F7);
+$blue--4: hexToRgb(#90E0EF);
 
 
 @mixin colorVariants($colorVariant, $color) {
@@ -45,6 +46,7 @@ body {
     @include colorVariants('black', $black--1);
     @include colorVariants(black-alter, $black--2);
     @include colorVariants(blue-alter, $blue--3);
+    @include colorVariants(blue-alter-2, $blue--4);
 
     &.theme--first {
         background-color: RGB(#{$white--1});

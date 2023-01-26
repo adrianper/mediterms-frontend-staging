@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
+import axios from 'axios';
 
-import { Flex, Grid } from 'components'
+import { Flex, Grid, Text } from 'components'
 
 import './home.scss'
 import { useNavigate } from 'react-router-dom'
@@ -8,25 +9,30 @@ import { useNavigate } from 'react-router-dom'
 const Home = () => {
 
     const navigate = useNavigate()
+    const [topics, setTopics] = useState([])
+    
+    useEffect(()=>{
+        axios.get(`/topics/`)
+            .then(res => {
+                setTopics(res.data)    
+            })
+    }, [])
 
     return (
-        <Grid className="home_page" gap="1.5rem">
-            <Flex onClick={() => { navigate(`/terms/all`) }} className="section_card">
-                <b>Todos los terminos</b>
-            </Flex>
-            <Grid gap="1rem">
-                <Flex onClick={() => { navigate(`/terms/suffixes`) }} className="section_card" direction="column">
-                    <b>Subfijos</b>
-                    <p>Principiante</p>
-                </Flex>
-                <Flex onClick={() => { navigate(`/terms/prefixes`) }} className="section_card" direction="column">
-                    <b>Prefijos</b>
-                    <p>Principiante</p>
-                </Flex>
-                <Flex onClick={() => { navigate(`/terms/hospital`) }} className="section_card" direction="column">
-                    <b>Terminos hospitalarios</b>
-                    <p>Principiante</p>
-                </Flex>
+        <Grid className="home_page" itemsX="center" padding="1.14em 0.42em">
+            <Grid w100 gap="1.7em" padding="1.7em 1.85em" className="home_page__list">
+                <Text bold size="5" align="center">¿Qué quieres estudiar?</Text>
+                <Text bold color="first" onClick={() => { navigate(`/terms`) }} className="section_card all_terms">
+                    Todos los terminos
+                </Text>
+                <Grid gap="0.7em">
+                    {topics.map((topic) =>
+                        <Grid onClick={() => { navigate(`/terms/${topic.id}`) }} className="section_card">
+                            <Text bold>{topic.name}</Text>
+                            <Text medium>{topic.level}</Text>
+                        </Grid>
+                    )}
+                </Grid>
             </Grid>
         </Grid>
     )

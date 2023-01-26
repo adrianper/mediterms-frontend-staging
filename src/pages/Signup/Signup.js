@@ -1,22 +1,45 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 import { Button, Grid, TextField, Text } from 'components'
 import { signup } from 'redux/reducers/auth/authSlice'
 
+import CheckoutForm from './CheckoutForm/CheckoutForm';
+
+
 import './signup.scss'
 
 // import { toast } from 'react-toastify'
+const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az');
 
 const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' })
+    const [clientSecret, setClientSecret] = useState('')
+    const [emailError, setEmailError] = useState('')
 
     const { auth } = useSelector(store => store)
     const { /*user, */authenticated } = auth
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const options = {
+        // passing the client secret obtained in step 3
+        clientSecret: clientSecret,
+        // Fully customizable with appearance API.
+        appearance: {
+            layout: {
+            type: 'accordion',
+            defaultCollapsed: false,
+            radios: true,
+            spacedAccordionItems: false
+            }
+        },
+    };
 
     const handleChange = useCallback((value, name) => {
         setFormData(formData => ({ ...formData, [name]: value }))
@@ -41,9 +64,28 @@ const Signup = () => {
         })
     }
 
+    const validateEmail = useCallback(async () => {
+        try {
+            const response = await axios.get(`/user/email/validate?email=${formData.email}`)
+            if(response.data.valid) setEmailError('')
+        } catch (error) {
+            setEmailError(error.response.data?.errors[0] || 'El correo ya esta en uso. Elige otro.' )
+        }
+    }, [formData.email])
+
     useEffect(() => {
         if (authenticated) navigate('/users')
+        
     }, [authenticated, navigate])
+
+    useEffect(() =>{
+        axios.post(`http://localhost:3000/payment/create-payment-intent`)
+          .then(res => {
+            setClientSecret(res.data.secret_client)
+            
+          })
+          
+    },[])
 
     return (
         <Grid className="signup" padding="2.28em 1.57em" itemsX="center" gap="2.18em">
@@ -59,7 +101,9 @@ const Signup = () => {
                         type="email"
                         value={formData.email}
                         onChange={v => handleChange(v, 'email')}
+                        onBlur={validateEmail}
                     />
+                    {emailError && <div>{emailError}</div>}
                     <TextField label="Contraseña"
                         type="password"
                         value={formData.password}
@@ -73,9 +117,16 @@ const Signup = () => {
 
                     <Text bold size="5" align="center">Método de pago</Text>
 
-                    <Button type="submit" selfCenter>Pagar y abrir cuenta</Button>
+                    
+
+                    {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
                 </Grid>
             </form>
+            {clientSecret != "" &&
+            <Elements stripe={stripePromise} options={options}>
+                <CheckoutForm formData={formData} clientSecret={clientSecret} />
+            </Elements>
+            }
         </Grid>
     )
 }
