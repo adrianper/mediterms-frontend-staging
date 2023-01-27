@@ -7,12 +7,18 @@ import './recover_password.scss'
 const RecoverPassword = (props) =>{
     const { setRecoverPassword } = props
     const [recoveredPassword, setRecoveredPassword] = useState(false)
+    const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     
     const sendEmail = async() => {
-        const response = await axios.post("user/reset_password", {email})
-        if(response.data && !response.data.error)
-            setRecoveredPassword(true)
+        if(email != ''){
+            const response = await axios.post("user/reset_password", {email}).catch((err) => { setError(err.response.data.errors[0]) })
+            if(response.data && !response.data.error){
+                setRecoveredPassword(true)
+            }
+        }else{
+            setError('Hay campos vacios')
+        }
     }  
 
     return(
@@ -26,6 +32,9 @@ const RecoverPassword = (props) =>{
                         value={email}
                         onChange={v => setEmail(v)}
                     />
+                    {error != '' &&
+                        <Text size="2" color="error" align="center">{error}</Text>
+                    }
                     <Text medium align="center">Enviaremos información a este correo electrónico para recuperar tu contraseña.</Text>
                     <Button selfCenter onClick={() => {sendEmail()}}>Recuperar</Button>
                 </Grid>
