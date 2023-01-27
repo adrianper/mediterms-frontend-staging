@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { Button } from 'components'
+import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
 import { login, reset } from 'redux/reducers/auth/authSlice';
 
@@ -86,9 +86,9 @@ const CheckoutForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <Button type="submit" >Pagar y abrir cuenta</Button>
+      {errorMessage && <Text margin={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
+      <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
       {/* Show error message to your customers */}
-      {errorMessage && <div>{errorMessage}</div>}
     </form>
   );
 };
