@@ -24,7 +24,7 @@ const ChangeRecoveredPassword = () =>{
         if(valid){
             console.log("entra al valid")
             const options = {
-                url: 'http://localhost:3000/user/save_password',
+                url: '/user/save_password',
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',
