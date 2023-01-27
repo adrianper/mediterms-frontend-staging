@@ -1,4 +1,4 @@
-export const hostURL = 'https://fp-api.magiei.app' 
+export const hostURL = 'http://mediterms.us-east-2.elasticbeanstalk.com/' 
 // export const hostURL = 'http://localhost:3000' /*(Development API Host)*/
 
 export const screenSizes = {
