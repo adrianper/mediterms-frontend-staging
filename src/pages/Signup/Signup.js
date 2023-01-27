@@ -102,12 +102,13 @@ const Signup = () => {
                         onChange={v => handleChange(v, 'email')}
                         onBlur={validateEmail}
                     />
-                    {emailError && <div>{emailError}</div>}
+                    {emailError && <Text color="error">{emailError}</Text>}
                     <TextField label="Contraseña"
                         type="password"
                         value={formData.password}
                         onChange={v => handleChange(v, 'password')}
                     />
+                    {showError && <Text color="error" align="center">{error}</Text>}
                     <Grid padding="1.42em" className="signup__price_container">
                         <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
                         <Text style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
@@ -115,8 +116,6 @@ const Signup = () => {
                     </Grid>
 
                     <Text bold size="5" align="center">Método de pago</Text>
-                    {showError && <Text color="error">{error}</Text>}
-                    
 
                     {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
                 </Grid>
