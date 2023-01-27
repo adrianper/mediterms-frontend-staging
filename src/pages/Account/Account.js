@@ -41,7 +41,9 @@ const Account = () => {
     },[])
 
     const logOut = () => {
-        localStorage.clear();
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.clear()
         navigate(0)
     }
 

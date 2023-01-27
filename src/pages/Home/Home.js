@@ -14,10 +14,13 @@ const Home = () => {
     useEffect(()=>{
         axios.get(`/topics/`)
             .then(res => {
+                
                 setTopics(res.data)    
             })
     }, [])
 
+    const priority = { Principiante: 3, Intermedio: 2,  Avanzado: 1}
+    const sortedTopics = topics.sort((a, b) => priority[b.level] - priority[a.level]);
     return (
         <Grid className="home_page" itemsX="center" padding="1.14em 0.42em">
             <Grid w100 gap="1.7em" padding="1.7em 1.85em" className="home_page__list">
@@ -26,8 +29,8 @@ const Home = () => {
                     Todos los terminos
                 </Text>
                 <Grid gap="0.7em">
-                    {topics.map((topic) =>
-                        <Grid onClick={() => { navigate(`/terms/${topic.id}`) }} className="section_card">
+                    {sortedTopics.map((topic, key) =>
+                        <Grid onClick={() => { navigate(`/terms/${topic.id}`) }} key={key} className="section_card">
                             <Text bold>{topic.name}</Text>
                             <Text medium>{topic.level}</Text>
                         </Grid>
