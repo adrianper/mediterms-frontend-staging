@@ -20,7 +20,8 @@ const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '' })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
-
+    const [error, setError] = useState('')
+    const [showError, setShowError] = useState(false)
     const { auth } = useSelector(store => store)
     const { /*user, */authenticated } = auth
 
@@ -56,9 +57,7 @@ const Signup = () => {
 
     const handleSumbit = async e => {
         e.preventDefault()
-
-        if (!verifyEmptyValues()) return
-
+          
         dispatch(signup(formData)).then(res => {
             if (res.payload.error) return console.error(res.payload.error)// toast.error(res.payload.error)
         })
@@ -116,7 +115,7 @@ const Signup = () => {
                     </Grid>
 
                     <Text bold size="5" align="center">Método de pago</Text>
-
+                    {showError && <Text color="error">{error}</Text>}
                     
 
                     {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
@@ -124,7 +123,7 @@ const Signup = () => {
             </form>
             {clientSecret != "" &&
             <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm formData={formData} clientSecret={clientSecret} />
+                <CheckoutForm setError={setError} setShowError={setShowError} formData={formData} clientSecret={clientSecret} />
             </Elements>
             }
         </Grid>
