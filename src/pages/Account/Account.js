@@ -44,7 +44,7 @@ const Account = () => {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         localStorage.clear()
-        navigate(0)
+        document.location.reload()
     }
 
     return (
