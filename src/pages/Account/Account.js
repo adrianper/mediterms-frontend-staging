@@ -22,7 +22,7 @@ const Account = () => {
     const [email, setEmail] = useState("")
     const navigate = useNavigate()
     useEffect(() => {
-        axios.get('http://localhost:3000/scores/', {
+        axios.get('/scores/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8',
