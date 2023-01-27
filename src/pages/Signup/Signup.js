@@ -79,7 +79,7 @@ const Signup = () => {
     }, [authenticated, navigate])
 
     useEffect(() =>{
-        axios.post(`http://localhost:3000/payment/create-payment-intent`)
+        axios.post(`/payment/create-payment-intent`)
           .then(res => {
             setClientSecret(res.data.secret_client)
             
