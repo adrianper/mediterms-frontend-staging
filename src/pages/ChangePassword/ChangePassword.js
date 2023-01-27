@@ -24,7 +24,7 @@ const ChangePassword = () =>{
 
         if(valid){
             const options = {
-                url: 'http://localhost:3000/user/change_password',
+                url: '/user/change_password',
                 method: 'POST',
                 headers: {
                   'Accept': 'application/json',

@@ -17,6 +17,7 @@ const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' })
     const [recoverPassword, setRecoverPassword] = useState(false)
     const [showError, setShowError] = useState(false)
+    const [error, setError] = useState('')
     // const { auth } = useSelector(store => store)
     // const { /*user, */authenticated } = auth
 
@@ -31,23 +32,30 @@ const Login = () => {
     const verifyEmptyValues = () => {
         const errors = []
         Object.keys(formData).forEach(input => {
-            if (formData[input] === '') errors.push(`${input} could not be empty`)
+            if (formData[input] === '') errors.push(`${input} No puede ser vacio`)
         })
-        if (errors.length > 0) alert(errors.map(err => err + '\n'))
+        // if (errors.length > 0) alert(errors.map(err => err + '\n'))
+        if (errors.length > 0) setShowError(true)
         return errors.length === 0
     }
 
     const handleSumbit = async e => {
         e.preventDefault()
 
-        if (!verifyEmptyValues()) return
-
-        dispatch(login(formData)).then(res => {
-            if(res.error){
-                setShowError(true)
-            }
-            // if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
-        })
+        // if (!verifyEmptyValues()) return
+        if (formData.email === '' || formData.password === ''){
+            setError('Hay campos vacios')
+            setShowError(true)
+        }else{
+            dispatch(login(formData)).then(res => {
+                if(res.error){
+                    setShowError(true)
+                    setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
+                }
+                // if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
+            })
+        }
+        
     }
 
     const createAccount = () =>{
@@ -78,7 +86,7 @@ const Login = () => {
                             onChange={v => handleChange(v, 'password')}
                         />
                         {showError &&
-                            <Text size="2" color="error">El correo electrónico o la contraseña son incorrectos, intenta de nuevo.</Text>
+                            <Text size="2" color="error">{error}</Text>
                         }
                         <Button type="submit" selfCenter>Ingresar</Button>
 

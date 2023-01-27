@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { login, reset } from 'redux/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
-  const { formData, clientSecret } = props
+  const { formData, clientSecret, setError, setShowError } = props
   const stripe = useStripe();
   const elements = useElements();
 
@@ -27,7 +27,12 @@ const CheckoutForm = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+    if (formData.email === '' || formData.password === '' || formData.name === ''){
+      setError('Hay campos vacios')
+      setShowError(true)
+    }else {
 
+    setShowError(false)
     try {
       const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
       signupToken = signupResponse.data?.token || null
@@ -76,6 +81,7 @@ const CheckoutForm = (props) => {
       // site first to authorize the payment, then redirected to the `return_url`.
     }
   }
+}
 
   return (
     <form onSubmit={handleSubmit}>
