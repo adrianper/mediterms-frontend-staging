@@ -67,3 +67,5 @@ export const routes = {
         element: <ChangeRecoveredPassword />
     },
 }
+
+export const noRedirectPaths = [routes.account.path]

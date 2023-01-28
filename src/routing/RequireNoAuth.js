@@ -6,7 +6,7 @@ const RequireNoAuth = () => {
     const { authenticated } = useSelector(store => store.auth)
     const location = useLocation()
 
-    return !authenticated ? <Outlet /> : <Navigate to={location.state?.from.pathname || routes.home.path} replace />
+    return !authenticated ? <Outlet /> : <Navigate to={location.state?.from?.pathname || routes.home.path} replace />
 }
 
 export default RequireNoAuth
