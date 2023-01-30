@@ -40,7 +40,7 @@ const RecoverPassword = (props) =>{
                 </Grid>
                 :
                 <Grid padding="3.78em 0em" gap="1.71em">
-                    <Text medium align="center">Se ha enviado una contraseña provisional al correo electrónico.</Text>
+                    <Text medium align="center">Se han enviado instrucciones para recuperar la contraseña a tu correo electrónico.</Text>
                     <Button selfCenter onClick={() => {setRecoverPassword(false)}}>Entendido</Button>
                 </Grid>
                 }

@@ -11,8 +11,8 @@ const FinalDemo = () =>{
     return(
         <Grid w100 className="final_demo" padding="1.71em 0.62em">
             <Grid w100 padding="2.85em 1.1em" gap="1.71em" className="final_demo__container" >
-                <Text medium align="center">Has llegado al fin de los <br/> términos gratuitos.</Text>
-                <Text medium align="center">Inicia sesión con tu cuenta o <br/>abre una si no la tienes.</Text>
+                <Text medium align="center">Has llegado al final de la demostración.</Text>
+                <Text medium align="center">Abre una cuenta o inicia sesión para continuar</Text>
                 <Grid gap="1.14em">
                     <PageLink to={routes.login.path} >
                         <Grid>
