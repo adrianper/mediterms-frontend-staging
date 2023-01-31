@@ -42,7 +42,7 @@ const Account = () => {
     }
 
     let userObject =  JSON.parse(localStorage.getItem('user'))
-    const photoUrl = userObject.photoUrl !== undefined ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
+    const photoUrl = userObject.photoUrl === undefined ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
             <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
