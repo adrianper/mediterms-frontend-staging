@@ -6,7 +6,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
 import { Button, Grid, TextField, Text } from 'components'
-import { signup } from 'redux/reducers/auth/authSlice'
+import { login, signup } from 'redux/reducers/auth/authSlice'
 
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 
@@ -24,6 +24,7 @@ const Signup = () => {
     const [showError, setShowError] = useState(false)
     const { auth } = useSelector(store => store)
     const { /*user, */authenticated } = auth
+    const [successfulAccount, setSuccessfulAccount] = useState(false)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -72,6 +73,10 @@ const Signup = () => {
         }
     }, [formData.email])
 
+    const loginAuto = () =>{
+        dispatch(login({ email: formData.email, password: formData.password }))
+    }
+
     useEffect(() => {
         if (authenticated) navigate('/users')
         
@@ -87,43 +92,56 @@ const Signup = () => {
     },[])
 
     return (
-        <Grid className="signup" padding="2.28em 1.57em" itemsX="center" gap="2.18em">
-            <Text bold size="5">Abre una cuenta</Text>
-
-            <form onSubmit={handleSumbit}>
-                <Grid w100 className="signup__form" gap="1.61em">
-                    <TextField label="Nombre completo"
-                        value={formData.name}
-                        onChange={v => handleChange(v, 'name')}
-                    />
-                    <TextField label="Correo electrónico"
-                        type="email"
-                        value={formData.email}
-                        onChange={v => handleChange(v, 'email')}
-                        onBlur={validateEmail}
-                    />
-                    {emailError && <Text color="error">{emailError}</Text>}
-                    <TextField label="Contraseña"
-                        type="password"
-                        value={formData.password}
-                        onChange={v => handleChange(v, 'password')}
-                    />
-                    {showError && <Text color="error" align="center">{error}</Text>}
-                    <Grid padding="1.42em" className="signup__price_container">
-                        <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
-                        <Text style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
-                        <Text bold size="9">9.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
-                    </Grid>
-
-                    <Text bold size="5" align="center">Método de pago</Text>
-
-                    {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
+        
+        <Grid>
+            {successfulAccount ?
+            <Grid className="singup_successfuly" padding="2.28em 1.57em" itemsX="center" gap="2.18em" >
+                <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png"/>
+                <Grid w100 padding="2em" className="singup_successfuly__container" gap="2.18em">
+                    <Text medium align="center">Tu cuenta ha sido creada con éxito</Text>
+                    <Button onClick={() => {loginAuto()}} selfCenter>Empezar a aprender</Button>
                 </Grid>
-            </form>
-            {clientSecret != "" &&
-            <Elements stripe={stripePromise} options={options}>
-                <CheckoutForm setError={setError} setShowError={setShowError} formData={formData} clientSecret={clientSecret} />
-            </Elements>
+            </Grid>
+            :
+            <Grid className="signup" padding="2.28em 1.57em" itemsX="center" gap="2.18em">
+                <Text bold align="center" size="5">Abre una cuenta</Text>
+
+                <form onSubmit={handleSumbit}>
+                    <Grid w100 className="signup__form" gap="1.61em">
+                        <TextField label="Nombre completo"
+                            value={formData.name}
+                            onChange={v => handleChange(v, 'name')}
+                        />
+                        <TextField label="Correo electrónico"
+                            type="email"
+                            value={formData.email}
+                            onChange={v => handleChange(v, 'email')}
+                            onBlur={validateEmail}
+                        />
+                        {emailError && <Text color="error">{emailError}</Text>}
+                        <TextField label="Contraseña"
+                            type="password"
+                            value={formData.password}
+                            onChange={v => handleChange(v, 'password')}
+                        />
+                        {showError && <Text color="error" align="center">{error}</Text>}
+                        <Grid padding="1.42em" className="signup__price_container">
+                            <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
+                            <Text style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
+                            <Text bold size="9">9.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
+                        </Grid>
+
+                        <Text bold size="5" align="center">Método de pago</Text>
+
+                        {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
+                    </Grid>
+                </form>
+                {clientSecret != "" &&
+                <Elements stripe={stripePromise} options={options}>
+                    <CheckoutForm setSuccessfulAccount={setSuccessfulAccount} setError={setError} setShowError={setShowError} formData={formData} clientSecret={clientSecret} />
+                </Elements>
+                }
+            </Grid>
             }
         </Grid>
     )
