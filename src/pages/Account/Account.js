@@ -1,6 +1,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
 
@@ -9,18 +9,12 @@ import axios from 'axios'
 
 
 const Account = () => {
-
-    const topicWithTotalMock = [
-        { 'topic_name': 'Topico 1', total: 2546 },
-        { 'topic_name': 'Topico 2', total: 222 },
-        { 'topic_name': 'Topico 3', total: 333 },
-    ];
-    
     const [topicWithTotal, setTopicsWithTotal] = useState([])
     const [error, setError] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const navigate = useNavigate()
+    const DEFAULT_PROFILE_PHOTO = "https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg"
+
     useEffect(() => {
         axios.get('/scores/', {
             headers: {
@@ -47,11 +41,13 @@ const Account = () => {
         document.location.reload()
     }
 
+    let userObject =  JSON.parse(localStorage.getItem('user'))
+    const photoUrl = userObject.photoUrl !== undefined ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
             <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
-                    <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" />
+                    {photoUrl}
                     <Text medium>{name}</Text>
                     <Text medium>{email}</Text>
                 </Grid>
