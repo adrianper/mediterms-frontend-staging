@@ -49,7 +49,7 @@ export const routes = {
         path: '/account',
         linkName: 'Account',
         element: <Account />,
-        icon: <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" className='account-icon' />
+        icon: <img src="https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-mt-user.svg" className='account-icon' />
     },
     changePassword: {
         path: '/changePassword',
