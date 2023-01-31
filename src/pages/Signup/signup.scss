@@ -3,7 +3,11 @@
     form{
         width: 100%;
         display: grid;
-        justify-items: center
+        justify-items: center;
+
+        .StripeElement{
+            width: 100%
+        }
     }
     .signup__form{
         .signup__price_container{
