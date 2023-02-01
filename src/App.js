@@ -17,7 +17,7 @@ import RequireNoAuth from 'routing/RequireNoAuth'
 import RequireAuth from 'routing/RequireAuth'
 import { LoadingAppContextProvider } from 'context/LoadingAppContext'
 import { MessageBoxContextProvider } from 'context/MessageDialogContext'
-import AxiosProvider from 'axiosInstance'
+import AxiosProvider from 'config/AxiosProvider'
 
 const App = () => {
 

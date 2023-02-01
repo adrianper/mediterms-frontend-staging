@@ -5,26 +5,12 @@ import { useDispatch } from "react-redux"
 import { Outlet } from "react-router"
 import { reset } from "redux/reducers/auth/authSlice"
 import { routes } from "routing/routes"
-import { hostURL, notValidTokenCodes } from "scripts/generalVariables"
+import { notValidTokenCodes } from "scripts/generalVariables"
 
-// const axiosInstance = axios.create({
-//     baseURL: hostURL,
-//     withCredentials: true,
-//     headers: {
-//         common: {
-//             Authorization: `Bearer ${global.getCookieToken()}`
-//         }
-//     }
-// })
-
-const AxiosProvider = ({ children }) => {
-
+const AxiosProvider = () => {
     const dispatch = useDispatch()
 
     const { showMB } = useMessageBoxContext()
-
-    if (localStorage.getItem('token'))
-        axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
 
     useEffect(() => {
         const resInterceptor = response => response
