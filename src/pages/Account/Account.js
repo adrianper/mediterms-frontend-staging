@@ -13,7 +13,8 @@ const Account = () => {
     const [error, setError] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const DEFAULT_PROFILE_PHOTO = "https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg"
+    const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg"
+    const [selectedImage, setSelectedImage] = useState('');
 
     useEffect(() => {
         axios.get('/scores/', {
@@ -41,12 +42,43 @@ const Account = () => {
         document.location.reload()
     }
 
+    const changeUserPhoto = useCallback((event) =>{        
+        console.log("ALAN",event.target.files[0])
+        const options = {
+            url: '/user/upload',
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            data: {
+              formData: {file: event.target.files[0]},
+            }
+        }
+        axios(options)
+        .then(response => {
+            console.log(response.data.photoUrl)
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }, [])
+
     let userObject =  JSON.parse(localStorage.getItem('user'))
-    const photoUrl = userObject.photoUrl === undefined ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
+    const photoUrl = userObject.photoUrl === '' ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
             <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
+                    <input
+                        className='account__user_input_photo'
+                        type="file"
+                        name="myImage"
+                        onChange={(event) => {
+                            changeUserPhoto(event);
+                        }}
+                    />
                     {photoUrl}
                     <Text medium>{name}</Text>
                     <Text medium>{email}</Text>
