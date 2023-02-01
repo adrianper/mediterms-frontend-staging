@@ -19,6 +19,7 @@ const Terms = () => {
     const [showFinalDemo, setShowFinalDemo] = useState(false)
     const [state, dispatch] = useReducer(reducer, initialState)
     const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
+    const [showNextButton, setShowNextButton] = useState(false)
 
     const { authenticated } = useSelector(store => store.auth)
 
@@ -97,7 +98,7 @@ const Terms = () => {
         }
 
         dispatch({ type: actions.SET_SELECTED_ANSWER, payload: { selectedAnswer: index, answeredCorrect: isCorrectAnswer } })
-
+        setShowNextButton(true)
         // setTimeout(() => {
         //     requestNextTerm(answeredIdsRef.current)
         // }, 3000)
@@ -107,6 +108,7 @@ const Terms = () => {
     const nextQuestion = () =>{
         answeredIdsRef.current[answeredTermsRef.current] = term.id
         requestNextTerm(answeredIdsRef.current)
+        setShowNextButton(false)
     }
 
     /*--------EFFECTS--------*/
@@ -158,10 +160,12 @@ const Terms = () => {
                     <Text bold size="5" color="white" align="center">{answeredCorrect ? 'Correcto' : 'Incorrecto'}</Text>
                 </Grid>
             </Grid>
-            <Grid w100 onClick={() => {nextQuestion()}} padding="1em" className="terms__next_button">
-                <Text medium color="white">Siguiente</Text>
-                <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg" />
-            </Grid>
+            {showNextButton &&
+                <Grid w100 onClick={() => {nextQuestion()}} padding="1em" className="terms__next_button">
+                    <Text medium color="white">Siguiente</Text>
+                    <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg" />
+                </Grid>
+            }
         </Grid >
     )
 }
