@@ -1,6 +1,6 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
 import { Button, Grid, TextField, Text } from 'components'
-import axios from "axiosInstance"
+import axios from "axios"
 
 import './recover_password.scss'
 

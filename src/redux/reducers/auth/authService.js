@@ -1,4 +1,4 @@
-import axios from "axiosInstance"
+import axios from "axios"
 
 const signup = async (userData) => {
     const response = await axios.post('/user/signup', userData)

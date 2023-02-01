@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import axios from 'axiosInstance';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {Elements} from '@stripe/react-stripe-js';

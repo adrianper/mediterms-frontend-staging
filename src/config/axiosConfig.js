@@ -1,4 +1,4 @@
-import axios from "axiosInstance"
+import axios from "axios"
 import { routes } from "routing/routes"
 import { hostURL } from "scripts/generalVariables"
 
