@@ -3,7 +3,11 @@
     form{
         width: 100%;
         display: grid;
-        justify-items: center
+        justify-items: center;
+
+        .StripeElement{
+            width: 100%
+        }
     }
     .signup__form{
         .signup__price_container{
@@ -18,4 +22,15 @@
         }
     }
     
+}
+.singup_successfuly{
+    height: 100vh;
+    img{
+        width: 11.8em;
+    }
+    .singup_successfuly__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+        
+    }
 }

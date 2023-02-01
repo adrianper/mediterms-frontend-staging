@@ -16,32 +16,40 @@ import { SideMenuContextProvider } from 'context/SideMenuContext'
 import RequireNoAuth from 'routing/RequireNoAuth'
 import RequireAuth from 'routing/RequireAuth'
 import { LoadingAppContextProvider } from 'context/LoadingAppContext'
+import { MessageBoxContextProvider } from 'context/MessageDialogContext'
+import AxiosProvider from 'config/AxiosProvider'
 
 const App = () => {
 
     const RouterProviders = useComposeProviders(Router, Routes)
-    const AppProviders = useComposeProviders(/*SocketContextProvider,*/ ScreenSizeContextProvider,
-        SideMenuContextProvider, LoadingAppContextProvider)
+    const AppProviders = useComposeProviders(/*SocketContextProvider, */
+        MessageBoxContextProvider,
+        LoadingAppContextProvider,
+        ScreenSizeContextProvider,
+        SideMenuContextProvider
+    )
 
     return (
         <ReduxProvider store={store}>
             {/* <ToastContainer /> */}
             <AppProviders>
                 <RouterProviders>
-                    <Route exact path={routes.home.path} element={<Layout />}>
-                        {publicRoutes.map(routeName =>
-                            <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
-                        )}
-                        <Route element={<RequireAuth />}>
-                            {requireAuthRoutes.map(routeName =>
+                    <Route element={<AxiosProvider />}>
+                        <Route exact path={routes.home.path} element={<Layout />}>
+                            {publicRoutes.map(routeName =>
+                                <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
+                            )}
+                            <Route element={<RequireAuth />}>
+                                {requireAuthRoutes.map(routeName =>
+                                    <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
+                                )}
+                            </Route>
+                        </Route>
+                        <Route element={<RequireNoAuth />}>
+                            {requireNoAuthRoutes.map(routeName =>
                                 <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
                             )}
                         </Route>
-                    </Route>
-                    <Route element={<RequireNoAuth />}>
-                        {requireNoAuthRoutes.map(routeName =>
-                            <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
-                        )}
                     </Route>
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </RouterProviders>

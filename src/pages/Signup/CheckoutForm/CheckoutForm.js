@@ -6,17 +6,17 @@ import { useDispatch } from 'react-redux';
 import { login, reset } from 'redux/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
-  const { formData, clientSecret, setError, setShowError } = props
+  const { formData, clientSecret, setError, setShowError, setSuccessfulAccount } = props
   const stripe = useStripe();
   const elements = useElements();
 
   const [errorMessage, setErrorMessage] = useState(null)
+  
 
   const dispatch = useDispatch()
 
   const handleSubmit = async event => {
     let signupToken = null
-    console.log("entra al handleSubmit")
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -73,7 +73,8 @@ const CheckoutForm = (props) => {
       setErrorMessage(error.message)
     } else {
       
-      dispatch(login({ email: formData.email, password: formData.password }))
+      setSuccessfulAccount(true)
+      // dispatch(login({ email: formData.email, password: formData.password }))
 
       console.log("entra al else", error)
       // Your customer will be redirected to your `return_url`. For some payment
@@ -86,7 +87,7 @@ const CheckoutForm = (props) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      {errorMessage && <Text margin={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
+      {errorMessage && <Text style={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
       <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
       {/* Show error message to your customers */}
     </form>
