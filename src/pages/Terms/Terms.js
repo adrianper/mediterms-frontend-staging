@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Button, Grid, Text } from 'components'
-import axios from 'axiosInstance'
+import axios from 'axios'
 import { actions, initialState, reducer } from './termsReducer'
 import { useLoadingAppContext } from 'hooks'
 import { routes } from 'routing/routes'

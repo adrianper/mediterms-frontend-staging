@@ -1,6 +1,6 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
 import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
-import axios from 'axiosInstance';
+import axios from 'axios';
 
 import { Button, Grid, Text } from 'components'
 import { routes } from 'routing/routes'
