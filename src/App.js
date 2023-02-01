@@ -16,12 +16,19 @@ import { SideMenuContextProvider } from 'context/SideMenuContext'
 import RequireNoAuth from 'routing/RequireNoAuth'
 import RequireAuth from 'routing/RequireAuth'
 import { LoadingAppContextProvider } from 'context/LoadingAppContext'
+import { AxiosProvider } from 'axiosInstance'
+import { MessageBoxContextProvider } from 'context/MessageDialogContext'
 
 const App = () => {
 
     const RouterProviders = useComposeProviders(Router, Routes)
-    const AppProviders = useComposeProviders(/*SocketContextProvider,*/ ScreenSizeContextProvider,
-        SideMenuContextProvider, LoadingAppContextProvider)
+    const AppProviders = useComposeProviders(/*SocketContextProvider, */
+        MessageBoxContextProvider,
+        LoadingAppContextProvider,
+        ScreenSizeContextProvider,
+        SideMenuContextProvider,
+        AxiosProvider
+    )
 
     return (
         <ReduxProvider store={store}>

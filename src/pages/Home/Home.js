@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react'
-import axios from 'axios';
+import axios from 'axiosInstance';
 
 import { Flex, Grid, Text } from 'components'
 
