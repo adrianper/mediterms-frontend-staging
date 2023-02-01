@@ -7,11 +7,14 @@
             filter: invert(53%) sepia(92%) saturate(1346%) hue-rotate(149deg) brightness(91%) contrast(103%);
         }
         .account__user_photo{
-            width: 8.57em;
+            width: 6.57em;
+            height: 6.57em;
+            border-radius: 100%;
+            object-fit: cover;
         }
         .account__user_input_photo{
-            width: 64px;
-            height: 64px;
+            width: 6.57em;
+            height: 6.57em;
             position: absolute;
             z-index: 2;
             opacity: 0;
