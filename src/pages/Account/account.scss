@@ -2,15 +2,19 @@
     .account__user_info{
         background: var(--bg-color--white);
         border-radius: 16px;
-        
         .user_info__default{
             width: 4.57em;
             filter: invert(53%) sepia(92%) saturate(1346%) hue-rotate(149deg) brightness(91%) contrast(103%);
         }
-
         .account__user_photo{
             width: 8.57em;
-
+        }
+        .account__user_input_photo{
+            width: 64px;
+            height: 64px;
+            position: absolute;
+            z-index: 2;
+            opacity: 0;
         }
     }
     .account__user_points{
