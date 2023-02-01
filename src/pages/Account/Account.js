@@ -5,7 +5,7 @@ import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
 
 import './account.scss'
-import axios from 'axios'
+import axios from 'axiosInstance'
 
 
 const Account = () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from "axios";
+import axios from "axiosInstance";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
