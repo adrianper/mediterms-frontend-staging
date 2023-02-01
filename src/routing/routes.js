@@ -68,4 +68,4 @@ export const routes = {
     },
 }
 
-export const noRedirectPaths = [routes.account.path]
+export const noRedirectPaths = [routes.account.path, routes.changePassword.path]
