@@ -7,13 +7,16 @@ import { routes } from 'routing/routes'
 import './account.scss'
 import axios from 'axios'
 
+const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg"
 
 const Account = () => {
     const [topicWithTotal, setTopicsWithTotal] = useState([])
     const [error, setError] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const DEFAULT_PROFILE_PHOTO = "https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg"
+    const [photoUrl, setPhotoUrl] = useState(DEFAULT_PROFILE_PHOTO)
+    
+    const [selectedImage, setSelectedImage] = useState('');
 
     useEffect(() => {
         axios.get('/scores/', {
@@ -23,12 +26,26 @@ const Account = () => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => {
-            setTopicsWithTotal(res.data)
-            let data = JSON.parse(localStorage.getItem('user'))
-            setName(data.name)
-            setEmail(data.email)   
+            setTopicsWithTotal(res.data) 
         }).catch(err => {
-            console.log(err.response.statusText)
+            setError(err.response.statusText)
+            
+        })
+    },[])
+
+    useEffect(() => {
+        axios.get('/user/account', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            const {data} = res
+            setName(data.user.name)
+            setEmail(data.user.email)   
+            setPhotoUrl(data.user.photoUrl || DEFAULT_PROFILE_PHOTO)
+        }).catch(err => {
             setError(err.response.statusText)
             
         })
@@ -41,13 +58,45 @@ const Account = () => {
         document.location.reload()
     }
 
-    let userObject =  JSON.parse(localStorage.getItem('user'))
-    const photoUrl = userObject.photoUrl === undefined ? <img src={DEFAULT_PROFILE_PHOTO} className="user_info__default"/> : <img src={userObject.photoUrl} className="account__user_photo" />
+    const changeUserPhoto = useCallback((event) =>{        
+        console.log("ALAN",event.target.files[0])
+        const options = {
+            url: '/user/upload',
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            data: {
+              formData: {file: event.target.files[0]},
+            }
+        }
+        axios(options)
+        .then(response => {
+            setPhotoUrl(response.data.photoUrl || DEFAULT_PROFILE_PHOTO)
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }, [])
+
+
+    const imageClassName = photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
+
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
             <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
-                    {photoUrl}
+                    <input
+                        className='account__user_input_photo'
+                        type="file"
+                        name="myImage"
+                        onChange={(event) => {
+                            changeUserPhoto(event);
+                        }}
+                    />
+                    <img src={photoUrl} className={imageClassName}/>
                     <Text medium>{name}</Text>
                     <Text medium>{email}</Text>
                 </Grid>
