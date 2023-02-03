@@ -19,7 +19,7 @@ import './signup.scss'
 const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM ');
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' })
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
     const [error, setError] = useState('')
@@ -30,6 +30,7 @@ const Signup = () => {
     const [promoError, setPromoError] = useState('')
     const [validPromoCode, setValidPromoCode] = useState(false)
     const [newPrice, setNewPrice] = useState(1299)
+    const [freeAccount, setFreeAccount] = useState(false)
     const promoCodeLength = 6
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -91,10 +92,14 @@ const Signup = () => {
                 let price = response.data.newPrice * 100
                 switch(price){
                     case 0:
-                        console.log("Cuenta gratis")
+                        setFreeAccount(true)
+                        setPromoError('')
+                        handleChange(response.data.promoCodeId, 'promoCodeId')
                     break;
                     case 999:
+                        setPromoError('')
                         setValidPromoCode(true)
+                        handleChange(response.data.promoCodeId, 'promoCodeId')
                         setNewPrice(price)
                     break; 
                 }
@@ -179,15 +184,15 @@ const Signup = () => {
                                 <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD</span></Text>
                             </Grid>
                         }
-                        <Text bold size="5" align="center">Método de pago</Text>
+                        {!freeAccount && <Text bold size="5" align="center">Método de pago</Text>}
 
                         {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
                     </Grid>
                 </form>
                 {clientSecret != "" &&
-                <Elements stripe={stripePromise} options={options} key={clientSecret}>
-                    <CheckoutForm setSuccessfulAccount={setSuccessfulAccount} setError={setError} setShowError={setShowError} formData={formData} clientSecret={clientSecret} />
-                </Elements>
+                    <Elements stripe={stripePromise} options={options} key={clientSecret}>
+                        <CheckoutForm setSuccessfulAccount={setSuccessfulAccount} setError={setError} setShowError={setShowError} formData={formData} freeAccount={freeAccount} clientSecret={clientSecret} />
+                    </Elements>
                 }
             </Grid>
             }
