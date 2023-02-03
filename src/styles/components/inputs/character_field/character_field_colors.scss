@@ -1,9 +1,9 @@
 .character_field {
     &.status--normal {
         .character_field__input {
-            border-color: var(--border-color--second-alter);
+            border-color: var(--border-color--second);
             &:focus {
-                border-color: var(--border-color--third);
+                border-color: var(--border-color--first);
             }
         }
     }
