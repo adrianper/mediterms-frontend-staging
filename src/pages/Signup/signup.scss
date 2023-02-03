@@ -20,6 +20,11 @@
                 text-decoration: line-through;
             }
         }
+        .signup__promo_container{
+            background: var(--bg-color--second);
+            border-radius: 16px;
+            justify-items: center;
+        }
     }
     
 }

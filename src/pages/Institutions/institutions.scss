@@ -1,0 +1,17 @@
+.institutions{
+    
+    .institutions__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+        .institutions__container__image{
+            border: solid 2px var(--border-color--second);
+            border-radius: 8px;
+            padding: 0.71em;
+            justify-content: center;
+            img{
+                width: 7.14em;
+                height: 7.14em;
+            }
+        }
+    }
+}
