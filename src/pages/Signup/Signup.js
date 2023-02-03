@@ -19,7 +19,7 @@ import './signup.scss'
 const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM ');
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' })
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
     const [error, setError] = useState('')
@@ -95,6 +95,7 @@ const Signup = () => {
                     break;
                     case 999:
                         setValidPromoCode(true)
+                        handleChange(response.data.promoCodeId, 'promoCodeId')
                         setNewPrice(price)
                     break; 
                 }
