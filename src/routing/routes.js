@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -6,7 +6,7 @@ export const headerRoutes = ['account']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
-export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword']
+export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
 export const requireNoAuthRoutes = ['login', 'signup']
 export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword']
 
@@ -65,6 +65,11 @@ export const routes = {
         path: '/changeRecoveredPassword',
         linkName: 'changeRecoveredPassword',
         element: <ChangeRecoveredPassword />
+    },
+    institutions:{
+        path: '/institutions',
+        linkName: 'institutions',
+        element: <Institutions />
     },
 }
 

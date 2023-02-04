@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { login, reset } from 'redux/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
-  const { formData, clientSecret, setError, setShowError, setSuccessfulAccount } = props
+  const { formData, clientSecret, setError, setShowError, setSuccessfulAccount, freeAccount } = props
   const stripe = useStripe();
   const elements = useElements();
 
@@ -27,11 +27,12 @@ const CheckoutForm = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
     if (formData.email === '' || formData.password === '' || formData.name === ''){
       setError('Hay campos vacios')
       setShowError(true)
     }else {
-
+      
     setShowError(false)
     try {
       const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
@@ -44,6 +45,8 @@ const CheckoutForm = (props) => {
       return
     }
     console.log('user created')
+
+    if(freeAccount) {setSuccessfulAccount(true); return;}
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -86,7 +89,7 @@ const CheckoutForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentElement />
+      {!freeAccount && <PaymentElement />}
       {errorMessage && <Text style={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
       <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
       {/* Show error message to your customers */}
