@@ -31,6 +31,7 @@ const Signup = () => {
     const [validPromoCode, setValidPromoCode] = useState(false)
     const [newPrice, setNewPrice] = useState(1299)
     const [freeAccount, setFreeAccount] = useState(false)
+    const [distance, setDistance] = useState(0);
     const promoCodeLength = 6
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -129,6 +130,20 @@ const Signup = () => {
           
     },[newPrice])
 
+    useEffect(() => {
+        const countDownDate = new Date("Feb 5, 2023 15:37:25").getTime();
+        const x = setInterval(() => {
+          const now = new Date().getTime();
+          setDistance(countDownDate - now);
+        }, 1000);
+        return () => clearInterval(x);
+    }, []);
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
     return (
         
         <Grid>
@@ -167,6 +182,7 @@ const Signup = () => {
                             <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
                             <Text medium style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
                             <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
+                            <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
                         </Grid>
                         <PageLink to={routes.institutions.path} >
                             <Text medium style={{textDecoration: 'underline'}} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
