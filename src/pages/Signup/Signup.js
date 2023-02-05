@@ -108,6 +108,8 @@ const Signup = () => {
             .catch(function (error) {
                 setPromoError(error.response.data.errors[0])
             });
+        }else{
+            setFreeAccount(false)
         }
     }
 
