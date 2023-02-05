@@ -75,7 +75,11 @@ const CheckoutForm = (props) => {
         })
       setErrorMessage(error.message)
     } else {
-      
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
       setSuccessfulAccount(true)
       // dispatch(login({ email: formData.email, password: formData.password }))
 
