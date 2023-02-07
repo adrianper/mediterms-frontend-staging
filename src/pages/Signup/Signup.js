@@ -19,7 +19,7 @@ import './signup.scss'
 const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az  ');
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null })
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null, institution: '' })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
     const [error, setError] = useState('')
@@ -168,6 +168,10 @@ const Signup = () => {
                         <TextField label="Nombre completo"
                             value={formData.name}
                             onChange={v => handleChange(v, 'name')}
+                        />
+                        <TextField label="Institución educativa"
+                            value={formData.institution}
+                            onChange={v => handleChange(v, 'institution')}
                         />
                         <TextField label="Correo electrónico"
                             type="email"

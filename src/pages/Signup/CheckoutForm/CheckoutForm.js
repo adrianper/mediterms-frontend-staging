@@ -28,7 +28,7 @@ const CheckoutForm = (props) => {
       return;
     }
 
-    if (formData.email === '' || formData.password === '' || formData.name === ''){
+    if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === ''){
       setError('Hay campos vacios')
       setShowError(true)
     }else {

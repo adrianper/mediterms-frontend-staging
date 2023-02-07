@@ -95,7 +95,7 @@ const Institutions = () =>{
                                     />
                                     <TextField
                                         value={formData.positionAndDepartment}
-                                        label="Puesto y departamento del contacto"
+                                        label="Puesto y depto del contacto"
                                         onChange={v => handleChange(v, 'positionAndDepartment')}
                                     />
                                     <TextField
