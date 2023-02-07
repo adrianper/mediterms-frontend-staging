@@ -46,7 +46,15 @@ const CheckoutForm = (props) => {
     }
     console.log('user created')
 
-    if(freeAccount) {setSuccessfulAccount(true); return;}
+    if(freeAccount) {
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
+      setSuccessfulAccount(true); 
+      return;
+    }
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
