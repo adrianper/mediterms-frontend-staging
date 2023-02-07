@@ -95,7 +95,7 @@ const CheckoutForm = (props) => {
     <form onSubmit={handleSubmit}>
       {!freeAccount && <PaymentElement />}
       {errorMessage && <Text style={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
-      <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
+      <Button style={{marginTop: '1em'}} type="submit" >{freeAccount ? 'Abrir cuenta' : 'Pagar y abrir cuenta'}</Button>
       {/* Show error message to your customers */}
     </form>
   );
