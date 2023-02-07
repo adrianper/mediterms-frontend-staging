@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { Button } from 'components'
+import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
 import { login, reset } from 'redux/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
-  const { formData, clientSecret, setError, setShowError } = props
+  const { formData, clientSecret, setError, setShowError, setSuccessfulAccount, freeAccount } = props
   const stripe = useStripe();
   const elements = useElements();
 
   const [errorMessage, setErrorMessage] = useState(null)
+  
 
   const dispatch = useDispatch()
 
   const handleSubmit = async event => {
     let signupToken = null
-    console.log("entra al handleSubmit")
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -27,11 +27,12 @@ const CheckoutForm = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
     if (formData.email === '' || formData.password === '' || formData.name === ''){
       setError('Hay campos vacios')
       setShowError(true)
     }else {
-
+      
     setShowError(false)
     try {
       const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
@@ -44,6 +45,8 @@ const CheckoutForm = (props) => {
       return
     }
     console.log('user created')
+
+    if(freeAccount) {setSuccessfulAccount(true); return;}
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -72,8 +75,13 @@ const CheckoutForm = (props) => {
         })
       setErrorMessage(error.message)
     } else {
-      
-      dispatch(login({ email: formData.email, password: formData.password }))
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
+      setSuccessfulAccount(true)
+      // dispatch(login({ email: formData.email, password: formData.password }))
 
       console.log("entra al else", error)
       // Your customer will be redirected to your `return_url`. For some payment
@@ -85,10 +93,10 @@ const CheckoutForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentElement />
-      <Button type="submit" >Pagar y abrir cuenta</Button>
+      {!freeAccount && <PaymentElement />}
+      {errorMessage && <Text style={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
+      <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
       {/* Show error message to your customers */}
-      {errorMessage && <div>{errorMessage}</div>}
     </form>
   );
 };

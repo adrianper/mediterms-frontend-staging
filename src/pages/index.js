@@ -9,3 +9,5 @@ export { default as Account } from './Account/Account'
 export { default as ChangePassword } from './ChangePassword/ChangePassword'
 export { default as FinalDemo } from './FinalDemo/FinalDemo'
 export { default as ChangeRecoveredPassword } from './ChangeRecoveredPassword/ChangeRecoveredPassword'
+export { default as Institutions } from './Institutions/Institutions'
+

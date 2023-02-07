@@ -1,55 +1,102 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
 
 import './account.scss'
 import axios from 'axios'
 
+const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg"
 
 const Account = () => {
-
-    const topicWithTotalMock = [
-        { 'topic_name': 'Topico 1', total: 2546 },
-        { 'topic_name': 'Topico 2', total: 222 },
-        { 'topic_name': 'Topico 3', total: 333 },
-    ];
-    
     const [topicWithTotal, setTopicsWithTotal] = useState([])
     const [error, setError] = useState([])
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const navigate = useNavigate()
+    const [photoUrl, setPhotoUrl] = useState(DEFAULT_PROFILE_PHOTO)
+    
+    const [selectedImage, setSelectedImage] = useState('');
+
     useEffect(() => {
-        axios.get('http://localhost:3000/scores/', {
+        axios.get('/scores/', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => {
-            setTopicsWithTotal(res.data)
-            let data = JSON.parse(localStorage.getItem('user'))
-            setName(data.name)
-            setEmail(data.email)   
+            setTopicsWithTotal(res.data) 
         }).catch(err => {
-            console.log(err.response.statusText)
+            setError(err.response.statusText)
+            
+        })
+    },[])
+
+    useEffect(() => {
+        axios.get('/user/account', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            const {data} = res
+            setName(data.user.name)
+            setEmail(data.user.email)   
+            setPhotoUrl(data.user.photoUrl || DEFAULT_PROFILE_PHOTO)
+        }).catch(err => {
             setError(err.response.statusText)
             
         })
     },[])
 
     const logOut = () => {
-        localStorage.clear();
-        navigate(0)
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.clear()
+        document.location.reload()
     }
+
+    const changeUserPhoto = useCallback((event) =>{        
+        console.log("ALAN",event.target.files[0])
+        const options = {
+            url: '/user/upload',
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            data: {
+              formData: {file: event.target.files[0]},
+            }
+        }
+        axios(options)
+        .then(response => {
+            setPhotoUrl(response.data.photoUrl || DEFAULT_PROFILE_PHOTO)
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }, [])
+
+
+    const imageClassName = photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
 
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
             <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
                 <Grid itemsX="center" gap="0.7em">
-                    <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" />
+                    <input
+                        className='account__user_input_photo'
+                        type="file"
+                        name="myImage"
+                        onChange={(event) => {
+                            changeUserPhoto(event);
+                        }}
+                    />
+                    <img src={photoUrl} className={imageClassName}/>
                     <Text medium>{name}</Text>
                     <Text medium>{email}</Text>
                 </Grid>

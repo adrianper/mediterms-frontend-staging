@@ -1,5 +1,6 @@
 export { default as useComposeProviders } from './useComposeProviders'
 export { default as useLoadingAppContext } from './useLoadingAppContext'
+export { default as useMessageBoxContext } from './useMessageBoxContext'
 export { default as useOnResizeWindow } from './useOnResizeWindow'
 export { default as useRenderInput } from './useRenderInput'
 export { default as useResizeObserver } from './useResizeObserver'

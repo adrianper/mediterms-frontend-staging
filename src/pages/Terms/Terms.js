@@ -19,6 +19,7 @@ const Terms = () => {
     const [showFinalDemo, setShowFinalDemo] = useState(false)
     const [state, dispatch] = useReducer(reducer, initialState)
     const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
+    const [showNextButton, setShowNextButton] = useState(false)
 
     const { authenticated } = useSelector(store => store.auth)
 
@@ -97,12 +98,18 @@ const Terms = () => {
         }
 
         dispatch({ type: actions.SET_SELECTED_ANSWER, payload: { selectedAnswer: index, answeredCorrect: isCorrectAnswer } })
-
-        setTimeout(() => {
-            requestNextTerm(answeredIdsRef.current)
-        }, 3000)
+        setShowNextButton(true)
+        // setTimeout(() => {
+        //     requestNextTerm(answeredIdsRef.current)
+        // }, 3000)
 
     }, [authenticated, requestNextTerm, term.id, topic])
+
+    const nextQuestion = () =>{
+        answeredIdsRef.current[answeredTermsRef.current] = term.id
+        requestNextTerm(answeredIdsRef.current)
+        setShowNextButton(false)
+    }
 
     /*--------EFFECTS--------*/
     useEffect(() => {
@@ -112,7 +119,7 @@ const Terms = () => {
 
     /*--------RENDER--------*/
     return (
-        <Grid className="terms" itemsX="center" padding="1.41em 0.62em">
+        <Grid className="terms" itemsX="center" padding="1.41em 0.62em" gap="1.14em">
             <Grid w100 className="terms__term_container" gap="1.71em" padding="1.71em 0.62em">
 
                 {term && <Text bold align="center" size="5" className="terms__term">{term.term}</Text>}
@@ -153,6 +160,12 @@ const Terms = () => {
                     <Text bold size="5" color="white" align="center">{answeredCorrect ? 'Correcto' : 'Incorrecto'}</Text>
                 </Grid>
             </Grid>
+            {showNextButton &&
+                <Grid w100 onClick={() => {nextQuestion()}} padding="1em" className="terms__next_button">
+                    <Text medium color="white">Siguiente</Text>
+                    <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg" />
+                </Grid>
+            }
         </Grid >
     )
 }

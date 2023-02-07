@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, PaymentRenewal } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -6,7 +6,7 @@ export const headerRoutes = ['account']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
-export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword']
+export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
 export const requireNoAuthRoutes = ['login', 'signup']
 export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal']
 
@@ -54,7 +54,7 @@ export const routes = {
         path: '/account',
         linkName: 'Account',
         element: <Account />,
-        icon: <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/icono_usuario.svg" className='account-icon' />
+        icon: <img src="https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-mt-user.svg" className='account-icon' />
     },
     changePassword: {
         path: '/changePassword',
@@ -71,4 +71,11 @@ export const routes = {
         linkName: 'changeRecoveredPassword',
         element: <ChangeRecoveredPassword />
     },
+    institutions:{
+        path: '/institutions',
+        linkName: 'institutions',
+        element: <Institutions />
+    },
 }
+
+export const noRedirectPaths = [routes.account.path, routes.changePassword.path]

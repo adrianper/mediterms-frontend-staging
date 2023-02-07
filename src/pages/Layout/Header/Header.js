@@ -19,13 +19,20 @@ const Header = () => {
                 <AiOutlineBars size="25" />
             </Flex> */}
             <PageLink to={routes.home.path} >
-                <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+                <Grid className="header__button">
+                    <img className="header__home" src="https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-mt-home.svg" />
+                </Grid>
+            </PageLink>
+            <PageLink to={routes.home.path} >
+                <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png"/>
             </PageLink>
             <Grid gap="1em" direction="column">
                 {[headerRoutes].map(route =>
                     <PageLink key={route} to={routes[route].path} >
-                        {routes[route].icon} &nbsp;
-                        {/* {routes[route].linkName} */}
+                        <Grid className="header__button">
+                            {routes[route].icon}
+                            {/* {routes[route].linkName} */}
+                        </Grid>
                     </PageLink>
                 )}
             </Grid>

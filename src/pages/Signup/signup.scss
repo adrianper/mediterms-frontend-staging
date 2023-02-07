@@ -3,7 +3,11 @@
     form{
         width: 100%;
         display: grid;
-        justify-items: center
+        justify-items: center;
+
+        .StripeElement{
+            width: 100%
+        }
     }
     .signup__form{
         .signup__price_container{
@@ -16,6 +20,22 @@
                 text-decoration: line-through;
             }
         }
+        .signup__promo_container{
+            background: var(--bg-color--second);
+            border-radius: 16px;
+            justify-items: center;
+        }
     }
     
+}
+.singup_successfuly{
+    height: 100vh;
+    img{
+        width: 11.8em;
+    }
+    .singup_successfuly__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+        
+    }
 }
