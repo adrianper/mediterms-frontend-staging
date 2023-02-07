@@ -1,5 +1,5 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
-import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { /*useSelector,*/ useDispatch } from 'react-redux'
 
 import { Button, Grid, TextField, Text } from 'components'
@@ -21,7 +21,7 @@ const Login = () => {
     // const { auth } = useSelector(store => store)
     // const { /*user, */authenticated } = auth
 
-    // const navigate = useNavigate()
+     const navigate = useNavigate()
     // const location = useLocation()
     const dispatch = useDispatch()
 
@@ -52,7 +52,11 @@ const Login = () => {
                     setShowError(true)
                     setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
                 }
-                // if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
+                console.log(localStorage.getItem('paymentStatus'))
+                if(localStorage.getItem('paymentStatus') === 'false'){
+                    navigate(routes.home.path)
+                }
+                //if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
             })
         }
         

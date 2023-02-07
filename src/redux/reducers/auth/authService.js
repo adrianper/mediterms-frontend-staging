@@ -4,10 +4,12 @@ const signup = async (userData) => {
     const response = await axios.post('/user/signup', userData)
 
     if (response.data && !response.data.error) {
+        localStorage.setItem('paymentStatus', response.data.paymentStatus)
         localStorage.setItem('user', JSON.stringify(response.data.user))
         localStorage.setItem('token', response.data.token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
     } else {
+        localStorage.removeItem('paymentStatus')
         localStorage.removeItem('user')
         localStorage.removeItem('token')
     }
@@ -19,10 +21,12 @@ const login = async (userData) => {
     const response = await axios.post('/user/login', userData)
 
     if (response.data && !response.data.error) {
+        localStorage.setItem('paymentStatus', response.data.paymentStatus)
         localStorage.setItem('user', JSON.stringify(response.data.user))
         localStorage.setItem('token', response.data.token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
     } else {
+        localStorage.removeItem('paymentStatus')
         localStorage.removeItem('user')
         localStorage.removeItem('token')
     }
