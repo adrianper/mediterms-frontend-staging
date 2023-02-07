@@ -133,7 +133,8 @@ const Signup = () => {
     },[newPrice])
 
     useEffect(() => {
-        const countDownDate = new Date("Feb 5, 2023 15:37:25").getTime();
+        const countDownDate = new Date() 
+        countDownDate.setDate(countDownDate.getDate() + 2);
         const x = setInterval(() => {
           const now = new Date().getTime();
           setDistance(countDownDate - now);
