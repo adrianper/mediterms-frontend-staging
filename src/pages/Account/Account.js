@@ -86,7 +86,7 @@ const Account = () => {
     }
 
 
-    const imageClassName = auth.user.photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
+    const imageClassName = (auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === "") ? "user_info__default" : "account__user_photo"
 
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
@@ -101,7 +101,7 @@ const Account = () => {
                             changeUserPhoto(event);
                         }}
                     />
-                    <img src={auth.user.photoUrl} className={imageClassName}/>
+                    <img src={auth.user.photoUrl || DEFAULT_PROFILE_PHOTO} className={imageClassName}/>
                     <Text medium>{auth.user.name}</Text>
                     <Text medium>{auth.user.email}</Text>
                 </Grid>

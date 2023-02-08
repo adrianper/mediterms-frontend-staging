@@ -32,7 +32,7 @@ const Header = () => {
     // }, []);
     const { auth } = useSelector(store => store)
 
-    const imageClassName = auth.user.photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
+    const imageClassName = (auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === "") ? "user_info__default" : "account__user_photo"
 
     return (
         <Flex className="header" align="center" justify="space-between" padding="1.14em">
@@ -49,7 +49,7 @@ const Header = () => {
             </PageLink>
             <PageLink to={routes.account.path}>
                 <Grid className="header__button">
-                    <img className={imageClassName} src={auth.user.photoUrl} />
+                    <img className={imageClassName} src={auth.user.photoUrl || DEFAULT_PROFILE_PHOTO} />
                 </Grid>
             </PageLink>
             
