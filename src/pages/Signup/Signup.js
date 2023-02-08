@@ -186,7 +186,7 @@ const Signup = () => {
                         />
                         {showError && <Text color="error" align="center">{error}</Text>}
 
-                        {!freeAccount &&
+                        
                             <Grid padding="1.42em" className="signup__price_container">
                                 <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD/año</span></Text>
                                 <Text medium style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
@@ -194,7 +194,7 @@ const Signup = () => {
                                 <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
                             </Grid>
                             <Text   bold align="center" size="5">¿Tienes un código de descuento?</Text>
-                        }
+                        
                         {!freeAccount &&
                             <PageLink to={routes.institutions.path} >
                                 <Text medium style={{textDecoration: 'underline'}} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
