@@ -1,5 +1,5 @@
-import React, { useCallback,/* useEffect,*/ useState } from 'react'
-import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import React, { useCallback,useEffect,/* useEffect,*/ useState } from 'react'
+import { useNavigate, Link as PageLink,/* useLocation*/ useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 
 import { Button, Grid, Text, TextField } from 'components'
@@ -13,14 +13,14 @@ const Institutions = () =>{
     const [successfulRequest, setSuccessfulRequest] = useState(false)
     const [error, setError] = useState('')
     const navigate = useNavigate()
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    
     const handleChange = useCallback((value, name) => {
         setFormData(formData => ({ ...formData, [name]: value }))
     }, [])
 
     const handleSumbit = () =>{
         let valid = false
-        console.log("entra")
         if (formData.institutionName != '' && formData.contactName != '' && formData.email != '' && formData.phoneNumber != '' && formData.positionAndDepartment != ''){
             valid = true
         }
@@ -59,6 +59,13 @@ const Institutions = () =>{
         setSuccessfulRequest(false)
         setError('')
     }
+
+    useEffect(() => {
+        const params = searchParams.get("form")
+        if(params === "true"){
+            setShowForm(true)
+        }
+    }, []);
 
     return(
         <Grid w100 className="institutions" padding="1.71em 0.62em">
