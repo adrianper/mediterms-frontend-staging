@@ -27,13 +27,12 @@ const Account = () => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => {
-            setTopicsWithTotal(res.data) 
+            setTopicsWithTotal(res.data)
         }).catch(err => {
             setError(err.response.statusText)
-            
-        })
-    },[])
 
+        })
+    }, [])
 
     const logOut = () => {
         localStorage.removeItem('user')
@@ -42,18 +41,18 @@ const Account = () => {
         document.location.reload()
     }
 
-    const changeUserPhoto = useCallback((event) =>{        
-        console.log("ALAN",event.target.files[0])
+    const changeUserPhoto = useCallback((event) => {
+        console.log("ALAN", event.target.files[0])
         const options = {
             url: '/user/upload',
             method: 'POST',
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             data: {
-              formData: {file: event.target.files[0]},
+                formData: { file: event.target.files[0] },
             }
         }
         axios(options)
@@ -69,6 +68,22 @@ const Account = () => {
             console.log(err)
         })
     }, [])
+
+    const handleRSSSChange = (e) => {
+        switch (e) {
+            case 'facebook':
+                window.open('https://www.facebook.com/meditermsapp', '_blank');
+                break;
+            case 'instagram':
+                window.open('https://www.instagram.com/meditermsapp', '_blank');
+                break;
+            case 'tiktok':
+                window.open('https://www.tiktok.com/@meditermsapp', '_blank');
+                break;
+            default:
+                break;
+        }
+    }
 
 
     const imageClassName = auth.user.photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
@@ -93,18 +108,35 @@ const Account = () => {
                 <PageLink to={routes.changePassword.path} >
                     <Button>Cambiar contraseña</Button>
                 </PageLink>
+                <Text bold size="5" color="first" >¿Dudas o aclaraciones?</Text>
+                <Text medium style={{'textAlign':'center'}}  color="first" >Siguenos en nuestras redes sociales</Text>
+                <Grid columns="1fr 1fr 1fr" style={{gap: 'inherit'}}>
+                    <Grid className='account__img_container'>
+                        <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/facebook-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('facebook') }} />
+                    </Grid>
+                    <Grid className='account__img_container'>
+                        <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/instagram-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('instagram') }} />
+                    </Grid>
+                    <Grid className='account__img_container'>
+                        <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/tiktok-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('tiktok') }} />
+                    </Grid>
+
+
+                </Grid >
             </Grid>
+
+
             <Grid w100 gap="1.14em" padding="1.71em 1.14em" className="account__user_points">
                 <Text>Términos respondidos correctamente:</Text>
                 {
                     topicWithTotal.map(topic =>
-                        <Grid  key={topic.id} columns="2fr 1fr" gap="1.14em 3.78em">
-                            <Text style={{alignSelf: 'center'}} medium className={`${topic.topic_name === 'Total' ? 'account__total_bold' : ''}`}>{topic.topic_name === 'Total' ? topic.topic_name.toUpperCase(): topic.topic_name}:</Text>
+                        <Grid key={topic.id} columns="2fr 1fr" gap="1.14em 3.78em">
+                            <Text style={{ alignSelf: 'center' }} medium className={`${topic.topic_name === 'Total' ? 'account__total_bold' : ''}`}>{topic.topic_name === 'Total' ? topic.topic_name.toUpperCase() : topic.topic_name}:</Text>
                             <Text bold color="first" size="6" >{topic.total}</Text>
                         </Grid>
                     )}
             </Grid>
-            <Button style={{marginTop: '0.52em'}} onClick = {()=>{logOut()}} className="account__logout">Cerrar sesión</Button>
+            <Button style={{ marginTop: '0.52em' }} onClick={() => { logOut() }} className="account__logout">Cerrar sesión</Button>
         </Grid>
     )
 }
