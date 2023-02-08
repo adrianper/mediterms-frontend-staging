@@ -104,7 +104,7 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
 
         return (
             <Flex w100 h100 align='center' justify='center' className='message_box_modal' ref={messageBoxRef}>
-                <Grid w100 className={className} padding='1em' gap='2em' rows={messageTitle !== '' ? 'auto 1fr auto' : '1fr auto'}>
+                <Grid w100 className={className} padding='2em' gap='1em' rows={messageTitle !== '' ? 'auto 1fr auto' : '1fr auto'}>
                     {/* <Flex centerX maxHeight='10em'>
                         <Animation autoplay loop animation={messageAnimation} />
                     </Flex> */}
