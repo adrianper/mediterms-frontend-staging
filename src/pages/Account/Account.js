@@ -1,22 +1,23 @@
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
+import { useSelector, useDispatch } from 'react-redux'
 
 import './account.scss'
 import axios from 'axios'
+import { setUser } from 'redux/reducers/auth/authSlice'
 
 const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg"
 
 const Account = () => {
     const [topicWithTotal, setTopicsWithTotal] = useState([])
     const [error, setError] = useState([])
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [photoUrl, setPhotoUrl] = useState(DEFAULT_PROFILE_PHOTO)
-    
-    const [selectedImage, setSelectedImage] = useState('');
+    const fileReference = useRef()
+
+    const { auth } = useSelector(store => store)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         axios.get('/scores/', {
@@ -33,23 +34,6 @@ const Account = () => {
         })
     },[])
 
-    useEffect(() => {
-        axios.get('/user/account', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(res => {
-            const {data} = res
-            setName(data.user.name)
-            setEmail(data.user.email)   
-            setPhotoUrl(data.user.photoUrl || DEFAULT_PROFILE_PHOTO)
-        }).catch(err => {
-            setError(err.response.statusText)
-            
-        })
-    },[])
 
     const logOut = () => {
         localStorage.removeItem('user')
@@ -73,8 +57,13 @@ const Account = () => {
             }
         }
         axios(options)
+        // .then(response => getAccountInfo())
         .then(response => {
-            setPhotoUrl(response.data.photoUrl || DEFAULT_PROFILE_PHOTO)
+            fileReference.current.value = ""
+            const user = JSON.parse(localStorage.getItem('user'))
+            user.photoUrl = response.data.photoUrl
+            localStorage.setItem('user', JSON.stringify(user))
+            dispatch(setUser({photoUrl: response.data.photoUrl}))
         })
         .catch(err =>{
             console.log(err)
@@ -82,7 +71,7 @@ const Account = () => {
     }, [])
 
 
-    const imageClassName = photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
+    const imageClassName = auth.user.photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
 
     return (
         <Grid className="account" itemsX="center" gap="0.7em" padding="1.14em 0.42em">
@@ -91,14 +80,15 @@ const Account = () => {
                     <input
                         className='account__user_input_photo'
                         type="file"
+                        ref={fileReference}
                         name="myImage"
                         onChange={(event) => {
                             changeUserPhoto(event);
                         }}
                     />
-                    <img src={photoUrl} className={imageClassName}/>
-                    <Text medium>{name}</Text>
-                    <Text medium>{email}</Text>
+                    <img src={auth.user.photoUrl} className={imageClassName}/>
+                    <Text medium>{auth.user.name}</Text>
+                    <Text medium>{auth.user.email}</Text>
                 </Grid>
                 <PageLink to={routes.changePassword.path} >
                     <Button>Cambiar contraseña</Button>
