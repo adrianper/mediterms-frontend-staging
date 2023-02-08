@@ -1,5 +1,5 @@
-import React, { useCallback,/* useEffect,*/ useState } from 'react'
-import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import React, { useCallback,useEffect,/* useEffect,*/ useState } from 'react'
+import { useNavigate, Link as PageLink,/* useLocation*/ useSearchParams } from 'react-router-dom'
 import axios from 'axios';
 
 import { Button, Grid, Text, TextField } from 'components'
@@ -13,14 +13,14 @@ const Institutions = () =>{
     const [successfulRequest, setSuccessfulRequest] = useState(false)
     const [error, setError] = useState('')
     const navigate = useNavigate()
-
+    const [searchParams, setSearchParams] = useSearchParams();
+    
     const handleChange = useCallback((value, name) => {
         setFormData(formData => ({ ...formData, [name]: value }))
     }, [])
 
     const handleSumbit = () =>{
         let valid = false
-        console.log("entra")
         if (formData.institutionName != '' && formData.contactName != '' && formData.email != '' && formData.phoneNumber != '' && formData.positionAndDepartment != ''){
             valid = true
         }
@@ -60,6 +60,13 @@ const Institutions = () =>{
         setError('')
     }
 
+    useEffect(() => {
+        const params = searchParams.get("form")
+        if(params === "true"){
+            setShowForm(true)
+        }
+    }, []);
+
     return(
         <Grid w100 className="institutions" padding="1.71em 0.62em">
             <Grid w100 padding="1.71em 1.142em" className="institutions__container" >
@@ -94,6 +101,11 @@ const Institutions = () =>{
                                         onChange={v => handleChange(v, 'contactName')}
                                     />
                                     <TextField
+                                        value={formData.positionAndDepartment}
+                                        label="Puesto y depto del contacto"
+                                        onChange={v => handleChange(v, 'positionAndDepartment')}
+                                    />
+                                    <TextField
                                         value={formData.email}
                                         label="Correo electrónico"
                                         onChange={v => handleChange(v, 'email')}
@@ -102,11 +114,6 @@ const Institutions = () =>{
                                         value={formData.phoneNumber}
                                         label="Teléfono"
                                         onChange={v => handleChange(v, 'phoneNumber')}
-                                    />
-                                    <TextField
-                                        value={formData.positionAndDepartment}
-                                        label="Puesto y departamento del contacto"
-                                        onChange={v => handleChange(v, 'positionAndDepartment')}
                                     />
                                     {error !=='' && <Text medium align="center" color="error">{error}</Text>}
                                     <Grid style={{marginTop:'10px'}} contentX="center" columns="auto auto" gap="1.71em">
