@@ -6,7 +6,6 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 import { routes } from 'routing/routes'
 
-
 import { Button, Grid, TextField, Text, CharacterField } from 'components'
 import { login, signup } from 'redux/reducers/auth/authSlice'
 
@@ -16,7 +15,7 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import './signup.scss'
 
 // import { toast } from 'react-toastify'
-const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM ');
+const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az ');
 
 const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null })
@@ -187,6 +186,10 @@ const Signup = () => {
                             <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
                             <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
                         </Grid>
+
+
+                        <Text   bold align="center" size="5">¿Tienes un código de descuento?</Text>
+
                         <PageLink to={routes.institutions.path} >
                             <Text medium style={{textDecoration: 'underline'}} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
                         </PageLink>
@@ -203,9 +206,14 @@ const Signup = () => {
                                 <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD</span></Text>
                             </Grid>
                         }
-                        {!freeAccount && <Text bold size="5" align="center">Método de pago</Text>}
+                        {!freeAccount && <Text bold size="5" align="center">Selecciona método de pago</Text>}
+                        
 
                         {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
+                    </Grid>
+                    <Grid>
+                        <Text  align="center" medium style={{margin:'1.4em 0em 0.5em 0em'}} >Pagos procesados por:</Text>
+                        <img src='https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/stripe-payment.png' className='signup__stripe_logo'/>
                     </Grid>
                 </form>
                 {clientSecret != "" &&
