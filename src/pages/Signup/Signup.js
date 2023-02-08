@@ -188,9 +188,9 @@ const Signup = () => {
                         {showError && <Text color="error" align="center">{error}</Text>}
                         {!freeAccount &&
                             <Grid padding="1.42em" className="signup__price_container">
-                                <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
+                                <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD/año</span></Text>
                                 <Text medium style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
-                                <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
+                                <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD/año</span></Text>
                                 <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
                             </Grid>
                         }
@@ -209,7 +209,7 @@ const Signup = () => {
                             <Grid padding="1.42em" gap="0.7em" className="signup__promo_container">
                                 <Text bold color="white" size="4">¡Tienes un descuento!</Text>
                                 <Text medium color="white">Tu nuevo total es:</Text>
-                                <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD</span></Text>
+                                <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD/año</span></Text>
                             </Grid>
                         }
                         {!freeAccount && <Text bold size="5" align="center">Método de pago</Text>}
