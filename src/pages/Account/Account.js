@@ -84,13 +84,13 @@ const Account = () => {
     const handleRSSSChange = (e) => {
         switch (e) {
             case 'facebook':
-                window.open('https://www.facebook.com', '_blank');
+                window.open('https://www.facebook.com/meditermsapp', '_blank');
                 break;
             case 'instagram':
-                window.open('https://www.instagram.com', '_blank');
+                window.open('https://www.instagram.com/meditermsapp', '_blank');
                 break;
             case 'tiktok':
-                window.open('https://www.tiktok.com', '_blank');
+                window.open('https://www.tiktok.com/@meditermsapp', '_blank');
                 break;
             default:
                 break;
