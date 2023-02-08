@@ -16,10 +16,10 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import './signup.scss'
 
 // import { toast } from 'react-toastify'
-const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM ');
+const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az  ');
 
 const Signup = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null })
+    const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null, institution: '' })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
     const [error, setError] = useState('')
@@ -96,6 +96,7 @@ const Signup = () => {
                         setFreeAccount(true)
                         setPromoError('')
                         handleChange(response.data.promoCodeId, 'promoCodeId')
+                        setValidPromoCode(false)
                     break;
                     case 999:
                         setPromoError('')
@@ -133,7 +134,8 @@ const Signup = () => {
     },[newPrice])
 
     useEffect(() => {
-        const countDownDate = new Date("Feb 5, 2023 15:37:25").getTime();
+        const countDownDate = new Date() 
+        countDownDate.setDate(countDownDate.getDate() + 2);
         const x = setInterval(() => {
           const now = new Date().getTime();
           setDistance(countDownDate - now);
@@ -167,6 +169,10 @@ const Signup = () => {
                             value={formData.name}
                             onChange={v => handleChange(v, 'name')}
                         />
+                        <TextField label="Institución educativa"
+                            value={formData.institution}
+                            onChange={v => handleChange(v, 'institution')}
+                        />
                         <TextField label="Correo electrónico"
                             type="email"
                             value={formData.email}
@@ -180,15 +186,19 @@ const Signup = () => {
                             onChange={v => handleChange(v, 'password')}
                         />
                         {showError && <Text color="error" align="center">{error}</Text>}
-                        <Grid padding="1.42em" className="signup__price_container">
-                            <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD</span></Text>
-                            <Text medium style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
-                            <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD</span></Text>
-                            <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
-                        </Grid>
-                        <PageLink to={routes.institutions.path} >
-                            <Text medium style={{textDecoration: 'underline'}} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
-                        </PageLink>
+                        {!freeAccount &&
+                            <Grid padding="1.42em" className="signup__price_container">
+                                <Text>Precio regular: <br/><span className="signup__regular_price">$25 USD/año</span></Text>
+                                <Text medium style={{margin:'1.4em 0em 0.5em 0em'}}>Promoción de inicio de semestre:</Text>
+                                <Text bold size="9">12.99<span style={{fontSize: '24px', color: '#162127'}}>USD/año</span></Text>
+                                <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
+                            </Grid>
+                        }
+                        {!freeAccount &&
+                            <PageLink to={routes.institutions.path} >
+                                <Text medium style={{textDecoration: 'underline'}} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
+                            </PageLink>
+                        }
                         <Grid gap="0.7em" itemsX="center">
                             <CharacterField onChange={handlePromotionalCode} length={promoCodeLength} />
                             {promoError !== '' &&
@@ -199,7 +209,7 @@ const Signup = () => {
                             <Grid padding="1.42em" gap="0.7em" className="signup__promo_container">
                                 <Text bold color="white" size="4">¡Tienes un descuento!</Text>
                                 <Text medium color="white">Tu nuevo total es:</Text>
-                                <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD</span></Text>
+                                <Text bold color="white" size="9">9.99<span style={{fontSize: '24px'}}>USD/año</span></Text>
                             </Grid>
                         }
                         {!freeAccount && <Text bold size="5" align="center">Método de pago</Text>}

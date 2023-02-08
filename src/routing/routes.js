@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -8,7 +8,7 @@ export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
 export const requireNoAuthRoutes = ['login', 'signup']
-export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword']
+export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal']
 
 export const routes = {
     home: {
@@ -32,6 +32,11 @@ export const routes = {
         path: '/signup',
         linkName: 'Signup',
         element: <Signup />
+    },
+    paymentRenewal: {
+        path: '/payment_renewal',
+        linkName: 'PaymentRenewal',
+        element: <PaymentRenewal />
     },
     redux_counter: {
         path: '/redux_counter',

@@ -94,6 +94,11 @@ const Institutions = () =>{
                                         onChange={v => handleChange(v, 'contactName')}
                                     />
                                     <TextField
+                                        value={formData.positionAndDepartment}
+                                        label="Puesto y depto del contacto"
+                                        onChange={v => handleChange(v, 'positionAndDepartment')}
+                                    />
+                                    <TextField
                                         value={formData.email}
                                         label="Correo electrónico"
                                         onChange={v => handleChange(v, 'email')}
@@ -102,11 +107,6 @@ const Institutions = () =>{
                                         value={formData.phoneNumber}
                                         label="Teléfono"
                                         onChange={v => handleChange(v, 'phoneNumber')}
-                                    />
-                                    <TextField
-                                        value={formData.positionAndDepartment}
-                                        label="Puesto y departamento del contacto"
-                                        onChange={v => handleChange(v, 'positionAndDepartment')}
                                     />
                                     {error !=='' && <Text medium align="center" color="error">{error}</Text>}
                                     <Grid style={{marginTop:'10px'}} contentX="center" columns="auto auto" gap="1.71em">

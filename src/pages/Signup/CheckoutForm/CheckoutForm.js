@@ -28,7 +28,7 @@ const CheckoutForm = (props) => {
       return;
     }
 
-    if (formData.email === '' || formData.password === '' || formData.name === ''){
+    if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === ''){
       setError('Hay campos vacios')
       setShowError(true)
     }else {
@@ -46,7 +46,15 @@ const CheckoutForm = (props) => {
     }
     console.log('user created')
 
-    if(freeAccount) {setSuccessfulAccount(true); return;}
+    if(freeAccount) {
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
+      setSuccessfulAccount(true); 
+      return;
+    }
 
     const {error} = await stripe.confirmPayment({
       //`Elements` instance that was used to create the Payment Element
@@ -95,7 +103,7 @@ const CheckoutForm = (props) => {
     <form onSubmit={handleSubmit}>
       {!freeAccount && <PaymentElement />}
       {errorMessage && <Text style={{marginTop: '1em'}} color="error" align="center">{errorMessage}</Text>}
-      <Button style={{marginTop: '1em'}} type="submit" >Pagar y abrir cuenta</Button>
+      <Button style={{marginTop: '1em'}} type="submit" >{freeAccount ? 'Abrir cuenta' : 'Pagar y abrir cuenta'}</Button>
       {/* Show error message to your customers */}
     </form>
   );
