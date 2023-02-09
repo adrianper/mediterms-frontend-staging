@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link as PageLink } from 'react-router-dom'
 
 import { AiOutlineBars } from 'react-icons/ai'
-
+import { useSelector } from 'react-redux'
 import { headerRoutes, routes } from 'routing/routes'
 import { Flex, Grid } from 'components'
 
@@ -14,24 +14,25 @@ const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.c
 const Header = () => {
 
     const { toggleSideMenu } = useSideMenuContext()
-    const [photoUrl, setPhotoUrl] = useState(DEFAULT_PROFILE_PHOTO)
+    // const [photoUrl, setPhotoUrl] = useState(DEFAULT_PROFILE_PHOTO)
 
-    useEffect(() => {
-        axios.get('/user/account', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(res => {
-            const {data} = res 
-            setPhotoUrl(data.user.photoUrl || DEFAULT_PROFILE_PHOTO)
-        }).catch(err => {
-            // setError(err.response.statusText)
-        })
-    }, []);
+    // useEffect(() => {
+    //     axios.get('/user/account', {
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json;charset=UTF-8',
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`
+    //         }
+    //     }).then(res => {
+    //         const {data} = res 
+    //         setPhotoUrl(data.user.photoUrl || DEFAULT_PROFILE_PHOTO)
+    //     }).catch(err => {
+    //         // setError(err.response.statusText)
+    //     })
+    // }, []);
+    const { auth } = useSelector(store => store)
 
-    const imageClassName = photoUrl === DEFAULT_PROFILE_PHOTO ? "user_info__default" : "account__user_photo"
+    const imageClassName = (auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === "") ? "user_info__default" : "account__user_photo"
 
     return (
         <Flex className="header" align="center" justify="space-between" padding="1.14em">
@@ -48,7 +49,7 @@ const Header = () => {
             </PageLink>
             <PageLink to={routes.account.path}>
                 <Grid className="header__button">
-                    <img className={imageClassName} src={photoUrl} />
+                    <img className={imageClassName} src={auth.user.photoUrl || DEFAULT_PROFILE_PHOTO} />
                 </Grid>
             </PageLink>
             
