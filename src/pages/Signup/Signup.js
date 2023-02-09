@@ -15,7 +15,7 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import './signup.scss'
 
 // import { toast } from 'react-toastify'
-const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az');
+const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM');
 
 const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null, institution: '' })
