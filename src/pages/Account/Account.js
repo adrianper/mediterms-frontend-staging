@@ -108,8 +108,10 @@ const Account = () => {
                 <PageLink to={routes.changePassword.path} >
                     <Button>Cambiar contraseña</Button>
                 </PageLink>
-                <Text bold size="5" color="first" >¿Dudas o aclaraciones?</Text>
-                <Text medium style={{'textAlign':'center'}}  color="first" >Siguenos en nuestras redes sociales</Text>
+                <Grid gap="0.8em" style={{marginTop:'0.8em'}}>
+                    <Text bold size="5" color="first" align="center" >¿Dudas o aclaraciones?</Text>
+                    <Text medium align="center"  color="first" >Siguenos en nuestras redes sociales</Text>
+                </Grid>
                 <Grid columns="1fr 1fr 1fr" style={{gap: 'inherit'}}>
                     <Grid className='account__img_container'>
                         <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/facebook-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('facebook') }} />

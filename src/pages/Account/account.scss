@@ -23,15 +23,14 @@
     .account__img_container{
         cursor: pointer;
         justify-items: center;
-        width: 44px;
-        height: 44px;
         border-radius: 8px;
         background-color: var(--bg-color--blue-alter);
     }
     .account__rss_logo{
         filter: invert(25%) sepia(99%) saturate(1626%) hue-rotate(179deg) brightness(99%) contrast(102%);
-        padding: 5px;
-        height: 100%;
+        padding: 6px;
+        width: 44px;
+        height: 44px;
         cursor: pointer
     }
     .account__user_points{
