@@ -15,7 +15,7 @@ import CheckoutForm from './CheckoutForm/CheckoutForm';
 import './signup.scss'
 
 // import { toast } from 'react-toastify'
-const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM  ');
+const stripePromise = loadStripe('pk_test_51MPJqDCMUMmnWPNk2Z3N0IapLcdoh6sDuOpjbn0bRN2p2HZiCAcekAb047GFQ2VWuA1UkYgPd2yVpWQ0BKRoH7JK00LvVb20az');
 
 const Signup = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', promoCodeId: null, institution: '' })
@@ -197,17 +197,17 @@ const Signup = () => {
                                     <Text bold align="center" size="5">¿Tienes un código de descuento?</Text>
                                 </Grid>
                             }
-                            {!freeAccount &&
-                                <PageLink to={routes.institutions.path} >
-                                    <Text medium style={{ textDecoration: 'underline' }} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
-                                </PageLink>
-                            }
                             <Grid gap="0.7em" itemsX="center">
                                 <CharacterField onChange={handlePromotionalCode} length={promoCodeLength} />
                                 {promoError !== '' &&
                                     <Text color="error">{promoError}</Text>
                                 }
                             </Grid>
+                            {!freeAccount &&
+                                <PageLink to={routes.institutions.path} >
+                                    <Text medium style={{ textDecoration: 'underline' }} align="center" color="first">Ver instituciones educativas que ofrecen códigos a sus alumnos</Text>
+                                </PageLink>
+                            }
                             {validPromoCode &&
                                 <Grid padding="1.42em" gap="0.7em" className="signup__promo_container">
                                     <Text bold color="white" size="4">¡Tienes un descuento!</Text>
@@ -220,10 +220,12 @@ const Signup = () => {
 
                             {/* <Button type="submit" selfCenter>Pagar y abrir cuenta</Button> */}
                         </Grid>
-                        <Grid>
-                            <Text align="center" medium style={{ margin: '1.4em 0em 0.5em 0em' }} >Pagos procesados por:</Text>
-                            <img src='https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/stripe-payment.png' className='signup__stripe_logo' />
-                        </Grid>
+                        {!freeAccount &&
+                            <Grid>
+                                <Text align="center" medium style={{ margin: '1.4em 0em 0.5em 0em' }} >Pagos procesados por:</Text>
+                                <img src='https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/stripe-payment.png' className='signup__stripe_logo' />
+                            </Grid>
+                        }
                     </form>
                     {clientSecret != "" &&
                         <Elements stripe={stripePromise} options={options} key={clientSecret}>

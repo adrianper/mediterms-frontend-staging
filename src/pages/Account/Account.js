@@ -129,7 +129,7 @@ const Account = () => {
 
 
             <Grid w100 gap="1.14em" padding="1.71em 1.14em" className="account__user_points">
-                <Text>Términos respondidos correctamente:</Text>
+                <Text bold>Términos respondidos correctamente:</Text>
                 {
                     topicWithTotal.map(topic =>
                         <Grid key={topic.id} columns="2fr 1fr" gap="1.14em 3.78em">
