@@ -3,7 +3,7 @@ import authService from './authService'
 
 const user = JSON.parse(localStorage.getItem('user'))
 const userInitialState = {
-    photoUrl: "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg",
+    photoUrl: "",
     name: '',
     email: ''
 }
