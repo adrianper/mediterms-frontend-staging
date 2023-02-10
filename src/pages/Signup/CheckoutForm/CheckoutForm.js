@@ -72,7 +72,7 @@ const CheckoutForm = (props) => {
       // details incomplete)
       console.log("error",error)
       console.log('Delete user')
-      axios.delete('/user/delete', {
+      axios.delete('/user/account/delete', {
         headers: {
           Authorization: `Bearer ${signupToken}`
         }
