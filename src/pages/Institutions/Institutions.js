@@ -21,7 +21,8 @@ const Institutions = () =>{
 
     const handleSumbit = () =>{
         let valid = false
-        if (formData.institutionName != '' && formData.contactName != '' && formData.email != '' && formData.phoneNumber != '' && formData.positionAndDepartment != ''){
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        if (formData.institutionName != '' && formData.contactName != '' && formData.email != '' && formData.phoneNumber != '' && formData.positionAndDepartment != '' && formData.email.match(regex)){
             valid = true
         }
 
@@ -45,7 +46,7 @@ const Institutions = () =>{
                 setError(err.response.data.errors[0])
             })
         }else{
-            setError('Hay campos vacios')
+            setError('Hay campos vacios o invalidos')
         }
     }
 
@@ -89,41 +90,39 @@ const Institutions = () =>{
                             <Grid gap="1.14em">
                                 <Text bold align="center" size="5">Autoridades educativas</Text>
                                 <Text>Para habilitar el descuento institucional a los alumnos, es necesario que se ponga en contacto con nosotros a través del siguiente formulario.</Text>
-                                <Grid>
-                                    <form style={{display: 'grid', gap:'1.21em'}}>
-                                        <TextField
-                                            value={formData.institutionName}
-                                            label="Nombre de la institución"
-                                            onChange={v => handleChange(v, 'institutionName')}
-                                        />
-                                        <TextField
-                                            value={formData.contactName}
-                                            label="Nombre del contacto"
-                                            onChange={v => handleChange(v, 'contactName')}
-                                        />
-                                        <TextField
-                                            value={formData.positionAndDepartment}
-                                            label="Puesto y depto del contacto"
-                                            onChange={v => handleChange(v, 'positionAndDepartment')}
-                                        />
-                                        <TextField
-                                            value={formData.email}
-                                            label="Correo electrónico"
-                                            type="email"
-                                            onChange={v => handleChange(v, 'email')}
-                                        />
-                                        <TextField
-                                            value={formData.phoneNumber}
-                                            label="Teléfono"
-                                            type="number"
-                                            onChange={v => handleChange(v, 'phoneNumber')}
-                                        />
-                                        {error !=='' && <Text medium align="center" color="error">{error}</Text>}
-                                        <Grid style={{marginTop:'10px'}} contentX="center" columns="auto auto" gap="1.71em">
-                                            <Button className="second_button" onClick={() => {cleanInstitutes()}}>Regresar</Button>
-                                            <Button type="submit" width="108px" onClick={handleSumbit}>Enviar</Button>
-                                        </Grid>
-                                    </form>
+                                <Grid gap="1.21em">
+                                    <TextField
+                                        value={formData.institutionName}
+                                        label="Nombre de la institución"
+                                        onChange={v => handleChange(v, 'institutionName')}
+                                    />
+                                    <TextField
+                                        value={formData.contactName}
+                                        label="Nombre del contacto"
+                                        onChange={v => handleChange(v, 'contactName')}
+                                    />
+                                    <TextField
+                                        value={formData.positionAndDepartment}
+                                        label="Puesto y depto del contacto"
+                                        onChange={v => handleChange(v, 'positionAndDepartment')}
+                                    />
+                                    <TextField
+                                        value={formData.email}
+                                        label="Correo electrónico"
+                                        type="email"
+                                        onChange={v => handleChange(v, 'email')}
+                                    />
+                                    <TextField
+                                        value={formData.phoneNumber}
+                                        label="Teléfono"
+                                        type="number"
+                                        onChange={v => handleChange(v, 'phoneNumber')}
+                                    />
+                                    {error !=='' && <Text medium align="center" color="error">{error}</Text>}
+                                    <Grid style={{marginTop:'10px'}} contentX="center" columns="auto auto" gap="1.71em">
+                                        <Button className="second_button" onClick={() => {cleanInstitutes()}}>Regresar</Button>
+                                        <Button type="submit" width="108px" onClick={handleSumbit}>Enviar</Button>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
