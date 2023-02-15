@@ -52,7 +52,6 @@ const Login = () => {
                     setShowError(true)
                     setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
                 }
-                console.log(localStorage.getItem('paymentStatus'))
                 if(localStorage.getItem('paymentStatus') === 'false'){
                     navigate(routes.home.path)
                 }
