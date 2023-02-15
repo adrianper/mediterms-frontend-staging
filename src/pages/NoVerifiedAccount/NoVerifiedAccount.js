@@ -8,16 +8,19 @@ import './no_verified_account.scss'
 
 const NoVerifiedAccount = () =>{
 
+    const logOut = () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.clear()
+        document.location.reload()
+    }
+
     return(
         <Grid w100 className="no_verified_account" padding="1.71em 0.62em">
             <Grid w100 padding="2.85em 1.1em" gap="1.71em" className="no_verified_account__container" >
                 <Text medium align="center">Revisa tu bandeja de entrada en tu correo electrónico para terminar el proceso de apertura de cuenta</Text>
                 <Grid gap="1.14em">
-                    <PageLink to={routes.login.path} >
-                        <Grid>
-                            <Button selfCenter>Entendido</Button>
-                        </Grid>
-                    </PageLink>
+                    <Button onClick={() => {logOut()}} selfCenter>Entendido</Button>
                     <Grid>
                         <Button className="send_email_button" selfCenter>Reenviar correo</Button>
                     </Grid>

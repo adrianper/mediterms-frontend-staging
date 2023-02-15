@@ -8,24 +8,48 @@ import './verified_account.scss'
 
 const VerifiedAccount = () =>{
     const [verifiedToken, setVerifiedToken] = useState('')
+    const [verificationSuccess, setVerificationSuccess] = useState(null)
 
     useEffect(() => {
         const url = new URL(window.location.href);
-        setVerifiedToken(url.hash.split('=').pop());
-    }, []);
+        console.log(url.hash.includes('='))
+        if(url.hash.includes('=')){
+            setVerifiedToken(url.hash.split('=').pop());
+            if(verifiedToken != ""){
+                axios.post('/user/verify_email', {
+                    token: verifiedToken
+                })
+                .then(function (response) {
+                    setVerificationSuccess(true)
+                })
+                .catch(function (error) {
+                    setVerificationSuccess(false)
+                });
+            }  
+        }
+    }, [verifiedToken]);
+
 
     return(
         <Grid w100 className="verified_account" padding="1.71em 0.62em">
             <Grid w100 padding="2.85em 1.1em" gap="1.71em" className="verified_account__container" >
-                <Text medium align="center">!Tu cuenta ha sido verificada con éxito!</Text>
-                <Text medium align="center">Ingresa a la app con tus credenciales</Text>
-                <Grid gap="1.14em">
-                    <PageLink to={routes.login.path} >
-                        <Grid>
-                            <Button selfCenter>Empezar a aprender</Button>
+                {verificationSuccess ?
+                    <Grid gap="1.71em">
+                        <Text medium align="center">!Tu cuenta ha sido verificada con éxito!</Text>
+                        <Text medium align="center">Ingresa a la app con tus credenciales</Text>
+                        <Grid gap="1.14em">
+                            <PageLink to={routes.login.path} >
+                                <Grid>
+                                    <Button selfCenter>Empezar a aprender</Button>
+                                </Grid>
+                            </PageLink>
                         </Grid>
-                    </PageLink>
-                </Grid>
+                    </Grid>
+                    :
+                    <Grid>
+                        <Text medium align="center"></Text>
+                    </Grid>
+                }
             </Grid>
         </Grid>
     )
