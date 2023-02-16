@@ -50,6 +50,9 @@ const App = () => {
                                 <Route key={routeName} path={routes[routeName].path} element={routes[routeName].element} />
                             )}
                         </Route>
+                        <Route  element={<RequireAuth />}>
+                            <Route element={routes.noVerifiedAccount.element} path={routes.noVerifiedAccount.path}></Route>
+                        </Route>
                     </Route>
                     <Route path="*" element={<Navigate to="/" replace />} />
                 </RouterProviders>

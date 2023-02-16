@@ -43,8 +43,9 @@ const UserSignup = () => {
         e.preventDefault()
         let signupToken = null
         // if (!verifyEmptyValues()) return
-        if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === ''){
-            setError('Hay campos vacios')
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === '' && formData.email.match(regex)){
+            setError('Hay campos vacios o invalidos')
             setShowError(true)
         }else{
             const signupResponse = await axios.post('/user/signup', { ...formData})
