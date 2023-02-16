@@ -15,6 +15,18 @@ const NoVerifiedAccount = () =>{
         document.location.reload()
     }
 
+    const resendVerificationEmail = () =>{
+        axios.post('/user/resend_email', {
+            email: JSON.parse(localStorage.getItem("user")).email
+        })
+        .then(function (response) {
+            
+        })
+        .catch(function (error) {
+            
+        });
+    }
+
     return(
         <Grid w100 className="no_verified_account" padding="1.71em 0.62em">
             <Grid w100 padding="2.85em 1.1em" gap="1.71em" className="no_verified_account__container" >
@@ -22,7 +34,7 @@ const NoVerifiedAccount = () =>{
                 <Grid gap="1.14em">
                     <Button onClick={() => {logOut()}} selfCenter>Entendido</Button>
                     <Grid>
-                        <Button className="send_email_button" selfCenter>Reenviar correo</Button>
+                        <Button onClick={() => {resendVerificationEmail()}} className="send_email_button" selfCenter>Reenviar correo</Button>
                     </Grid>
                 </Grid>
             </Grid>
