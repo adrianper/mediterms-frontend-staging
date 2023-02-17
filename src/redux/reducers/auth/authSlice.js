@@ -11,6 +11,7 @@ const initialState = {
     user: { ...userInitialState,...user},
     authenticated: !!user,
     verified: false,
+    paymentStatus: false,
     isLoading: false,
     message: '',
 }
@@ -52,7 +53,11 @@ const authSlice = createSlice({
         setUser: (state, action) => {
             // if(isNaN(action.payload)) return;
             state.user = {...state.user, ...action.payload}
-        }
+        },
+        // clearUser: (state, action) => {
+        //     // if(isNaN(action.payload)) return;
+        //     state.authenticated = false
+        // },
     },
     extraReducers: (builder) => {
         builder
@@ -76,6 +81,7 @@ const authSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(login.fulfilled, (state, action) => {
+                state.verified = action.payload.verified
                 state.isLoading = false
                 state.authenticated = !action.payload.error
                 state.message = action.payload.error ? action.payload.error : ''

@@ -19,7 +19,6 @@ const signup = async (userData) => {
 
 const login = async (userData) => {
     const response = await axios.post('/user/login', userData)
-
     if (response.data && !response.data.error) {
         localStorage.setItem('paymentStatus', response.data.paymentStatus)
         localStorage.setItem('user', JSON.stringify(response.data.user))
