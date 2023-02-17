@@ -52,6 +52,7 @@ const App = () => {
                         </Route>
                         <Route  element={<RequireAuth />}>
                             <Route element={routes.noVerifiedAccount.element} path={routes.noVerifiedAccount.path}></Route>
+                            <Route element={routes.payment.element} path={routes.payment.path}></Route>
                         </Route>
                     </Route>
                     <Route path="*" element={<Navigate to="/" replace />} />

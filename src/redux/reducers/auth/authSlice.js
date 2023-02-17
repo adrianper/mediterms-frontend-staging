@@ -10,6 +10,7 @@ const userInitialState = {
 const initialState = {
     user: { ...userInitialState,...user},
     authenticated: !!user,
+    verified: false,
     isLoading: false,
     message: '',
 }
@@ -44,6 +45,7 @@ const authSlice = createSlice({
             state.user = null
             state.accountInfo  = {}
             state.authenticated = false
+            state.verified = false
             state.isLoading = false
             state.message = ''
         },
