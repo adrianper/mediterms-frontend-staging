@@ -11,15 +11,14 @@ const RequireAuth = () => {
 
     if (!noRedirectPaths.includes(location.pathname))
         locationState.from = location
-
-    // if(location.pathname === "/noVerifiedAccount" && authenticated) return <NoVerifiedAccount />
+    if(location.pathname === "/noVerifiedAccount" && authenticated && location.pathname !== "/verifiedAccount") return <NoVerifiedAccount />
     
-    // if(authenticated && verified){
-    //     return <Outlet /> 
-    // }
-    // if(authenticated && !verified){
-    //     return <Navigate replace to={routes.noVerifiedAccount.path} />
-    // }
+    if(authenticated && verified){
+        return <Outlet /> 
+    }
+    if(authenticated && !verified){
+        return <Navigate replace to={routes.noVerifiedAccount.path} />
+    }
 
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them

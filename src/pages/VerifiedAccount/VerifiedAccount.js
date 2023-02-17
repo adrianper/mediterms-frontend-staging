@@ -1,14 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { /*useNavigate,*/ Link as PageLink,/* useLocation*/ } from 'react-router-dom'
+import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import axios from 'axios';
 
 import { Button, Grid, Text } from 'components'
 import { routes } from 'routing/routes'
+import { useSelector, useDispatch } from 'react-redux'
+import { reset } from 'redux/reducers/auth/authSlice'
+
 import './verified_account.scss'
 
 const VerifiedAccount = () =>{
     const [verifiedToken, setVerifiedToken] = useState('')
     const [verificationSuccess, setVerificationSuccess] = useState(null)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const logOut = () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        localStorage.clear()
+        dispatch(reset())
+        navigate('/login')
+    }
 
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -40,7 +53,7 @@ const VerifiedAccount = () =>{
                         <Grid gap="1.14em">
                             <PageLink to={routes.login.path} >
                                 <Grid>
-                                    <Button selfCenter>Empezar a aprender</Button>
+                                    <Button selfCenter onClick={() => {logOut()}} >Empezar a aprender</Button>
                                 </Grid>
                             </PageLink>
                         </Grid>
