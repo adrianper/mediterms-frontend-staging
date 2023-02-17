@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount, VerifiedAccount } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount, VerifiedAccount, Payment } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -89,6 +89,11 @@ export const routes = {
         path: '/verifiedAccount',
         linkName: 'verifiedAccount',
         element: <VerifiedAccount />
+    },
+    payment:{
+        path: '/payment',
+        linkName: 'payment',
+        element: <Payment />
     },
 }
 

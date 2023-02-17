@@ -27,7 +27,7 @@ const Home = () => {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         }).then(res => {
-            console.log("res",res)
+            
         }).catch(err => {
             // setError(err.response.statusText)
         })
