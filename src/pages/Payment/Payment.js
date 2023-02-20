@@ -31,6 +31,7 @@ const Payment = () => {
     const [newPrice, setNewPrice] = useState(1299)
     const [freeAccount, setFreeAccount] = useState(false)
     const [distance, setDistance] = useState(0);
+    const [promoPriceText, setPromoPriceText] = useState("9.99")
     const promoCodeLength = 6
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -102,12 +103,14 @@ const Payment = () => {
                             setValidPromoCode(true)
                             handleChange(response.data.promoCodeId, 'promoCodeId')
                             setNewPrice(price)
+                            setPromoPriceText("9.99")
                             break;
                         case 1099:
                             setPromoError('')
                             setValidPromoCode(true)
                             handleChange(response.data.promoCodeId, 'promoCodeId')
                             setNewPrice(price)
+                            setPromoPriceText("10.99")
                             break;
                     }
                 })
@@ -202,7 +205,7 @@ const Payment = () => {
                                 <Grid padding="1.42em" gap="0.7em" className="payment__promo_container">
                                     <Text bold color="white" size="4">¡Tienes un descuento!</Text>
                                     <Text medium color="white">Tu nuevo total es:</Text>
-                                    <Text bold color="white" size="9">9.99<span style={{ fontSize: '24px' }}>USD/año</span></Text>
+                                    <Text bold color="white" size="9">{promoPriceText}<span style={{ fontSize: '24px' }}>USD/año</span></Text>
                                 </Grid>
                             }
                             {!freeAccount && <Text bold size="5" align="center">Selecciona método de pago</Text>}
