@@ -1,4 +1,4 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal } from 'pages'
+import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount, VerifiedAccount, Payment } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -7,7 +7,7 @@ export const headerRoutes = ['account']
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
-export const requireNoAuthRoutes = ['login', 'signup']
+export const requireNoAuthRoutes = ['login', 'signup', 'userSignup', 'verifiedAccount']
 export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal']
 
 export const routes = {
@@ -74,6 +74,26 @@ export const routes = {
         path: '/institutions',
         linkName: 'institutions',
         element: <Institutions />
+    },
+    userSignup:{
+        path: '/userSignup',
+        linkName: 'userSignup',
+        element: <UserSignup />
+    },
+    noVerifiedAccount:{
+        path: '/noVerifiedAccount',
+        linkName: 'noVerifiedAccount',
+        element: <NoVerifiedAccount />
+    },
+    verifiedAccount:{
+        path: '/verifiedAccount',
+        linkName: 'verifiedAccount',
+        element: <VerifiedAccount />
+    },
+    payment:{
+        path: '/payment',
+        linkName: 'payment',
+        element: <Payment />
     },
 }
 

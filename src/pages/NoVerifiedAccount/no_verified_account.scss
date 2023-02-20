@@ -1,0 +1,13 @@
+.no_verified_account{
+    height: 100vh;
+    .no_verified_account__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+
+        .send_email_button{
+            background: transparent;
+            color: var(--text-color--first);
+            border: solid 2px var(--bg-color--first);
+        }
+    }
+}

@@ -1,0 +1,15 @@
+.user_signup {
+    padding: 0.5em;
+    form{
+        width: 100%;
+        display: grid;
+        justify-items: center
+    }
+    img{
+        width: 11.8em;
+    }
+    .user_signup__form {
+        background: var(--bg-color--white);
+        border-radius: 16px;
+    }
+}

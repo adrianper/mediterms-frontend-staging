@@ -1,0 +1,46 @@
+.payment{
+    background: var(--bg-color--white);
+    form{
+        width: 100%;
+        display: grid;
+        justify-items: center;
+
+        .StripeElement{
+            width: 100%
+        }
+    }
+    .payment__form{
+        .payment__price_container{
+            background: var(--bg-color--blue-alter);
+            border-radius: 16px;
+            justify-items: center;
+            .payment__regular_price{
+                font-weight: bold;
+                font-size: var(--text-size--8);
+                text-decoration: line-through;
+            }
+        }
+        .payment__promo_container{
+            background: var(--bg-color--second);
+            border-radius: 16px;
+            justify-items: center;
+        }
+    }
+    .payment__stripe_logo{
+        width: 86px;
+        margin: auto;
+        
+    }
+    
+}
+.payment_successfuly{
+    height: 100vh;
+    img{
+        width: 11.8em;
+    }
+    .payment_successfuly__container{
+        background: var(--bg-color--white);
+        border-radius: 16px;
+        
+    }
+}

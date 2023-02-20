@@ -19,6 +19,20 @@ const Home = () => {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get('/scores/', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        }).then(res => {
+            
+        }).catch(err => {
+            // setError(err.response.statusText)
+        })
+    }, [])
+
     const priority = { Principiante: 3, Intermedio: 2,  Avanzado: 1}
     const sortedTopics = topics.sort((a, b) => priority[b.level] - priority[a.level]);
     return (

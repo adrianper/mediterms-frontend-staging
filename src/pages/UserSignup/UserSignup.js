@@ -1,21 +1,21 @@
 import React, { useCallback,/* useEffect,*/ useState } from 'react'
+import axios from "axios";
+
 import { useNavigate, Link as PageLink,/* useLocation*/ } from 'react-router-dom'
 import { /*useSelector,*/ useDispatch } from 'react-redux'
 
 import { Button, Grid, TextField, Text } from 'components'
 import { routes } from 'routing/routes'
 
-import './login.scss'
-import RecoverPassword from 'pages/RecoverPassword/RecoverPassword'
+import './user_signup.scss'
 import { login/*, reset*/ } from 'redux/reducers/auth/authSlice'
 // import { toast } from 'react-toastify'
 
 // withCredentials: true, //[allow sert 3rd party cookies] / [send cookies]
 // credentials: 'include' //[send cookies]
 
-const Login = () => {
-    const [formData, setFormData] = useState({ email: '', password: '' })
-    const [recoverPassword, setRecoverPassword] = useState(false)
+const UserSignup = () => {
+    const [formData, setFormData] = useState({ name: '', institution: '' , email: '', password: '' })
     const [showError, setShowError] = useState(false)
     const [error, setError] = useState('')
     // const { auth } = useSelector(store => store)
@@ -41,24 +41,21 @@ const Login = () => {
 
     const handleSumbit = async e => {
         e.preventDefault()
-
+        let signupToken = null
         // if (!verifyEmptyValues()) return
-        if (formData.email === '' || formData.password === ''){
-            setError('Hay campos vacios')
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === '' && formData.email.match(regex)){
+            setError('Hay campos vacios o invalidos')
             setShowError(true)
         }else{
-            dispatch(login(formData)).then(res => {
-                if(res.error){
-                    setShowError(true)
-                    setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
-                    return
-                }
-                if(localStorage.getItem('paymentStatus') === 'false'){
-                    navigate(routes.home.path)
-                }
-                navigate(routes.home.path)
-                //if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
+            const signupResponse = await axios.post('/user/signup', { ...formData}).catch(err => {
+                console.log(err.response.data.errors[0])
+                if(err) setError('El correo esta en uso')
+                setShowError(true)
             })
+            signupToken = signupResponse.data?.token || null
+            dispatch(login({ email: formData.email, password: formData.password }))
+            navigate('/noVerifiedAccount')
         }
         
     }
@@ -72,14 +69,19 @@ const Login = () => {
     // }, [authenticated, navigate])
 
     return (
-        <Grid className="login" itemsX="center" gap="4.28em" padding="4.28em 0.42em 0em 0.42em">
+        <Grid className="user_signup" itemsX="center" gap="4.28em" padding="4.28em 0.42em">
             <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
-            {recoverPassword ?
-                <RecoverPassword setRecoverPassword={setRecoverPassword} />
-            :
                 <form onSubmit={handleSumbit}>
-                    <Grid w100 padding="1.72em 1.1em" className="login__form" gap="1.3em" maxWidth="22em">
-                        <Text size="5" align="center" bold>Inicia sesión</Text>
+                    <Grid w100 padding="1.72em 1.1em" className="user_signup__form" gap="1.3em" maxWidth="22em">
+                        <Text size="5" align="center" bold>Abre una cuenta</Text>
+                        <TextField label="Nombre completo"
+                            value={formData.name}
+                            onChange={v => handleChange(v, 'name')}
+                        />
+                        <TextField label="Institución educativa"
+                            value={formData.institution}
+                            onChange={v => handleChange(v, 'institution')}
+                        />
                         <TextField label="Correo electrónico"
                             type="email"
                             value={formData.email}
@@ -91,22 +93,14 @@ const Login = () => {
                             onChange={v => handleChange(v, 'password')}
                         />
                         {showError &&
-                            <Text size="2" color="error">{error}</Text>
+                            <Text align="center" size="2" color="error">{error}</Text>
                         }
-                        <Button type="submit" selfCenter>Ingresar</Button>
-
-                        <Grid gap="2em" margin="1em 0em 0em 0em">
-                            <PageLink to={routes.userSignup.path} >
-                                <Text onClick={() => {createAccount()}} medium align="center" color="first">Abrir una cuenta</Text>
-                            </PageLink>
-                            <Text onClick={() => {setRecoverPassword(true)}} medium align="center" color="second">Olvidé mi contraseña</Text>
-                        </Grid>
+                        <Button type="submit" selfCenter>Abrir cuenta</Button>
                     </Grid>
                 </form>
-            }
             {/*<Button type="submit" onClick={() => dispatch(reset())}>Reset auth</Button>*/}
         </Grid>
     )
 }
 
-export default Login
+export default UserSignup
