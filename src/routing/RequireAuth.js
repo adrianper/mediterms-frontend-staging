@@ -1,18 +1,22 @@
 import { useSelector } from "react-redux"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 import { noRedirectPaths, routes } from "./routes"
-import { NoVerifiedAccount } from "pages"
+import { NoVerifiedAccount, Payment } from "pages"
 
 const RequireAuth = () => {
-    const { authenticated } = useSelector(store => store.auth)
-    const { verified } = useSelector(store => store.auth)
+    const { authenticated, verified, accountStatus } = useSelector(store => store.auth)
     const location = useLocation()
     const locationState = {}
 
-    if (!noRedirectPaths.includes(location.pathname))
-        locationState.from = location
+    if (!noRedirectPaths.includes(location.pathname)) locationState.from = location
+    
     if(location.pathname === "/noVerifiedAccount" && authenticated && location.pathname !== "/verifiedAccount") return <NoVerifiedAccount />
     
+    if(location.pathname === "/payment" && authenticated) return <Payment />
+
+    console.log("authenticated", authenticated, "accountStatus", accountStatus )
+    if(authenticated && accountStatus === 'MDT-AS-US_PR_0000') return <Navigate replace to={'/payment'} />
+
     if(authenticated && verified){
         return <Outlet /> 
     }

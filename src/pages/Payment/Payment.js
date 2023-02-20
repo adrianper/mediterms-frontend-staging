@@ -103,6 +103,12 @@ const Payment = () => {
                             handleChange(response.data.promoCodeId, 'promoCodeId')
                             setNewPrice(price)
                             break;
+                        case 1099:
+                            setPromoError('')
+                            setValidPromoCode(true)
+                            handleChange(response.data.promoCodeId, 'promoCodeId')
+                            setNewPrice(price)
+                            break;
                     }
                 })
                 .catch(function (error) {
@@ -158,7 +164,15 @@ const Payment = () => {
                 </Grid>
                 :
                 <Grid className="payment" padding="2.28em 1.57em" itemsX="center" gap="2.18em">
-                    <Text bold align="center" size="5">Abre una cuenta</Text>
+                    {!freeAccount &&
+                        <Text bold align="center" size="8" color="first">¡Felicidades!</Text>
+                    }
+                    {!freeAccount &&
+                        <Grid gap="1em">
+                            <Text medium align="center">Has aprendido 10 términos médicos</Text>
+                            <Text medium align="center">Adquiere una membresía para seguir aprendiendo</Text>
+                        </Grid>
+                    }
 
                     <form onSubmit={handleSumbit}>
                         <Grid w100 className="payment__form" gap="1.61em">

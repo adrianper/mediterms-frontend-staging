@@ -48,7 +48,11 @@ const UserSignup = () => {
             setError('Hay campos vacios o invalidos')
             setShowError(true)
         }else{
-            const signupResponse = await axios.post('/user/signup', { ...formData})
+            const signupResponse = await axios.post('/user/signup', { ...formData}).catch(err => {
+                console.log(err.response.data.errors[0])
+                if(err) setError('El correo esta en uso')
+                setShowError(true)
+            })
             signupToken = signupResponse.data?.token || null
             dispatch(login({ email: formData.email, password: formData.password }))
             navigate('/noVerifiedAccount')

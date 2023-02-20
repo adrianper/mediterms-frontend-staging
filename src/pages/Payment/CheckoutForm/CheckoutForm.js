@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import { useNavigate } from 'react-router-dom'
 import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
-import { login, reset } from 'redux/reducers/auth/authSlice';
+import { setAccountStatus } from 'redux/reducers/auth/authSlice'
+
 
 const CheckoutForm = (props) => {
   const { formData, clientSecret, setError, setShowError, setSuccessfulAccount, freeAccount } = props
@@ -14,6 +16,7 @@ const CheckoutForm = (props) => {
   
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = async event => {
     let signupToken = null
@@ -44,7 +47,16 @@ const CheckoutForm = (props) => {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
-      setSuccessfulAccount(true); 
+      axios.post('/payment/validate-payment', {client_secret: '', ...formData }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then(res =>{
+        console.log("res data", res.data)
+        dispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
+        localStorage.setItem("md_ac_u_s", res.data.accountStatus)
+        if(res.data.accountStatus === 'MDT-AS-US_AP_0000') setSuccessfulAccount(true)
+      })
       return;
     }
 
@@ -84,8 +96,12 @@ const CheckoutForm = (props) => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
+      }).then(res =>{
+        dispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
+        localStorage.setItem("md_ac_u_s", res.data.accountStatus)
+        if(res.data.accountStatus === 'MDT-AS-US_AP_0000') setSuccessfulAccount(true)
       })
-      setSuccessfulAccount(true)
+      
       // dispatch(login({ email: formData.email, password: formData.password }))
 
       console.log("entra al else", error)
