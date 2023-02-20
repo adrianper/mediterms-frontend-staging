@@ -12,10 +12,10 @@ const RequireAuth = () => {
     
     if(location.pathname === "/noVerifiedAccount" && authenticated && location.pathname !== "/verifiedAccount") return <NoVerifiedAccount />
     
-    if(location.pathname === "/payment" && authenticated) return <Payment />
+    // if(location.pathname === "/payment" && authenticated) return <Payment />
 
-    console.log("authenticated", authenticated, "accountStatus", accountStatus )
-    if(authenticated && accountStatus === 'MDT-AS-US_PR_0000') return <Navigate replace to={'/payment'} />
+    // console.log("authenticated", authenticated, "accountStatus", accountStatus )
+    // if(authenticated && accountStatus === 'MDT-AS-US_PR_0000') return <Navigate replace to={'/payment'} />
 
     if(authenticated && verified){
         return <Outlet /> 
