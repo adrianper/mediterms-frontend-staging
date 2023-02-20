@@ -8,7 +8,7 @@ export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
 export const requireNoAuthRoutes = ['login', 'signup', 'userSignup', 'verifiedAccount']
-export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal']
+export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal', 'payment']
 
 export const routes = {
     home: {
