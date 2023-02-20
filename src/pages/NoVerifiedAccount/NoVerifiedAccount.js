@@ -7,7 +7,7 @@ import { routes } from 'routing/routes'
 import './no_verified_account.scss'
 
 const NoVerifiedAccount = () =>{
-
+    const [resendText, showResendText] = useState(false)
     const logOut = () => {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
@@ -22,7 +22,7 @@ const NoVerifiedAccount = () =>{
             email: JSON.parse(localStorage.getItem("user")).email
         })
         .then(function (response) {
-            
+            showResendText(true)
         })
         .catch(function (error) {
             
@@ -38,6 +38,9 @@ const NoVerifiedAccount = () =>{
                     <Grid>
                         <Button onClick={() => {resendVerificationEmail()}} className="send_email_button" selfCenter>Reenviar correo</Button>
                     </Grid>
+                    {resendText &&
+                        <Text color="first" align="center">Hemos enviado de nuevo el correo electrónico de verificación, revisa tu bandeja de entrada y la bandeja de correo no deseado</Text>
+                    }
                 </Grid>
             </Grid>
         </Grid>
