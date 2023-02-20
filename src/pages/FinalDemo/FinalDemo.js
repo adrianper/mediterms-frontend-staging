@@ -20,7 +20,7 @@ const FinalDemo = () =>{
                         </Grid>
                     </PageLink>
                     <Text medium align="center">o</Text>
-                    <PageLink to={routes.signup.path} >
+                    <PageLink to={routes.userSignup.path} >
                         <Grid>
                             <Button className="open_account_button" selfCenter>Abrir cuenta</Button>
                         </Grid>

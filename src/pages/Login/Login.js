@@ -51,10 +51,12 @@ const Login = () => {
                 if(res.error){
                     setShowError(true)
                     setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
+                    return
                 }
                 if(localStorage.getItem('paymentStatus') === 'false'){
                     navigate(routes.home.path)
                 }
+                navigate(routes.home.path)
                 //if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
             })
         }
@@ -94,7 +96,7 @@ const Login = () => {
                         <Button type="submit" selfCenter>Ingresar</Button>
 
                         <Grid gap="2em" margin="1em 0em 0em 0em">
-                            <PageLink to={routes.signup.path} >
+                            <PageLink to={routes.userSignup.path} >
                                 <Text onClick={() => {createAccount()}} medium align="center" color="first">Abrir una cuenta</Text>
                             </PageLink>
                             <Text onClick={() => {setRecoverPassword(true)}} medium align="center" color="second">Olvidé mi contraseña</Text>

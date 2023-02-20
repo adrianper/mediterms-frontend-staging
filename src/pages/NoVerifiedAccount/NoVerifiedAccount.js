@@ -11,6 +11,8 @@ const NoVerifiedAccount = () =>{
     const logOut = () => {
         localStorage.removeItem('user')
         localStorage.removeItem('token')
+        localStorage.removeItem('md_v_u_s')
+        localStorage.removeItem('md_ac_u_s')
         localStorage.clear()
         document.location.reload()
     }

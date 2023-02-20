@@ -7,7 +7,7 @@ import axios from 'axios'
 import { actions, initialState, reducer } from './termsReducer'
 import { useLoadingAppContext } from 'hooks'
 import { routes } from 'routing/routes'
-import { reset } from 'redux/reducers/auth/authSlice'
+import { reset, setAccountStatus } from 'redux/reducers/auth/authSlice'
 
 import './terms.scss'
 
@@ -92,6 +92,11 @@ const Terms = () => {
         if (authenticated && isCorrectAnswer) {
             const topicId = topic ? topic : termTopic
             axios.post(`/terms/correct/${topicId}`)
+                .then(res =>{
+                    reduxDispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
+                    localStorage.setItem("md_ac_u_s", res.data.accountStatus)
+                    if(res.data.accountStatus === 'MDT-AS-US_PR_0000') navigate('/payment')
+                })
                 .catch(error => {
                     console.error('|ERR_SAVE_CORRECT_ANSWER|', error)
                 })
