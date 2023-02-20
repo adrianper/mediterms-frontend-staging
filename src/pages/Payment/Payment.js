@@ -161,7 +161,7 @@ const Payment = () => {
                 <Grid className="payment_successfuly" padding="2.28em 1.57em" itemsX="center" gap="2.18em" >
                     <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
                     <Grid w100 padding="2em" className="payment_successfuly__container" gap="2.18em">
-                        <Text medium align="center">Tu cuenta ha sido creada con éxito</Text>
+                        <Text medium align="center">¡Tu pago ha sido exitoso, y tu membresía ahora se encuentra activa!</Text>
                         <Button onClick={() => { navigate('/home') }} selfCenter>Empezar a aprender</Button>
                     </Grid>
                 </Grid>
