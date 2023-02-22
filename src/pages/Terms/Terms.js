@@ -131,7 +131,7 @@ const Terms = () => {
 
                 <Grid gap="0.71em" itemsX="center">
                     {term && term.definitions.map((definition, i) =>
-                        <Grid w100 key={i}
+                        <Grid w100 key={definition.id}
                             className="terms__definition_btn"
                             padding="1.71em 0.85em"
                             onClick={() => { handleClickDefinitionBtn(i, definition.correct_answer, term.topicId) }}

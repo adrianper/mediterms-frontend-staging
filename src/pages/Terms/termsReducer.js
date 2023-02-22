@@ -8,12 +8,8 @@ export const actions = {
 }
 
 const termMock = {
-    term: 'Dev',
-    definitions: [
-        { answer: 'Empty', correct_answer: false },
-        { answer: 'Empty', correct_answer: false },
-        { answer: 'Empty', correct_answer: false },
-    ]
+    term: '',
+    definitions: []
 }
 
 export const initialState = {
