@@ -5,8 +5,27 @@ import axios from 'axios';
 import { Button, Grid, Text } from 'components'
 import { routes } from 'routing/routes'
 import './final_demo.scss'
+import { useEffect } from 'react';
 
 const FinalDemo = () =>{
+
+    useEffect(() =>{
+        console.log("final demo")
+        const options = {
+            url: '/prospects/counter_test_app',
+            method: 'POST',
+            data: {
+              "name": "APP_TEST",
+            }
+        }
+        axios(options)
+        .then(response => {
+            
+        })
+        .catch(err =>{
+            
+        })
+    },[])
 
     return(
         <Grid w100 className="final_demo" padding="1.71em 0.62em">
