@@ -112,6 +112,13 @@ const Payment = () => {
                             setNewPrice(price)
                             setPromoPriceText("10.99")
                             break;
+                        case 699:
+                            setPromoError('')
+                            setValidPromoCode(true)
+                            handleChange(response.data.promoCodeId, 'promoCodeId')
+                            setNewPrice(price)
+                            setPromoPriceText("6.99")
+                            break;
                     }
                 })
                 .catch(function (error) {
