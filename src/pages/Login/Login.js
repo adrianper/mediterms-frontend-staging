@@ -21,7 +21,7 @@ const Login = () => {
     // const { auth } = useSelector(store => store)
     // const { /*user, */authenticated } = auth
 
-     const navigate = useNavigate()
+    const navigate = useNavigate()
     // const location = useLocation()
     const dispatch = useDispatch()
 
@@ -43,29 +43,26 @@ const Login = () => {
         e.preventDefault()
 
         // if (!verifyEmptyValues()) return
-        if (formData.email === '' || formData.password === ''){
+        if (formData.email === '' || formData.password === '') {
             setError('Hay campos vacios')
             setShowError(true)
-        }else{
+        } else {
             dispatch(login(formData)).then(res => {
-                if(res.error){
+                if (res.error) {
                     setShowError(true)
                     setError('El correo electrónico o la contraseña son incorrectos, intenta de nuevo.')
                     return
                 }
-                if(localStorage.getItem('paymentStatus') === 'false'){
+                if (localStorage.getItem('paymentStatus') === 'false') {
                     navigate(routes.home.path)
                 }
                 navigate(routes.home.path)
                 //if (res.payload.error) return console.error(res)//toast.error(res.payload.error)
             })
         }
-        
     }
 
-    const createAccount = () =>{
-        
-    }
+    const createAccount = () => { }
 
     // useEffect(() => {
     //     if (authenticated) navigate(location.state?.from.pathname || '/users')
@@ -76,7 +73,7 @@ const Login = () => {
             <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
             {recoverPassword ?
                 <RecoverPassword setRecoverPassword={setRecoverPassword} />
-            :
+                :
                 <form onSubmit={handleSumbit}>
                     <Grid w100 padding="1.72em 1.1em" className="login__form" gap="1.3em" maxWidth="22em">
                         <Text size="5" align="center" bold>Inicia sesión</Text>
@@ -97,9 +94,9 @@ const Login = () => {
 
                         <Grid gap="2em" margin="1em 0em 0em 0em">
                             <PageLink to={routes.userSignup.path} >
-                                <Text onClick={() => {createAccount()}} medium align="center" color="first">Abrir una cuenta</Text>
+                                <Text onClick={() => { createAccount() }} medium align="center" color="first">Abrir una cuenta</Text>
                             </PageLink>
-                            <Text onClick={() => {setRecoverPassword(true)}} medium align="center" color="second">Olvidé mi contraseña</Text>
+                            <Text onClick={() => { setRecoverPassword(true) }} medium align="center" color="second">Olvidé mi contraseña</Text>
                         </Grid>
                     </Grid>
                 </form>

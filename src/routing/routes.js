@@ -1,4 +1,8 @@
-import { Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo, ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount, VerifiedAccount, Payment } from 'pages'
+import {
+    Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo,
+    ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount,
+    VerifiedAccount, Payment, Privacy
+} from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
 
@@ -6,7 +10,7 @@ export const headerRoutes = ['account']
 
 export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
-export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions']
+export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions', 'privacy']
 export const requireNoAuthRoutes = ['login', 'signup', 'userSignup', 'verifiedAccount']
 export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal', 'payment']
 
@@ -70,31 +74,37 @@ export const routes = {
         linkName: 'changeRecoveredPassword',
         element: <ChangeRecoveredPassword />
     },
-    institutions:{
+    institutions: {
         path: '/institutions',
         linkName: 'institutions',
         element: <Institutions />
     },
-    userSignup:{
+    userSignup: {
         path: '/userSignup',
         linkName: 'userSignup',
         element: <UserSignup />
     },
-    noVerifiedAccount:{
+    noVerifiedAccount: {
         path: '/noVerifiedAccount',
         linkName: 'noVerifiedAccount',
         element: <NoVerifiedAccount />
     },
-    verifiedAccount:{
+    verifiedAccount: {
         path: '/verifiedAccount',
         linkName: 'verifiedAccount',
         element: <VerifiedAccount />
     },
-    payment:{
+    payment: {
         path: '/payment',
         linkName: 'payment',
         element: <Payment />
     },
+    privacy: {
+        path: '/privacidad',
+        linkName: 'privacy',
+        element: <Privacy />
+
+    }
 }
 
 export const noRedirectPaths = [routes.account.path, routes.changePassword.path]
