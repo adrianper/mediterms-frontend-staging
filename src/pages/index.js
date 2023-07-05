@@ -14,5 +14,4 @@ export { default as UserSignup } from './UserSignup/UserSignup'
 export { default as NoVerifiedAccount } from './NoVerifiedAccount/NoVerifiedAccount'
 export { default as VerifiedAccount } from './VerifiedAccount/VerifiedAccount'
 export { default as Payment } from './Payment/Payment'
-
-
+export { default as Privacy } from './Privacy/Privacy'

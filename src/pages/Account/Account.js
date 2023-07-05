@@ -58,17 +58,17 @@ const Account = () => {
             }
         }
         axios(options)
-        // .then(response => getAccountInfo())
-        .then(response => {
-            fileReference.current.value = ""
-            const user = JSON.parse(localStorage.getItem('user'))
-            user.photoUrl = response.data.photoUrl
-            localStorage.setItem('user', JSON.stringify(user))
-            dispatch(setUser({photoUrl: response.data.photoUrl}))
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+            // .then(response => getAccountInfo())
+            .then(response => {
+                fileReference.current.value = ""
+                const user = JSON.parse(localStorage.getItem('user'))
+                user.photoUrl = response.data.photoUrl
+                localStorage.setItem('user', JSON.stringify(user))
+                dispatch(setUser({ photoUrl: response.data.photoUrl }))
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }, [])
 
     const handleRSSSChange = (e) => {
@@ -103,18 +103,18 @@ const Account = () => {
                             changeUserPhoto(event);
                         }}
                     />
-                    <img src={auth.user.photoUrl || DEFAULT_PROFILE_PHOTO} className={imageClassName}/>
+                    <img src={auth.user.photoUrl || DEFAULT_PROFILE_PHOTO} className={imageClassName} />
                     <Text medium>{auth.user.name}</Text>
                     <Text medium>{auth.user.email}</Text>
                 </Grid>
                 <PageLink to={routes.changePassword.path} >
                     <Button>Cambiar contraseña</Button>
                 </PageLink>
-                <Grid gap="0.8em" style={{marginTop:'0.8em'}}>
+                <Grid gap="0.8em" style={{ marginTop: '0.8em' }}>
                     <Text bold size="5" color="first" align="center" >¿Dudas o aclaraciones?</Text>
-                    <Text medium align="center"  color="first" >Siguenos en nuestras redes sociales</Text>
+                    <Text medium align="center" color="first" >Siguenos en nuestras redes sociales</Text>
                 </Grid>
-                <Grid columns="1fr 1fr 1fr" style={{gap: 'inherit'}}>
+                <Grid columns="1fr 1fr 1fr" style={{ gap: 'inherit' }}>
                     <Grid className='account__img_container'>
                         <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/facebook-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('facebook') }} />
                     </Grid>
@@ -124,9 +124,10 @@ const Account = () => {
                     <Grid className='account__img_container'>
                         <img src='https://mediterms-resources.s3.us-east-2.amazonaws.com/img/tiktok-logo.svg' className='account__rss_logo' onClick={() => { handleRSSSChange('tiktok') }} />
                     </Grid>
-
-
                 </Grid >
+                <PageLink to={routes.privacy.path} >
+                    <Text bold className='text--underline' color='first'>AVISO DE PRIVACIDAD</Text>
+                </PageLink>
             </Grid>
 
 
