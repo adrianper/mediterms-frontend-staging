@@ -15,13 +15,13 @@ import { login/*, reset*/ } from 'redux/reducers/auth/authSlice'
 // credentials: 'include' //[send cookies]
 
 const UserSignup = () => {
-    const [formData, setFormData] = useState({ name: '', institution: '' , email: '', password: '' })
+    const [formData, setFormData] = useState({ name: '', institution: '', email: '', password: '' })
     const [showError, setShowError] = useState(false)
     const [error, setError] = useState('')
     // const { auth } = useSelector(store => store)
     // const { /*user, */authenticated } = auth
 
-     const navigate = useNavigate()
+    const navigate = useNavigate()
     // const location = useLocation()
     const dispatch = useDispatch()
 
@@ -44,24 +44,24 @@ const UserSignup = () => {
         let signupToken = null
         // if (!verifyEmptyValues()) return
         const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-        if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === '' && formData.email.match(regex)){
+        if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === '' && formData.email.match(regex)) {
             setError('Hay campos vacios o invalidos')
             setShowError(true)
-        }else{
-            const signupResponse = await axios.post('/user/signup', { ...formData}).catch(err => {
+        } else {
+            const signupResponse = await axios.post('/user/signup', { ...formData }).catch(err => {
                 console.log(err.response.data.errors[0])
-                if(err) setError('El correo esta en uso')
+                if (err) setError('El correo esta en uso')
                 setShowError(true)
             })
             signupToken = signupResponse.data?.token || null
             dispatch(login({ email: formData.email, password: formData.password }))
             navigate('/noVerifiedAccount')
         }
-        
+
     }
 
-    const createAccount = () =>{
-        
+    const createAccount = () => {
+
     }
 
     // useEffect(() => {
@@ -71,33 +71,40 @@ const UserSignup = () => {
     return (
         <Grid className="user_signup" itemsX="center" gap="4.28em" padding="4.28em 0.42em">
             <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
-                <form onSubmit={handleSumbit}>
-                    <Grid w100 padding="1.72em 1.1em" className="user_signup__form" gap="1.3em" maxWidth="22em">
-                        <Text size="5" align="center" bold>Abre una cuenta</Text>
-                        <TextField label="Nombre completo"
-                            value={formData.name}
-                            onChange={v => handleChange(v, 'name')}
-                        />
-                        <TextField label="Institución educativa"
-                            value={formData.institution}
-                            onChange={v => handleChange(v, 'institution')}
-                        />
-                        <TextField label="Correo electrónico"
-                            type="email"
-                            value={formData.email}
-                            onChange={v => handleChange(v, 'email')}
-                        />
-                        <TextField label="Contraseña"
-                            type="password"
-                            value={formData.password}
-                            onChange={v => handleChange(v, 'password')}
-                        />
-                        {showError &&
-                            <Text align="center" size="2" color="error">{error}</Text>
-                        }
-                        <Button type="submit" selfCenter>Abrir cuenta</Button>
+            <form onSubmit={handleSumbit}>
+                <Grid w100 padding="1.72em 1.1em" className="user_signup__form" gap="1.3em" maxWidth="22em">
+                    <Text size="5" align="center" bold>Abre una cuenta</Text>
+                    <TextField label="Nombre completo"
+                        value={formData.name}
+                        onChange={v => handleChange(v, 'name')}
+                    />
+                    <TextField label="Institución educativa"
+                        value={formData.institution}
+                        onChange={v => handleChange(v, 'institution')}
+                    />
+                    <TextField label="Correo electrónico"
+                        type="email"
+                        value={formData.email}
+                        onChange={v => handleChange(v, 'email')}
+                    />
+                    <TextField label="Contraseña"
+                        type="password"
+                        value={formData.password}
+                        onChange={v => handleChange(v, 'password')}
+                    />
+                    {showError &&
+                        <Text align="center" size="2" color="error">{error}</Text>
+                    }
+                    <Grid>
+                        <Text>Al hacer click en "Abrir cuenta" aceptas que has revisado y aceptado el</Text>
+                        <PageLink to={routes.privacy.path} >
+                            <Text bold className='text--underline' color='first'>AVISO DE PRIVACIDAD</Text>
+                        </PageLink>
                     </Grid>
-                </form>
+
+                    <Button type="submit" selfCenter>Abrir cuenta</Button>
+                </Grid>
+            </form>
             {/*<Button type="submit" onClick={() => dispatch(reset())}>Reset auth</Button>*/}
         </Grid>
     )
