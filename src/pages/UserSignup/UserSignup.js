@@ -70,7 +70,9 @@ const UserSignup = () => {
 
     return (
         <Grid className="user_signup" itemsX="center" gap="4.28em" padding="4.28em 0.42em">
-            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+            <PageLink to={routes.login.path} >
+                <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+            </PageLink>
             <form onSubmit={handleSumbit}>
                 <Grid w100 padding="1.72em 1.1em" className="user_signup__form" gap="1.3em" maxWidth="22em">
                     <Text size="5" align="center" bold>Abre una cuenta</Text>
@@ -96,13 +98,17 @@ const UserSignup = () => {
                         <Text align="center" size="2" color="error">{error}</Text>
                     }
                     <Grid>
-                        <Text>Al hacer click en "Abrir cuenta" aceptas que has revisado y aceptado el</Text>
+                        <Text align='center'>Al hacer click en "Abrir cuenta" aceptas que has revisado y aceptado el</Text>
                         <PageLink to={routes.privacy.path} >
-                            <Text bold className='text--underline' color='first'>AVISO DE PRIVACIDAD</Text>
+                            <Text bold align='center' className='text--underline' color='first'>AVISO DE PRIVACIDAD</Text>
                         </PageLink>
                     </Grid>
 
                     <Button type="submit" selfCenter>Abrir cuenta</Button>
+
+                    <PageLink to={routes.login.path} >
+                        <Text medium align="center" color="first">Iniciar sesión</Text>
+                    </PageLink>
                 </Grid>
             </form>
             {/*<Button type="submit" onClick={() => dispatch(reset())}>Reset auth</Button>*/}
