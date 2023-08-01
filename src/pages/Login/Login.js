@@ -62,7 +62,7 @@ const Login = () => {
         }
     }
 
-    const createAccount = () => { }
+    // const createAccount = () => { }
 
     // useEffect(() => {
     //     if (authenticated) navigate(location.state?.from.pathname || '/users')
@@ -70,7 +70,7 @@ const Login = () => {
 
     return (
         <Grid className="login" itemsX="center" gap="4.28em" padding="4.28em 0.42em 0em 0.42em">
-            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+            <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" onClick={() => { setRecoverPassword(false) }} />
             {recoverPassword ?
                 <RecoverPassword setRecoverPassword={setRecoverPassword} />
                 :
@@ -94,7 +94,7 @@ const Login = () => {
 
                         <Grid gap="2em" margin="1em 0em 0em 0em">
                             <PageLink to={routes.userSignup.path} >
-                                <Text onClick={() => { createAccount() }} medium align="center" color="first">Abrir una cuenta</Text>
+                                <Text medium align="center" color="first">Abrir una cuenta</Text>
                             </PageLink>
                             <Text onClick={() => { setRecoverPassword(true) }} medium align="center" color="second">Olvidé mi contraseña</Text>
                         </Grid>
