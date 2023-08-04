@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { Capacitor } from '@capacitor/core';
 import axios from 'axios';
 import { useNavigate, Link as PageLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,11 +7,11 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { routes } from 'routing/routes'
 
-import { Button, Grid, TextField, Text, CharacterField } from 'components'
-import { login, signup } from 'redux/reducers/auth/authSlice'
+import { Button, Grid, Text, CharacterField } from 'components'
+import { signup } from 'redux/reducers/auth/authSlice'
 
+import IOSPaymentDisplay from 'pages/IOSPaymentDisplay/IOSPaymentDisplay';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
-
 
 import './payment.scss'
 
@@ -18,7 +19,7 @@ import './payment.scss'
 const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM ');
 
 const Payment = () => {
-    const [formData, setFormData] = useState({promoCodeId: null})
+    const [formData, setFormData] = useState({ promoCodeId: null })
     const [clientSecret, setClientSecret] = useState('')
     const [emailError, setEmailError] = useState('')
     const [error, setError] = useState('')
@@ -79,10 +80,6 @@ const Payment = () => {
             setEmailError(error.response.data?.errors[0] || 'El correo ya esta en uso. Elige otro.')
         }
     }, [formData.email])
-
-    // const loginAuto = () => {
-    //     dispatch(login({ email: formData.email, password: formData.password }))
-    // }
 
     const handlePromotionalCode = (v) => {
         if (v.length === promoCodeLength) {
@@ -162,6 +159,8 @@ const Payment = () => {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    if (Capacitor.getPlatform() === 'ios') return <IOSPaymentDisplay />
+
     return (
         <Grid>
             {successfulAccount ?
@@ -183,7 +182,6 @@ const Payment = () => {
                             <Text medium align="center">Adquiere una membresía para seguir aprendiendo</Text>
                         </Grid>
                     }
-
                     <form onSubmit={handleSumbit}>
                         <Grid w100 className="payment__form" gap="1.61em">
                             {!freeAccount &&
