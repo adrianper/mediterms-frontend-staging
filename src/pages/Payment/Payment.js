@@ -29,7 +29,7 @@ const Payment = () => {
     const [successfulAccount, setSuccessfulAccount] = useState(false)
     const [promoError, setPromoError] = useState('')
     const [validPromoCode, setValidPromoCode] = useState(false)
-    const [newPrice, setNewPrice] = useState(1299)
+    const [newPrice, setNewPrice] = useState(1469)
     const [freeAccount, setFreeAccount] = useState(false)
     const [distance, setDistance] = useState(0);
     const [promoPriceText, setPromoPriceText] = useState("9.99")
@@ -189,7 +189,7 @@ const Payment = () => {
                                     <Grid padding="1.42em" className="payment__price_container">
                                         <Text>Precio regular: <br /><span className="payment__regular_price">$25 USD/año</span></Text>
                                         <Text medium style={{ margin: '1.4em 0em 0.5em 0em' }}>Promoción de inicio de semestre:</Text>
-                                        <Text bold size="9">12.99<span style={{ fontSize: '24px', color: '#162127' }}>USD/año</span></Text>
+                                        <Text bold size="9">14.69<span style={{ fontSize: '24px', color: '#162127' }}>USD/año</span></Text>
                                         <Text bold color="error" size="2">Termina en: {days}d {hours}h {minutes}m {seconds}s</Text>
                                     </Grid>
                                     <Text bold align="center" size="5">¿Tienes un código de descuento?</Text>
