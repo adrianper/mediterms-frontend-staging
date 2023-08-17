@@ -28,7 +28,7 @@ const Signup = () => {
     const [successfulAccount, setSuccessfulAccount] = useState(false)
     const [promoError, setPromoError] = useState('')
     const [validPromoCode, setValidPromoCode] = useState(false)
-    const [newPrice, setNewPrice] = useState(1299)
+    const [newPrice, setNewPrice] = useState(1469)
     const [freeAccount, setFreeAccount] = useState(false)
     const [distance, setDistance] = useState(0);
     const promoCodeLength = 6
