@@ -15,7 +15,7 @@ const Header = () => {
     const imageClassName = (auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === "") ? "user_info__default" : "account__user_photo"
 
     return (
-        <Flex className={`header${Capacitor.getPlatform() !== 'web' ? ' mobile_header':''}`} align="center" justify="space-between" padding="1.14em">
+        <Flex className={`header${Capacitor.getPlatform() !== 'web' ? ' mobile_header':''}`} align="center" justify="space-between">
             <PageLink to={routes.home.path}>
                 <Grid className="header__button">
                     <img className="header__home" src="https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-mt-home.svg" />
