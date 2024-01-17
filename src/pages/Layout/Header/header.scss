@@ -1,13 +1,13 @@
 .header {
     &.mobile_header {
-        margin-top: 2rem;
-        top: 2rem;
+        padding-top: 4rem;    
     }
 
+    background: linear-gradient(135deg, rgb(0, 180, 216) 0%, rgb(0, 150, 200) 100%);
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: linear-gradient(135deg, rgb(0, 180, 216) 0%, rgb(0, 150, 200) 100%);
+    padding: 1.14em;
 
     .side_menu_bars {
         cursor: pointer;
