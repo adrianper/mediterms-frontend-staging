@@ -1,4 +1,14 @@
 .header {
+    &.mobile_header {
+        margin-top: 2rem;
+        top: 2rem;
+    }
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, rgb(0, 180, 216) 0%, rgb(0, 150, 200) 100%);
+
     .side_menu_bars {
         cursor: pointer;
         color: var(--text-color--third);
