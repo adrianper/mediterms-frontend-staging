@@ -17,11 +17,12 @@ const IOSPaymentDisplay = () => {
                     <Text medium align="center">Adquiere una membresía para seguir aprendiendo</Text>
                 </Grid>
                 <Text medium align="center">
-                    El pago no puede ser realizado desde la aplicación. Entendemos el inconveniente.
+                    Por el momento la membresia solo se puede adquirir desde nuestro sitio web.
+                    ¡Visitalo y adquierela!
                 </Text>
                 <PageLink to={routes.home.path}>
                     <Grid className="img_container">
-                        <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+                        <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" alt="mediterms"/>
                     </Grid>
                 </PageLink>
             </Grid>
