@@ -1,7 +1,7 @@
 
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { Link as PageLink,/* useLocation*/ } from 'react-router-dom'
-import { Button, Grid, TextField, Text } from 'components'
+import { Button, Grid, Text } from 'components'
 import { routes } from 'routing/routes'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -142,6 +142,9 @@ const Account = () => {
                     )}
             </Grid>
             <Button style={{ marginTop: '0.52em' }} onClick={() => { logOut() }} className="account__logout">Cerrar sesión</Button>
+            <PageLink to={routes.account_deletion.path} >
+                <Button style={{ backgroundColor: 'var(--bg-color--error)' }}>Eliminar cuenta</Button>
+            </PageLink>
         </Grid>
     )
 }

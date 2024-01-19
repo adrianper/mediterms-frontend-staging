@@ -1,7 +1,7 @@
 import {
     Home, Login, ReduxCounter, Signup, Terms, TestComponents, Account, ChangePassword, FinalDemo,
     ChangeRecoveredPassword, Institutions, PaymentRenewal, UserSignup, NoVerifiedAccount,
-    VerifiedAccount, Payment, Privacy
+    VerifiedAccount, Payment, Privacy, AccountDeletion
 } from 'pages'
 import { AiFillHome, AiOutlineLogin, AiOutlineCalculator } from 'react-icons/ai'
 import { RiTestTubeFill } from 'react-icons/ri'
@@ -12,7 +12,7 @@ export const sideMenuRoutes = ['redux_counter', 'testComponents']
 
 export const publicRoutes = ['terms', 'finalDemo', 'changeRecoveredPassword', 'institutions', 'privacy']
 export const requireNoAuthRoutes = ['login', 'signup', 'userSignup', 'verifiedAccount']
-export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal', 'payment']
+export const requireAuthRoutes = ['home', 'redux_counter', 'testComponents', 'account', 'changePassword', 'paymentRenewal', 'payment', 'account_deletion']
 
 export const routes = {
     home: {
@@ -59,6 +59,11 @@ export const routes = {
         linkName: 'Account',
         element: <Account />,
     },
+    account_deletion: {
+        path: '/eliminar_cuenta',
+        linkName: 'Delete account',
+        element: <AccountDeletion />
+    },
     changePassword: {
         path: '/changePassword',
         linkName: 'changePassword',
@@ -103,8 +108,7 @@ export const routes = {
         path: '/privacidad',
         linkName: 'privacy',
         element: <Privacy />
-
-    }
+    },
 }
 
 export const noRedirectPaths = [routes.account.path, routes.changePassword.path]
