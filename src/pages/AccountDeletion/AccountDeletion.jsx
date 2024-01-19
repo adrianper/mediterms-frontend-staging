@@ -10,7 +10,7 @@ const AccountDeletion = () => {
     const deleteAccount = async () => {
         startLoading()
         try {
-            const response = await axios.delete('/user/account/delete/asas')
+            const response = await axios.delete('/user/account/delete')
             if (response.data.success) {
                 localStorage.removeItem('user')
                 localStorage.removeItem('token')
