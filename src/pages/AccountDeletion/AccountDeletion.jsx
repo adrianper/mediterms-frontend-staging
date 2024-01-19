@@ -1,12 +1,24 @@
 import axios from 'axios'
 import { Button, Grid, Text } from 'components'
+import { useLoadingAppContext } from 'hooks'
 import React from 'react'
 
 const AccountDeletion = () => {
 
+    const { startLoading } = useLoadingAppContext()
+
     const deleteAccount = async () => {
+        startLoading()
         try {
-            await axios.delete('/user/account/delete')
+            const response = await axios.delete('/user/account/delete/asas')
+            if (response.data.success) {
+                localStorage.removeItem('user')
+                localStorage.removeItem('token')
+                localStorage.removeItem('md_v_u_s')
+                localStorage.removeItem('md_ac_u_s')
+                localStorage.clear()
+                document.location.reload()
+            }
         } catch (error) {
             console.error('DELETE_ACCOUNT_ERROR', error)
         }
