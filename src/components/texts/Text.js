@@ -1,4 +1,4 @@
-import React, { memo, useCallback, forwardRef } from 'react'
+import React, { memo, forwardRef } from 'react'
 import reactFastCompare from 'react-fast-compare'
 import './text.scss'
 
@@ -57,7 +57,7 @@ export default memo ( forwardRef(function Text (props, ref) {
         width,
         height,
         maxWidth,
-        justifyContent: (flexWrap && align == 'center') ? 'center' : ''
+        justifyContent: (flexWrap && align === 'center') ? 'center' : ''
     }
     
     if(elipsis){ 
