@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Capacitor } from '@capacitor/core';
 import axios from 'axios';
 import { useNavigate, Link as PageLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, /*useSelector */} from 'react-redux'
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { routes } from 'routing/routes'
@@ -21,11 +21,11 @@ const stripePromise = loadStripe('pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD
 const Payment = () => {
     const [formData, setFormData] = useState({ promoCodeId: null })
     const [clientSecret, setClientSecret] = useState('')
-    const [emailError, setEmailError] = useState('')
-    const [error, setError] = useState('')
-    const [showError, setShowError] = useState(false)
-    const { auth } = useSelector(store => store)
-    const { /*user, */authenticated } = auth
+    // const [emailError, setEmailError] = useState('')
+    const /*[error, */setError/*] */= useState('')[1]
+    const /*[showError, */setShowError/*]*/ = useState(false)[1]
+    // const { auth } = useSelector(store => store)
+    // const { /*user, */authenticated } = auth
     const [successfulAccount, setSuccessfulAccount] = useState(false)
     const [promoError, setPromoError] = useState('')
     const [validPromoCode, setValidPromoCode] = useState(false)
@@ -55,14 +55,14 @@ const Payment = () => {
         setFormData(formData => ({ ...formData, [name]: value }))
     }, [])
 
-    const verifyEmptyValues = () => {
-        const errors = []
-        Object.keys(formData).forEach(input => {
-            if (formData[input] === '') errors.push(`${input} could not be empty`)
-        })
-        if (errors.length > 0) alert(errors.map(err => err + '\n'))
-        return errors.length === 0
-    }
+    // const verifyEmptyValues = () => {
+    //     const errors = []
+    //     Object.keys(formData).forEach(input => {
+    //         if (formData[input] === '') errors.push(`${input} could not be empty`)
+    //     })
+    //     if (errors.length > 0) alert(errors.map(err => err + '\n'))
+    //     return errors.length === 0
+    // }
 
     const handleSumbit = async e => {
         e.preventDefault()
@@ -72,14 +72,14 @@ const Payment = () => {
         })
     }
 
-    const validateEmail = useCallback(async () => {
-        try {
-            const response = await axios.get(`/user/email/validate?email=${formData.email}`)
-            if (response.data.valid) setEmailError('')
-        } catch (error) {
-            setEmailError(error.response.data?.errors[0] || 'El correo ya esta en uso. Elige otro.')
-        }
-    }, [formData.email])
+    // const validateEmail = useCallback(async () => {
+    //     try {
+    //         const response = await axios.get(`/user/email/validate?email=${formData.email}`)
+    //         if (response.data.valid) setEmailError('')
+    //     } catch (error) {
+    //         setEmailError(error.response.data?.errors[0] || 'El correo ya esta en uso. Elige otro.')
+    //     }
+    // }, [formData.email])
 
     const handlePromotionalCode = (v) => {
         if (v.length === promoCodeLength) {
@@ -116,6 +116,7 @@ const Payment = () => {
                             setNewPrice(price)
                             setPromoPriceText("6.99")
                             break;
+                        default:
                     }
                 })
                 .catch(function (error) {
@@ -165,7 +166,7 @@ const Payment = () => {
         <Grid>
             {successfulAccount ?
                 <Grid className="payment_successfuly" padding="2.28em 1.57em" itemsX="center" gap="2.18em" >
-                    <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
+                    <img alt='mediterms logo' src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" />
                     <Grid w100 padding="2em" className="payment_successfuly__container" gap="2.18em">
                         <Text medium align="center">¡Tu pago ha sido exitoso, y tu membresía ahora se encuentra activa!</Text>
                         <Button onClick={() => { navigate('/home') }} selfCenter>Empezar a aprender</Button>
@@ -178,7 +179,7 @@ const Payment = () => {
                     }
                     {!freeAccount &&
                         <Grid gap="1em">
-                            <Text medium align="center">Has aprendido 10 términos médicos</Text>
+                            <Text medium align="center">Has aprendido 30 términos médicos</Text>
                             <Text medium align="center">Adquiere una membresía para seguir aprendiendo</Text>
                         </Grid>
                     }
@@ -226,11 +227,11 @@ const Payment = () => {
                         {!freeAccount &&
                             <Grid>
                                 <Text align="center" medium style={{ margin: '1.4em 0em 0.5em 0em' }} >Pagos procesados por:</Text>
-                                <img src='https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/stripe-payment.png' className='payment__stripe_logo' />
+                                <img alt='stripe payment' src='https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/stripe-payment.png' className='payment__stripe_logo' />
                             </Grid>
                         }
                     </form>
-                    {clientSecret != "" &&
+                    {clientSecret !== "" &&
                         <Elements stripe={stripePromise} options={options} key={clientSecret}>
                             <CheckoutForm setSuccessfulAccount={setSuccessfulAccount} setError={setError} setShowError={setShowError} formData={formData} freeAccount={freeAccount} clientSecret={clientSecret} />
                         </Elements>
