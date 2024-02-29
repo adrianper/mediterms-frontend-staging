@@ -1,40 +1,50 @@
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
-import { Flex, Grid, Text } from 'components'
+import { Grid, Text } from 'components'
 
 import './home.scss'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
 
-    const navigate = useNavigate()
     const [topics, setTopics] = useState([])
-    
-    useEffect(()=>{
-        axios.get(`/topics/`)
-            .then(res => {
-                
-                setTopics(res.data)    
-            })
-    }, [])
+
+    const navigate = useNavigate()
+
+    const getTopics = async () => {
+        try {
+            const response = await axios.get(`/topics/`)
+            if (response.data) {
+                setTopics(response.data)
+            }
+        } catch (error) {
+            console.error('GET_TOPICS_ERROR', error)
+        }
+    }
+
+    const validateSession = async () => {
+        try {
+            const response = await axios.get('session/')
+            if (response.data.accountStatus === 'MDT-AS-US_PR_0000') {
+                localStorage.setItem("md_ac_u_s", response.data.accountStatus)
+                navigate('/payment')
+            } else {
+                getTopics()
+            }
+        } catch (error) {
+            console.error('VALIDATE_SESSION_ERROR', error)
+        }
+    }
 
     useEffect(() => {
-        axios.get('/scores/', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        }).then(res => {
-            
-        }).catch(err => {
-            // setError(err.response.statusText)
-        })
+        validateSession()
+        // eslint-disable-next-line
     }, [])
 
-    const priority = { Principiante: 3, Intermedio: 2,  Avanzado: 1}
+    const priority = { Principiante: 3, Intermedio: 2, Avanzado: 1 }
     const sortedTopics = topics.sort((a, b) => priority[b.level] - priority[a.level]);
+
     return (
         <Grid className="home_page" itemsX="center" padding="1.14em 0.42em">
             <Grid w100 gap="1.7em" padding="1.7em 1.85em" className="home_page__list">

@@ -13,7 +13,7 @@ const IOSPaymentDisplay = () => {
             <Grid className="ios_payment_display" gap="2rem" padding="2rem" itemsX="center">
                 <Text bold align="center" size="8" color="first">¡Felicidades!</Text>
                 <Grid>
-                    <Text medium align="center">Has aprendido 10 términos médicos</Text>
+                    <Text medium align="center">Has aprendido 30 términos médicos</Text>
                     <Text medium align="center">Adquiere una membresía para seguir aprendiendo</Text>
                 </Grid>
                 <Text medium align="center">
@@ -22,7 +22,7 @@ const IOSPaymentDisplay = () => {
                 </Text>
                 <PageLink to={routes.home.path}>
                     <Grid className="img_container">
-                        <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" alt="mediterms"/>
+                        <img src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png" alt="mediterms" />
                     </Grid>
                 </PageLink>
             </Grid>

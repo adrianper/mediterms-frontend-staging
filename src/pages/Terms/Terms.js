@@ -21,7 +21,7 @@ const Terms = () => {
     const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
     const [showNextButton, setShowNextButton] = useState(false)
 
-    const { authenticated } = useSelector(store => store.auth)
+    const { authenticated, accountStatus } = useSelector(store => store.auth)
 
     /*--------HOOKS--------*/
     const navigate = useNavigate()
@@ -56,8 +56,8 @@ const Terms = () => {
                 if (error.response.data.code) {
                     switch (error.response.data.code) {
                         case "MDT_DB_OUT_BOUNDARIES":
-                        setTimeout(() => {
-                                navigate(authenticated ? routes.home.path : (setShowFinalDemo(true),routes.finalDemo.path) ,
+                            setTimeout(() => {
+                                navigate(authenticated ? routes.home.path : (setShowFinalDemo(true), routes.finalDemo.path),
                                     { state: { from: location } })
                             }, 1000)
                             break
@@ -92,10 +92,10 @@ const Terms = () => {
         if (authenticated && isCorrectAnswer) {
             const topicId = topic ? topic : termTopic
             axios.post(`/terms/correct/${topicId}`)
-                .then(res =>{
-                    reduxDispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
+                .then(res => {
+                    reduxDispatch(setAccountStatus({ accountStatus: res.data.accountStatus }))
                     localStorage.setItem("md_ac_u_s", res.data.accountStatus)
-                    if(res.data.accountStatus === 'MDT-AS-US_PR_0000') navigate('/payment')
+                    if (res.data.accountStatus === 'MDT-AS-US_PR_0000') navigate('/payment')
                 })
                 .catch(error => {
                     console.error('|ERR_SAVE_CORRECT_ANSWER|', error)
@@ -108,15 +108,22 @@ const Terms = () => {
         //     requestNextTerm(answeredIdsRef.current)
         // }, 3000)
 
+        // eslint-disable-next-line
     }, [authenticated, requestNextTerm, term.id, topic])
 
-    const nextQuestion = () =>{
+    const nextQuestion = () => {
         answeredIdsRef.current[answeredTermsRef.current] = term.id
         requestNextTerm(answeredIdsRef.current)
         setShowNextButton(false)
     }
 
     /*--------EFFECTS--------*/
+    useEffect(() => {
+        if (authenticated && accountStatus === 'MDT-AS-US_PR_0000')
+            navigate('/payment')
+        // eslint-disable-next-line
+    }, [authenticated, accountStatus])
+
     useEffect(() => {
         requestNextTerm()
         // eslint-disable-next-line
@@ -150,7 +157,7 @@ const Terms = () => {
                     )}
                 </Grid>
 
-                {(fetchTermError && showFinalDemo ) &&
+                {(fetchTermError && showFinalDemo) &&
                     <Grid className="terms__error_label" style={{ color: 'red' }}>
                         {errorLabel}
                         {retryFetchTerm && <Button onClick={() => requestNextTerm()}>Reintentar</Button>}
@@ -166,9 +173,9 @@ const Terms = () => {
                 </Grid>
             </Grid>
             {showNextButton &&
-                <Grid w100 onClick={() => {nextQuestion()}} padding="1em" className="terms__next_button">
+                <Grid w100 onClick={() => { nextQuestion() }} padding="1em" className="terms__next_button">
                     <Text medium color="white">Siguiente</Text>
-                    <img src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg" />
+                    <img alt="arrow next term" src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg" />
                 </Grid>
             }
         </Grid >
