@@ -23,14 +23,28 @@ const Home = () => {
         }
     }
 
+    const validateSession = async () => {
+        try {
+            const response = await axios.get('session/')
+            if (response.data.accountStatus === 'MDT-AS-US_PR_0000') {
+                localStorage.setItem("md_ac_u_s", response.data.accountStatus)
+                navigate('/payment')
+            } else {
+                getTopics()
+            }
+        } catch (error) {
+            console.error('VALIDATE_SESSION_ERROR', error)
+        }
+    }
+
     useEffect(() => {
-        getTopics()
+        validateSession()
         // eslint-disable-next-line
     }, [])
 
     const priority = { Principiante: 3, Intermedio: 2, Avanzado: 1 }
     const sortedTopics = topics.sort((a, b) => priority[b.level] - priority[a.level]);
-    
+
     return (
         <Grid className="home_page" itemsX="center" padding="1.14em 0.42em">
             <Grid w100 gap="1.7em" padding="1.7em 1.85em" className="home_page__list">
