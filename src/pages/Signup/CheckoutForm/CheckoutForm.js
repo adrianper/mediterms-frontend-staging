@@ -3,7 +3,7 @@ import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
-import { login, reset } from 'redux/reducers/auth/authSlice';
+import { login, reset } from 'reduxStore/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
   const { formData, clientSecret, setError, setShowError, setSuccessfulAccount, freeAccount } = props

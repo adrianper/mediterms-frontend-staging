@@ -6,7 +6,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
 
 import { Button, Grid, TextField, Text } from 'components'
-import { signup } from 'redux/reducers/auth/authSlice'
+import { signup } from 'reduxStore/reducers/auth/authSlice'
 
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 
