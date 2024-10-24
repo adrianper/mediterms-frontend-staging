@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { Button, Grid, TextField } from 'components'
-import { decrement, increment, incrementQuantity } from 'redux/reducers/counter/counterSlice'
+import { decrement, increment, incrementQuantity } from 'reduxStore/reducers/counter/counterSlice'
 
 const ReduxCounter = () => {
     const [amount, setAmount] = useState()

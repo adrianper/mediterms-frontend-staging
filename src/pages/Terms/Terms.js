@@ -7,7 +7,7 @@ import axios from 'axios'
 import { actions, initialState, reducer } from './termsReducer'
 import { useLoadingAppContext } from 'hooks'
 import { routes } from 'routing/routes'
-import { reset, setAccountStatus } from 'redux/reducers/auth/authSlice'
+import { reset, setAccountStatus } from 'reduxStore/reducers/auth/authSlice'
 
 import './terms.scss'
 

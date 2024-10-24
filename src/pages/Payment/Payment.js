@@ -8,7 +8,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { routes } from 'routing/routes'
 
 import { Button, Grid, Text, CharacterField } from 'components'
-import { signup } from 'redux/reducers/auth/authSlice'
+import { signup } from 'reduxStore/reducers/auth/authSlice'
 
 import IOSPaymentDisplay from 'pages/IOSPaymentDisplay/IOSPaymentDisplay';
 import CheckoutForm from './CheckoutForm/CheckoutForm';
