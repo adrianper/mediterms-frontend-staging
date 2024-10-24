@@ -7,7 +7,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { ScreenSizeContextProvider } from 'context/ScreenSizeContext'
 import { publicRoutes, requireAuthRoutes, requireNoAuthRoutes, routes } from 'routing/routes'
 
-import store from 'redux/store'
+import store from 'reduxStore/store'
 
 import Layout from 'pages/Layout'
 // import { ToastContainer } from 'react-toastify'

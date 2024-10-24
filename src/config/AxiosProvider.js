@@ -3,7 +3,7 @@ import { useMessageBoxContext } from "hooks"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { Outlet } from "react-router"
-import { reset } from "redux/reducers/auth/authSlice"
+import { reset } from "reduxStore/reducers/auth/authSlice"
 import { routes } from "routing/routes"
 import { notValidTokenCodes } from "scripts/generalVariables"
 

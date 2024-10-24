@@ -4,7 +4,7 @@ import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom'
 import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
-import { setAccountStatus } from 'redux/reducers/auth/authSlice'
+import { setAccountStatus } from 'reduxStore/reducers/auth/authSlice'
 
 
 const CheckoutForm = (props) => {

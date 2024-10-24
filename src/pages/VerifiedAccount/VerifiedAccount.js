@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Button, Grid, Text } from 'components'
 import { routes } from 'routing/routes'
 import { useSelector, useDispatch } from 'react-redux'
-import { reset } from 'redux/reducers/auth/authSlice'
+import { reset } from 'reduxStore/reducers/auth/authSlice'
 
 import './verified_account.scss'
 

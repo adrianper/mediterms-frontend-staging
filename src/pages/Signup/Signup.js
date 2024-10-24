@@ -7,7 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { routes } from 'routing/routes'
 
 import { Button, Grid, TextField, Text, CharacterField } from 'components'
-import { login, signup } from 'redux/reducers/auth/authSlice'
+import { login, signup } from 'reduxStore/reducers/auth/authSlice'
 
 import CheckoutForm from './CheckoutForm/CheckoutForm';
 

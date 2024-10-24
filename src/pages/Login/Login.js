@@ -7,7 +7,7 @@ import { routes } from 'routing/routes'
 
 import './login.scss'
 import RecoverPassword from 'pages/RecoverPassword/RecoverPassword'
-import { login/*, reset*/ } from 'redux/reducers/auth/authSlice'
+import { login/*, reset*/ } from 'reduxStore/reducers/auth/authSlice'
 // import { toast } from 'react-toastify'
 
 // withCredentials: true, //[allow sert 3rd party cookies] / [send cookies]

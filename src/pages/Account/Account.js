@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import './account.scss'
 import axios from 'axios'
-import { setUser } from 'redux/reducers/auth/authSlice'
+import { setUser } from 'reduxStore/reducers/auth/authSlice'
 
 const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-user-edit.svg"
 
