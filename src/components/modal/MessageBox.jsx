@@ -52,7 +52,7 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
                 messageContent: content,
                 messageType: type,
                 messageTitle: title,
-                // messageAnimation: global.switchMDAnimation(animation ?? 3),
+                // messageAnimation: window.switchMDAnimation(animation ?? 3),
             }
         })
     }, [dispatch])

@@ -52,7 +52,7 @@
     }
     
     //-----------------------------COLOR--------------------------------------
-    @each $color in error, first, second, third, fourth, alter--first, alter--second, alter--third, alter--fourth, white {
+    @each $color in error, first, second, third, fourth, alter--first, alter--second, alter--third, alter--fourth, "white" {
         &.text-color--#{$color}{
             color: var(--text-color--#{$color});
         }    

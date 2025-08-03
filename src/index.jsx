@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import './scripts/generalFunctions';
-import './config/axiosConfig.js';
+import 'config/axiosConfig';
 
 // import reportWebVitals from './reportWebVitals';
 
