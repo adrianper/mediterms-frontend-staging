@@ -1,6 +1,6 @@
 
-// export const hostURL = 'https://api.mediterms.app/' 
-export const hostURL = import.meta.env.VITE_HOST_URL
+export const hostURL = 'https://api.mediterms.app/' 
+// export const hostURL = "http://localhost:3000"
 
 export const screenSizes = {
     'mobile': 0,
