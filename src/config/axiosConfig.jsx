@@ -15,7 +15,7 @@ if (localStorage.getItem('token'))
 //     // Any status code that falls outside the range of 2xx
 //     if (error.response.data.errors) {
 //         if (error.response.data.code === 'TOKEN_EXPIRED')
-//             global.redirectTo(routes.login.path)
+//             window.redirectTo(routes.login.path)
 //     }
 //     return Promise.reject(error)
 // })

@@ -19,9 +19,9 @@ const AxiosProvider = () => {
             if (error.response.data.errors) {
                 if (notValidTokenCodes.includes(error.response.data.code)) {
                     showMB('Por favor inicia sesión', error.response.data.errors[0])
-                    global.clearSession()
+                    window.clearSession()
                     dispatch(reset())
-                    global.redirectTo(routes.login.path)
+                    window.redirectTo(routes.login.path)
                 }
             }
 

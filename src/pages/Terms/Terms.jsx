@@ -65,7 +65,7 @@ const Terms = () => {
                         case "MDT_APP_TOKEN_NOT_VALID":
                             setErrorLabel('Por favor inicia sesion')
                             reduxDispatch(reset())
-                            global.clearSession()
+                            window.clearSession()
                             setTimeout(() => {
                                 navigate(routes.login.path, { state: { from: location } })
                             }, 2000)

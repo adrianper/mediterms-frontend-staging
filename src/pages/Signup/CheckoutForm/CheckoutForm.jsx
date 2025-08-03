@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { useNavigate } from 'react-router-dom'
 import { Button, Text } from 'components'
 import { useDispatch } from 'react-redux';
-import { setAccountStatus } from 'reduxStore/reducers/auth/authSlice'
-
+import { login, reset } from 'reduxStore/reducers/auth/authSlice';
 
 const CheckoutForm = (props) => {
   const { formData, clientSecret, setError, setShowError, setSuccessfulAccount, freeAccount } = props
@@ -16,7 +14,6 @@ const CheckoutForm = (props) => {
   
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const handleSubmit = async event => {
     let signupToken = null
@@ -30,9 +27,16 @@ const CheckoutForm = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
+    if (formData.email === '' || formData.password === '' || formData.name === '' || formData.institution === ''){
+      setError('Hay campos vacios')
+      setShowError(true)
+    }else {
+      
+    setShowError(false)
     try {
-    //   const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
-    //   signupToken = signupResponse.data?.token || null
+      const signupResponse = await axios.post('/user/signup', { ...formData, clientSecret: { clientSecret } })
+      signupToken = signupResponse.data?.token || null
     } catch (error) {
       if (error.response.data)
         setErrorMessage(error.response.data.errors[0])
@@ -40,23 +44,15 @@ const CheckoutForm = (props) => {
         setErrorMessage(error.message)
       return
     }
+    console.log('user created')
 
     if(freeAccount) {
-      axios.post('/user/send_welcome_email', {email: JSON.parse(localStorage.getItem("user")).email }, {
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${signupToken}`
         }
       })
-      axios.post('/payment/validate-payment', {client_secret: '', ...formData }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      }).then(res =>{
-        console.log("res data", res.data)
-        dispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
-        localStorage.setItem("md_ac_u_s", res.data.accountStatus)
-        if(res.data.accountStatus === 'MDT-AS-US_AP_0000') setSuccessfulAccount(true)
-      })
+      setSuccessfulAccount(true); 
       return;
     }
 
@@ -76,32 +72,23 @@ const CheckoutForm = (props) => {
       // details incomplete)
       console.log("error",error)
       console.log('Delete user')
-    //   axios.delete('/user/account/delete', {
-    //     headers: {
-    //       Authorization: `Bearer ${signupToken}`
-    //     }
-    //   })
-    //     .then(() => {
-    //       dispatch(reset())
-    //       global.clearSession()
-    //     })
+      axios.delete('/user/account/delete', {
+        headers: {
+          Authorization: `Bearer ${signupToken}`
+        }
+      })
+        .then(() => {
+          dispatch(reset())
+          window.clearSession()
+        })
       setErrorMessage(error.message)
     } else {
-      axios.post('/user/send_welcome_email', {email: JSON.parse(localStorage.getItem("user")).email }, {
+      axios.post('/user/send_welcome_email', {email: formData.email }, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${signupToken}`
         }
       })
-      axios.post('/payment/validate-payment', {client_secret: clientSecret, ...formData }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      }).then(res =>{
-        dispatch(setAccountStatus({accountStatus: res.data.accountStatus}))
-        localStorage.setItem("md_ac_u_s", res.data.accountStatus)
-        if(res.data.accountStatus === 'MDT-AS-US_AP_0000') setSuccessfulAccount(true)
-      })
-      
+      setSuccessfulAccount(true)
       // dispatch(login({ email: formData.email, password: formData.password }))
 
       console.log("entra al else", error)
@@ -109,7 +96,7 @@ const CheckoutForm = (props) => {
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
     }
-  
+  }
 }
 
   return (
