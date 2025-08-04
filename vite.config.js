@@ -8,7 +8,12 @@ export default defineConfig(() => {
 			outDir: "build",
 		},
 		server: {
-			port: 5000
+			port: 5000,
+			strictPort: true,
+		},
+		preview: {
+			port: 5000,
+			strictPort: true,
 		},
 		plugins: [react()],
 		resolve: {
