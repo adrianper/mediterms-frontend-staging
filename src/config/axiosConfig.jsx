@@ -1,21 +1,8 @@
 import axios from "axios"
-// import { routes } from "routing/routes"
-import { hostURL } from "scripts/generalVariables"
+import { ENVS } from "../scripts/generalVariables"
 
-axios.defaults.baseURL = hostURL
-// axios.defaults.withCredentials = true
+axios.defaults.baseURL = ENVS.hostUrl
+
 
 if (localStorage.getItem('token'))
     axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`
-
-// axios.interceptors.response.use((response) => {
-//     // Any status code within the range 2xx
-//     return response
-// }, (error) => {
-//     // Any status code that falls outside the range of 2xx
-//     if (error.response.data.errors) {
-//         if (error.response.data.code === 'TOKEN_EXPIRED')
-//             window.redirectTo(routes.login.path)
-//     }
-//     return Promise.reject(error)
-// })

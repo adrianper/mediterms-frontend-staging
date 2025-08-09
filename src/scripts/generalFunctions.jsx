@@ -19,5 +19,3 @@ window.setCookieOnce = (name, value) => {
 window.getCookieToken = () =>
     document.cookie.replace(/(?:(?:^|.*;\s*)x-access-token\s*=\s*([^;]*).*$)|^.*$/, "$1")
 
-// window.getCookieValue = (name) =>
-//     document.cookie.replace(new RegExp('/(?:(?:^|.*;\s*)' + name + '\s*\=\s*([^;]*).*$)|^.*$/'), "$1")

@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react'
 import io from 'socket.io-client'
+import { ENVS } from '../scripts/generalVariables'
 
-// const socket = io('http://localhost:8080')
-const socket = io('https://fp-api.magiei.app') //For deploy
+const socket = io(ENVS.socketUrl)
 
 const SocketContext = createContext({isConnected: false, socket: {}})
 

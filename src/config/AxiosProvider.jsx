@@ -8,34 +8,32 @@ import { routes } from "routing/routes"
 import { notValidTokenCodes } from "scripts/generalVariables"
 
 const AxiosProvider = () => {
-    const dispatch = useDispatch()
+	const dispatch = useDispatch()
 
-    const { showMB } = useMessageBoxContext()
+	const { showMB } = useMessageBoxContext()
 
-    useEffect(() => {
-        const resInterceptor = response => response
+	useEffect(() => {
+		const resInterceptor = (response) => response
 
-        const errInterceptor = error => {
-            if (error.response.data.errors) {
-                if (notValidTokenCodes.includes(error.response.data.code)) {
-                    showMB('Por favor inicia sesión', error.response.data.errors[0])
-                    window.clearSession()
-                    dispatch(reset())
-                    window.redirectTo(routes.login.path)
-                }
-            }
+		const errInterceptor = (error) => {
+			if (error.response.data.errors) {
+				if (notValidTokenCodes.includes(error.response.data.code)) {
+					showMB("Por favor inicia sesión", error.response.data.errors[0])
+					window.clearSession()
+					dispatch(reset())
+					window.redirectTo(routes.login.path)
+				}
+			}
 
-            return Promise.reject(error)
-        }
+			return Promise.reject(error)
+		}
 
-        const interceptor = axios.interceptors.response.use(resInterceptor, errInterceptor)
+		const interceptor = axios.interceptors.response.use(resInterceptor, errInterceptor)
 
-        return () => axios.interceptors.response.eject(interceptor)
+		return () => axios.interceptors.response.eject(interceptor)
+	}, [])
 
-        // eslint-disable-next-line
-    }, [])
-
-    return <Outlet />
+	return <Outlet />
 }
 
 export default AxiosProvider

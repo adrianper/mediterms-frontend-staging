@@ -8,7 +8,9 @@
 	"homepage": "https://www.mediterms.app/",
 	"dependencies": {
 		"@capacitor/android": "7.4.2",
+		"@capacitor/assets": "^3.0.5",
 		"@capacitor/camera": "^7.0.1",
+		"@capacitor/cli": "7.4.2",
 		"@capacitor/core": "^7.4.2",
 		"@capacitor/filesystem": "^7.1.4",
 		"@capacitor/geolocation": "^7.1.4",
@@ -31,17 +33,19 @@
 		"react-router-dom": "^6.27.0",
 		"sass": "^1.89.2",
 		"vite": "^7.0.6",
-		"web-vitals": "^5.1.0",
-		"@capacitor/assets": "^3.0.5",
-		"@capacitor/cli": "7.4.2"
+		"web-vitals": "^5.1.0"
 	},
 	"devDependencies": {
+		"eslint": "^9.33.0",
+		"eslint-plugin-react": "^7.37.5",
+		"globals": "^16.3.0",
 		"typescript": "^5.9.2"
 	},
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"serve": "vite preview"
+		"serve": "vite preview",
+		"lint": "eslint ."
 	},
 	"eslintConfig": {
 		"extends": [

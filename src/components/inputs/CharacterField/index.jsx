@@ -25,7 +25,7 @@ const CharacterField = (props, ref) => {
         onChange(v.slice(0, v.length))
     }, [onChange])
 
-    const cursorToEnd = (i) => {
+    const cursorToEnd = () => {
         setTimeout(() => {
             document.activeElement.setSelectionRange(1, 1)
             // inputsRef.current[i].current.setSelectionRange(1, 1)
