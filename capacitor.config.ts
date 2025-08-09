@@ -1,9 +1,9 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli"
 
 const config: CapacitorConfig = {
-  appId: 'www.mediterms.app',
-  appName: 'MediTerms',
-  webDir: 'build',
-};
+	appId: "www.mediterms.app",
+	appName: "Mediterms",
+	webDir: "build",
+}
 
-export default config;
+export default config
