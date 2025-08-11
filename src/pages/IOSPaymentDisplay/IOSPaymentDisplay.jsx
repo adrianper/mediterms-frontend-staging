@@ -27,7 +27,7 @@ const IOSPaymentDisplay = () => {
 				<PageLink to={routes.home.path}>
 					<Grid className="img_container">
 						<img
-							src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo.png"
+							src="https://inteligeneresources.s3.us-east-2.amazonaws.com/Imagenes/mediterms-logo-payment.png"
 							alt="mediterms"
 						/>
 					</Grid>
