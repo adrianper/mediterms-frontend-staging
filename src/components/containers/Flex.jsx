@@ -6,7 +6,7 @@ const Flex = (props, ref) => {
 
     const {
         children, style, padding, margin, direction,
-        align, justify, wrap, w100, h100,
+        align, justify, wrap, w100, h100, gap,
         ...rest
     } = props
 
@@ -20,6 +20,7 @@ const Flex = (props, ref) => {
         flexWrap: wrap && 'wrap',
         width: w100 && '100%',
         height: h100 && '100%',
+        gap,
         ...style
     }), [padding, margin, direction, align, justify, wrap, w100, h100, style])
 

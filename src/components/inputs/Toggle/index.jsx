@@ -1,4 +1,4 @@
-import React, { forwardRef, memo, useCallback } from "react"
+import React, { memo, useCallback } from "react"
 
 import "./styles.scss"
 
@@ -20,4 +20,4 @@ const Toggle = (props) => {
 	)
 }
 
-export default memo(forwardRef(Toggle))
+export default memo(Toggle)
