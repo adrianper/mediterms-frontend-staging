@@ -29,3 +29,5 @@ export const notValidTokenCodes = [
 	"FST_JWT_AUTHORIZATION_TOKEN_EXPIRED",
 	"FST_JWT_NO_AUTHORIZATION_IN_HEADER",
 ]
+
+export const isAdminSubdomain = /:\/\/([^\/]+)/.exec(window.location.href)[1].split(".")[0] === 'admin'

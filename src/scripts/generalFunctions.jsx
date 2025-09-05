@@ -6,6 +6,9 @@ window.setSession = (user, token) => {
 window.clearSession = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
+    localStorage.removeItem('md_v_u_s')
+    localStorage.removeItem('md_ac_u_s')
+    localStorage.clear()
 }
 
 window.redirectTo = (path) => {

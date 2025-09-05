@@ -16,9 +16,7 @@ const VerifiedAccount = () => {
 	const dispatch = useDispatch()
 
 	const logOut = () => {
-		localStorage.removeItem("user")
-		localStorage.removeItem("token")
-		localStorage.clear()
+		window.clearSession()
 		dispatch(reset())
 		navigate("/login")
 	}

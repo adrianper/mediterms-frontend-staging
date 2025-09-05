@@ -56,9 +56,7 @@ const ChangePassword = () => {
 	}
 
 	const logOut = () => {
-		localStorage.removeItem("user")
-		localStorage.removeItem("token")
-		localStorage.clear()
+		window.clearSession()
 		document.location.reload()
 	}
 
