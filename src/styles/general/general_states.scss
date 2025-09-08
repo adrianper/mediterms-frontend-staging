@@ -1,0 +1,13 @@
+@mixin state__disabled {
+    &.disabled {
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.8;
+    }
+}
+
+@mixin state__hidden {
+    &.hidden {
+        display: none;
+    }
+}
