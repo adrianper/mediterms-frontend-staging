@@ -10,7 +10,7 @@ const Layout = () => {
 	return (
 		<Grid className="app_layout" rows="auto 1fr">
 			<Header />
-			<Grid className="layout_content" columns="auto 1fr">
+			<Grid w100 className="layout_content" columns="auto 1fr">
 				<SideMenu />
 				<Outlet />
 			</Grid>
