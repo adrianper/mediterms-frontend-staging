@@ -2,7 +2,7 @@
 
     /*----------------------------------------LIST----------------------------------------*/
     .combobox__list {
-        background-color: rgb(var(--app--bg--color));
+        background-color: white;
     }
 
     .combobox__list__option {
@@ -20,7 +20,6 @@
     .combobox {
         .text.combobox__text {
             color: var(--component--text-color);
-            font-weight: 500;
         }
     }
 
@@ -31,7 +30,6 @@
 
         .combobox__label {
             color: var(--component--label-color--inactive);
-            font-weight: 500;
         }
 
         .combobox__fieldset {

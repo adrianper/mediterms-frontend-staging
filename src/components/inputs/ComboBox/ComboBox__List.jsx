@@ -29,7 +29,7 @@ const ComboBoxList = (props) => {
     const createOption = (i, key) => {
         // Ignore data type in key and value comparisson, keys can be numeric or string
         const className = `combobox__list__option ${key == value ? 'combobox__list__option--selected' : ''}`
-        return <li {...{ className, key, onClick: () => handleChange(key) }}>
+        return <li key={key} {...{ className, onClick: () => handleChange(key) }}>
             {options[key]}
         </li>
     }

@@ -6,6 +6,8 @@ import _$ from 'jquery';
 import { Grid, Text, Icon } from 'components'
 import ComboBoxList from './ComboBox__List'
 
+import './combobox.scss'
+
 const ComboBox = (props, ref) => {
     let {
         inputClassName = '',

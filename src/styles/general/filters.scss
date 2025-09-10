@@ -1,0 +1,13 @@
+$filter--white--1: invert(98%) sepia(8%) saturate(16%) hue-rotate(329deg) brightness(104%) contrast(100%);
+$filter--blue--1: brightness(0) saturate(100%) invert(52%) sepia(25%) saturate(4704%) hue-rotate(154deg) brightness(98%) contrast(101%);
+
+body {
+    --filter--none: none;
+
+    /*-----------------------------FILTERS-------------------------------*/
+    --filter--white--1: #{$filter--white--1};
+    --filter--blue--1: #{$filter--blue--1};
+}
+
+// body.dark {
+// }

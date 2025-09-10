@@ -1,6 +1,7 @@
-@function hexToRgb($color){
+@function hexToRgb($color) {
     @return red($color), green($color), blue($color);
 }
+
 // ------Variables syntax -----
 // --property--color--variant
 // --property--color--variant--interaction
@@ -17,13 +18,16 @@ $red--2: hexToRgb(#ff9191);
 $gray--1: hexToRgb(#b8bdd4);
 $gray--2: hexToRgb(#a6b1e1);
 $gray--3: hexToRgb(#17192e);
+$gray--4: hexToRgb(#4D4D4D);
+$gray--5: hexToRgb(#99989D);
+$gray--6: hexToRgb(#737373);
 $purple--1: hexToRgb(#DCD6F7);
 $purple--2: hexToRgb(#bf85d6);
 $blue--1: hexToRgb(#0077B6);
 $blue--2: hexToRgb(#00B4D8);
 $blue--3: hexToRgb(#C9F0F7);
 $blue--4: hexToRgb(#90E0EF);
-
+$blue--5: hexToRgb(#EBF4F3);
 
 @mixin colorVariants($colorVariant, $color) {
     --text-color--#{$colorVariant}: RGB(#{$color});
@@ -32,6 +36,20 @@ $blue--4: hexToRgb(#90E0EF);
 }
 
 body {
+    --shadow--color: rgba(195, 196, 201, 0.6); //shadow effect
+
+    --component--color: RGB(#{$blue--1});
+    --component--color--active: RGB(#{$blue--2});
+    --component--color--inactive: RGB(#{$blue--2});
+    // --component--text-color: RGB(#{$gray--4});
+    --component--text-color: var(--text-color--black-alter);
+    // --component--label-color--inactive: RGB(#{$gray--6});
+    --component--label-color--inactive: var(--text-color--black-alter);
+    --component--option--bg-color--hover: RGB(#{$blue--4});
+
+    --card--shadow: 0px 0px 6px 2px var(--shadow--color);
+
+    --color--blue--5: #{$blue--5};
 
     @include colorVariants(first, $blue--1);
     @include colorVariants(first-alter, $gray--2);
@@ -47,6 +65,10 @@ body {
     @include colorVariants(black-alter, $black--2);
     @include colorVariants(blue-alter, $blue--3);
     @include colorVariants(blue-alter-2, $blue--4);
+
+    /*-----------------------------ICONS-------------------------------*/
+    --filter--inactive: var(--filter--blue--1);
+    --filter--active: var(--filter--blue--1);
 
     &.theme--first {
         background-color: RGB(#{$white--1});
@@ -129,7 +151,7 @@ body {
 //         --border-color--error--hover: RGB(#{$red--1});
 //         --bg-color--error: RGB(#{$red--3});
 //         --bg-color--error--hover: RGB(#{$red--1});
-        
+
 //         @each $colorVariant in first, second, third, fourth, fifth, error {
 //             @if $colorVariant == first {
 //                 @include generate-variables('gray', $colorVariant, $gray--1);

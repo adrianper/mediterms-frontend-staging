@@ -5,7 +5,6 @@
 
 $default--size: 3;
 $default--label--size: 2;
-$border-width: 1px;
 $padding-top-bottom: 0.7em;
 
 /*---------------------------------COMBOBOX---------------------------------------*/
@@ -19,8 +18,8 @@ $padding-top-bottom: 0.7em;
     }
 
     .combobox {
-        font-size: getTextSize($default--size);
-        padding: 1em;
+        font-size: getTextSize(2);
+        padding: 1.18em 1.4em;
         cursor: pointer;
 
         /*---------------------------------VALUE---------------------------------------*/
@@ -29,8 +28,8 @@ $padding-top-bottom: 0.7em;
             white-space: nowrap;
             text-overflow: ellipsis;
             user-select: none;
-            font-size: getTextSize($default--size);
-            font-weight: 500;
+            font-size: getTextSize(2);
+            // font-weight: 500;
         }
     }
 
@@ -43,13 +42,13 @@ $padding-top-bottom: 0.7em;
         z-index: $index--combobox_list;
         box-shadow: var(--card--shadow);
         border-radius: 0.5em;
-        animation: ComboBoxListAnimationOpen 0.3s;
+        // animation: ComboBoxListAnimationOpen 0.3s;
         max-height: 20em;
     }
 
     .combobox__list--invisible {
         border-width: 0;
-        animation: ComboBoxListAnimationClose 0.3s;
+        // animation: ComboBoxListAnimationClose 0.3s;
         max-height: 0;
         overflow: hidden;
         box-shadow: none;
@@ -76,8 +75,8 @@ $padding-top-bottom: 0.7em;
     }
 
     .combobox__label {
-        font-weight: 500;
-        line-height: 1.6em;
+        // font-weight: 500;
+        line-height: 1.5em;
         display: block;
         transform-origin: top left;
         white-space: nowrap;
@@ -105,7 +104,8 @@ $padding-top-bottom: 0.7em;
         pointer-events: none;
         border-radius: 0.6em;
         border-style: solid;
-        border-width: 1px;
+        border-width: 2px;
+        border-color: var(--border-color--second);
         overflow: hidden;
         min-width: 0%;
 
@@ -138,53 +138,29 @@ $padding-top-bottom: 0.7em;
     }
 }
 
-@media screen and (min-width: $size--laptop) {
-    .combobox__container {
-        .combobox {
-            padding: 0.686em 1em;
-        }
-
-        /*-----------------------------OPTIONS----------------------------------*/
-        .combobox__list__option {
-            padding: 0.7em 1em;
-        }
-
-        &.label_up:not(.no_label) {
-            .combobox__label {
-                transform: translate(1em, -0.7em);
-            }
-        }
-
-        .combobox__label {
-            line-height: 1em;
-            transform: translate(1em, 0.8em);
-        }
-    }
-}
-
 /*------------------------------ANIMATIONS---------------------------------------*/
-@keyframes ComboBoxListAnimationOpen {
-    0% {
-        max-height: 0;
-    }
+// @keyframes ComboBoxListAnimationOpen {
+//     0% {
+//         max-height: 0;
+//     }
 
-    100% {
-        max-height: 20em;
-    }
-}
+//     100% {
+//         max-height: 20em;
+//     }
+// }
 
-@keyframes ComboBoxListAnimationClose {
-    0% {
-        max-height: 20em;
-        border-width: 2px;
-    }
+// @keyframes ComboBoxListAnimationClose {
+//     0% {
+//         max-height: 20em;
+//         border-width: 2px;
+//     }
 
-    99% {
-        border-width: 2px;
-    }
+//     99% {
+//         border-width: 2px;
+//     }
 
-    100% {
-        max-height: 0;
-        border-width: 0;
-    }
-}
+//     100% {
+//         max-height: 0;
+//         border-width: 0;
+//     }
+// }
