@@ -11,8 +11,8 @@ const MessageBoxContext = createContext(initialState)
 export const MessageBoxContextProvider = ({ children }) => {
     const messageBoxRef = useRef()
 
-    const showMB = useCallback((title = '', content = '') => {
-        messageBoxRef.current.show({ title, content })
+    const showMB = useCallback((title = '', content = '', closeText, onClose) => {
+        messageBoxRef.current.show({ title, content, closeText, onClose })
     }, [])
 
     const hideMB = useCallback(() => {

@@ -8,7 +8,9 @@ const initReducer = {
     messageType: 'message-single',
     messageContent: '',
     messageTitle: '',
-    messageAnimation: 'MD-Alerta',
+    closeBtnText: 'Cerrar',
+    onCloseCallback: () => { },
+    // messageAnimation: 'MD-Alerta',
 }
 
 const reducer = (state, action) => {
@@ -35,7 +37,8 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
 
     /*---------------------------------------STATE-------------------------------------------*/
     const {
-        messageContent, messageType, messageTitle, /*messageAnimation,*/ isOpen
+        isOpen, messageContent, messageType, messageTitle, closeBtnText, onCloseCallback,
+        /*messageAnimation,*/
     } = state
 
     /*---------------------------------------REFS--------------------------------------------*/
@@ -43,7 +46,8 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
 
     /*---------------------------------EXTERNAL FUNCTIONS------------------------------------*/
     const show = useCallback(({
-        content = '', title = '', type = 'message-single'//, animation = 3
+        content = '', title = '', type = 'message-single', closeText = "Cerrar", onClose = () => { }
+        //, animation = 3
     }) => {
         if (type === 'message-list' && content === '') content = []
 
@@ -52,14 +56,17 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
                 messageContent: content,
                 messageType: type,
                 messageTitle: title,
+                closeBtnText: closeText,
+                onCloseCallback: onClose,
                 // messageAnimation: window.switchMDAnimation(animation ?? 3),
             }
         })
     }, [dispatch])
 
     const hide = useCallback(() => {
+        onCloseCallback && onCloseCallback()
         dispatch({ type: 'hide' })
-    }, [dispatch])
+    }, [onCloseCallback, dispatch])
 
     const error = useCallback((errors = [], animation = 2) => {
         show({ type: 'message-list', title: 'Hubo un problema', content: errors, animation })
@@ -111,7 +118,7 @@ export default memo(forwardRef(function CustomMessageBox(props, ref) {
                     {messageTitle !== '' && <Text bold className='message_box__title'>{messageTitle}</Text>}
                     {contentRender}
                     <Flex wrap className='message_box__buttons' justify='center'>
-                        <Button onClick={hide}>Cerrar</Button>
+                        <Button onClick={hide}>{closeBtnText}</Button>
                     </Flex>
                 </Grid>
             </Flex>
