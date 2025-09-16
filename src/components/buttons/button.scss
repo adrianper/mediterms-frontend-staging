@@ -11,4 +11,9 @@
     &:hover {
         background-color: var(--bg-color--second);
     }
+    
+    &.disabled {
+        pointer-events: none;
+        background-color: var(--bg-color--second-alter);
+    }
 }

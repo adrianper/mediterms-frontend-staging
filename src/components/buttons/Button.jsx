@@ -10,6 +10,7 @@ const Button = props => {
         justifySelf = '',
         selfCenter = false,
         style = {},
+        disabled = false,
         ...rest
     } = props
 
@@ -22,6 +23,9 @@ const Button = props => {
         justifySelf
     }
     className += ' button'
+
+    if(disabled)
+        className += ' disabled'
 
     return <button {...{className, style, ...rest}}>{props.children}</button>
 
