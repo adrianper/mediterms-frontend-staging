@@ -3,15 +3,20 @@
     padding: 18px 22px;
     border: none; //2px solid var(--border-color--second);
     border-radius: 35px;
+    color: var(--text-color--white);
     background-color: var(--bg-color--first);
     font-size: 16px;
     cursor: pointer;
-    color: var(--text-color--white);
 
     &:hover {
         background-color: var(--bg-color--second);
     }
-    
+
+    &.button--secondary {
+        color: var(--bg-color--first);
+        background-color: var(--text-color--white);
+    }
+
     &.disabled {
         pointer-events: none;
         background-color: var(--bg-color--second-alter);

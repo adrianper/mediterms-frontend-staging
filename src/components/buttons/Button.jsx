@@ -1,34 +1,47 @@
-import React from 'react'
-import './button.scss'
+import { useMemo } from "react"
+import "./button.scss"
 
-const Button = props => {
-    let {
-        className = '',
-        width = '',
-        maxWidth = '',
-        alignSelf = '',
-        justifySelf = '',
-        selfCenter = false,
-        style = {},
-        disabled = false,
-        ...rest
-    } = props
+const Button = ({
+    className = "",
+    width = "",
+    maxWidth = "",
+    alignSelf = "",
+    justifySelf = "",
+    style = {},
+    disabled = false,
+    variant,
+    children,
+    ...rest
+}) => {
 
-    if(selfCenter){justifySelf = 'center'; alignSelf = 'center'}
     style = {
         ...style,
         width,
         maxWidth,
         alignSelf,
-        justifySelf
+        justifySelf,
     }
-    className += ' button'
 
-    if(disabled)
-        className += ' disabled'
+    const btnClassNames = useMemo(() => {
+        let result = "button"
 
-    return <button {...{className, style, ...rest}}>{props.children}</button>
+        if (className)
+            result += ` ${className}`
 
+        if (disabled)
+            result += " disabled"
+
+        if (variant)
+            result += ` button--${variant}`
+
+        return result
+    }, [className, disabled, variant])
+
+    return (
+        <button className={btnClassNames} style={style} {...rest}>
+            {children}
+        </button>
+    )
 }
 
 export default Button
