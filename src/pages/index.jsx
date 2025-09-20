@@ -13,3 +13,4 @@ export { default as NoVerifiedAccount } from './NoVerifiedAccount/NoVerifiedAcco
 export { default as VerifiedAccount } from './VerifiedAccount/VerifiedAccount'
 export { default as Payment } from './Payment/Payment'
 export { default as Privacy } from './Privacy/Privacy'
+export { default as Ranking } from './Ranking/Ranking'

@@ -1,3 +1,8 @@
+import { Route } from "react-router-dom"
+
+import { AiFillHome, AiOutlineLogin } from "react-icons/ai"
+import { RiTestTubeFill } from "react-icons/ri"
+
 import {
 	Home,
 	Login,
@@ -14,24 +19,34 @@ import {
 	Payment,
 	Privacy,
 	AccountDeletion,
+	Ranking,
 } from "pages"
-import { AiFillHome, AiOutlineLogin } from "react-icons/ai"
-import { RiTestTubeFill } from "react-icons/ri"
+
+import {
+	AdminHome,
+	AdminLogin,
+} from "@admin_pages"
 
 export const headerRoutes = ["account"]
 
 export const sideMenuRoutes = ["testComponents"]
 
 export const publicRoutes = ["terms", "finalDemo", "changeRecoveredPassword", "institutions", "privacy"]
+
 export const requireNoAuthRoutes = ["login", "userSignup", "verifiedAccount"]
 export const requireAuthRoutes = [
 	"home",
 	"testComponents",
 	"account",
+	"account_deletion",
 	"changePassword",
 	"payment",
-	"account_deletion",
+	"ranking",
 ]
+
+export const requireNoAuthAdminRoutes = ['login']
+
+export const requireAuthAdminRoutes = ['home']
 
 export const routes = {
 	home: {
@@ -61,6 +76,12 @@ export const routes = {
 		path: "/account",
 		linkName: "Account",
 		element: <Account />,
+		children: [
+			// {
+			// 	path: "/account/ranking",
+			// 	element: <Ranking />
+			// }
+		]
 	},
 	account_deletion: {
 		path: "/eliminar_cuenta",
@@ -112,6 +133,30 @@ export const routes = {
 		linkName: "privacy",
 		element: <Privacy />,
 	},
+	ranking: {
+		path: "/ranking",
+		linkName: "Account",
+		element: <Ranking />,
+	},
+}
+
+export const adminRoutes = {
+	login: {
+		path: "/admin/login",
+		element: <AdminLogin />
+	},
+	home: {
+		path: "/admin/home",
+		element: <AdminHome />
+	},
 }
 
 export const noRedirectPaths = [routes.account.path, routes.changePassword.path]
+
+export const renderRoute = ({ path, element, children }) => {
+	return (
+		<Route key={path} path={path} element={element}>
+			{children?.map(child => renderRoute(child))}
+		</Route>
+	)
+} 

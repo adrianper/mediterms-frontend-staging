@@ -1,0 +1,36 @@
+.ranking_user_card {
+    $imageSize: 4rem;
+    background-color: RGB(var(--color--blue--5));
+
+    .user_placement {
+        justify-self: center;
+    }
+
+    .card_user_info {
+        min-height: 100px;
+        .user_picture {
+            align-self: center;
+            // overflow: hidden;
+            width: $imageSize;
+            min-width: $imageSize;
+            height: $imageSize;
+            max-height: $imageSize;
+
+            img {
+                border-radius: 50%;
+                width: $imageSize;
+                height: $imageSize;
+                object-fit: contain;
+            }
+        }
+
+        .crown_icon {
+            position: absolute;
+            bottom: 60%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #FFD700;
+        }
+    }
+
+}

@@ -27,11 +27,7 @@ const login = async (userData) => {
         localStorage.setItem('md_ac_u_s', response.data.accountStatus)
         axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
     } else {
-        localStorage.removeItem('paymentStatus')
-        localStorage.removeItem('user')
-        localStorage.removeItem('token')
-        localStorage.removeItem('md_v_u_s')
-        localStorage.removeItem('md_ac_u_s')
+        window.clearSession()
     }
 
     return response.data

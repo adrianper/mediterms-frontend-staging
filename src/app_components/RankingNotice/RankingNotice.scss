@@ -1,0 +1,28 @@
+.ranking_notice {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background: linear-gradient(135deg, rgba(0, 180, 216, 1) 0%, rgba(0, 119, 182, 1) 100%);
+
+    .ranking_notice_user_cards {
+        .ranking_user_card__hidden {
+            visibility: hidden;
+        }
+
+        .ranking_user_card__above {
+            background: linear-gradient(to top, RGB(var(--color--blue--5)) 50%, transparent);
+        }
+
+        .ranking_user_card__middle {
+            transform: scale(1.06);
+        }
+
+        .ranking_user_card__below {
+            background: linear-gradient(to bottom, RGB(var(--color--blue--5)) 50%, transparent);
+        }
+
+    }
+}

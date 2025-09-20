@@ -10,6 +10,7 @@ import { routes } from "routing/routes"
 import { reset, setAccountStatus } from "reduxStore/reducers/auth/authSlice"
 
 import "./terms.scss"
+import RankingNotice from "../../app_components/RankingNotice"
 
 const initErrorLbl = "Error al cargar la información"
 
@@ -20,6 +21,8 @@ const Terms = () => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
 	const [showNextButton, setShowNextButton] = useState(false)
+	const [showRankingNotice, setShowRankingNotice] = useState(false)
+	const [correctAnsweredTerms, setCorrectAnsweredTerms] = useState(0)
 
 	const { authenticated, accountStatus } = useSelector((store) => store.auth)
 
@@ -35,86 +38,100 @@ const Terms = () => {
 	const answeredIdsRef = useRef([])
 
 	/*--------FUNCTIONS--------*/
-	const requestNextTerm = useCallback(
-		(answeredIds = []) => {
-			startLoading()
+	const validateUserRanking = useCallback(async () => {
+		try {
+			const response = await axios.get("ranking/my-ranking")
+			const currentUserRanking = response.data?.ranking
+			const localUserRanking = localStorage.getItem("localUserRanking")
 
-			const requestUrl = authenticated
-				? `/terms?previousIds=${JSON.stringify(answeredIds)}${topic ? `&topicId=${topic}` : ""}`
-				: `/terms/samples?previousIds=${JSON.stringify(answeredIds)}`
+			if (!currentUserRanking) return
 
-			axios
-				.get(requestUrl)
-				.then((response) => {
-					dispatch({ type: actions.SET_TERM, payload: response.data })
-				})
-				.finally(() => {
-					setTimeout(() => stopLoading(), 300)
-				})
-				.catch((error) => {
-					if (error.response.data.code) {
-						switch (error.response.data.code) {
-							case "MDT_DB_OUT_BOUNDARIES":
-								setTimeout(() => {
-									navigate(
-										authenticated
-											? routes.home.path
-											: (setShowFinalDemo(true), routes.finalDemo.path),
-										{ state: { from: location } }
-									)
-								}, 1000)
-								break
-							case "FST_JWT_AUTHORIZATION_TOKEN_INVALID":
-							case "MDT_APP_TOKEN_NOT_VALID":
-								setErrorLabel("Por favor inicia sesion")
-								reduxDispatch(reset())
-								window.clearSession()
-								setTimeout(() => {
-									navigate(routes.login.path, { state: { from: location } })
-								}, 2000)
-								break
-							default:
-								break
-						}
+			if (currentUserRanking < localUserRanking)
+				setShowRankingNotice(true)
+		} catch (error) {
+			console.error(error)
+		}
+	}, [])
 
-						dispatch({ type: actions.SET_FETCH_TERM_ERROR, payload: false })
-					} else {
-						console.error(error)
-						setErrorLabel(`${initErrorLbl}\n${error.message}`)
-						dispatch({ type: actions.SET_FETCH_TERM_ERROR, payload: true })
+	const requestNextTerm = useCallback((answeredIds = []) => {
+		startLoading()
+
+		const requestUrl = authenticated
+			? `/terms?previousIds=${JSON.stringify(answeredIds)}${topic ? `&topicId=${topic}` : ""}`
+			: `/terms/samples?previousIds=${JSON.stringify(answeredIds)}`
+
+		axios
+			.get(requestUrl)
+			.then((response) => {
+				dispatch({ type: actions.SET_TERM, payload: response.data })
+			})
+			.finally(() => {
+				setTimeout(() => stopLoading(), 300)
+			})
+			.catch((error) => {
+				if (error.response.data.code) {
+					switch (error.response.data.code) {
+						case "MDT_DB_OUT_BOUNDARIES":
+							setTimeout(() => {
+								navigate(
+									authenticated
+										? routes.home.path
+										: (setShowFinalDemo(true), routes.finalDemo.path),
+									{ state: { from: location } }
+								)
+							}, 1000)
+							break
+						case "FST_JWT_AUTHORIZATION_TOKEN_INVALID":
+						case "MDT_APP_TOKEN_NOT_VALID":
+							setErrorLabel("Por favor inicia sesion")
+							reduxDispatch(reset())
+							window.clearSession()
+							setTimeout(() => {
+								navigate(routes.login.path, { state: { from: location } })
+							}, 2000)
+							break
+						default:
+							break
 					}
-				})
-		},
+
+					dispatch({ type: actions.SET_FETCH_TERM_ERROR, payload: false })
+				} else {
+					console.error(error)
+					setErrorLabel(`${initErrorLbl}\n${error.message}`)
+					dispatch({ type: actions.SET_FETCH_TERM_ERROR, payload: true })
+				}
+			})
+	},
 		[authenticated, location, navigate, reduxDispatch, startLoading, stopLoading, topic]
 	)
 
-	const handleClickDefinitionBtn = useCallback(
-		(index, isCorrectAnswer, termTopic) => {
-			answeredIdsRef.current[answeredTermsRef.current] = term.id
-			answeredTermsRef.current = answeredTermsRef.current < 7 ? answeredTermsRef.current + 1 : 0
+	const handleClickDefinitionBtn = useCallback((index, isCorrectAnswer, termTopic) => {
+		answeredIdsRef.current[answeredTermsRef.current] = term.id
+		answeredTermsRef.current = answeredTermsRef.current < 7 ? answeredTermsRef.current + 1 : 0
 
-			if (authenticated && isCorrectAnswer) {
-				const topicId = topic ? topic : termTopic
-				axios
-					.post(`/terms/correct/${topicId}`)
-					.then((res) => {
-						reduxDispatch(setAccountStatus({ accountStatus: res.data.accountStatus }))
-						localStorage.setItem("md_ac_u_s", res.data.accountStatus)
-						if (res.data.accountStatus === "MDT-AS-US_PR_0000") navigate("/payment")
-					})
-					.catch((error) => {
-						console.error("|ERR_SAVE_CORRECT_ANSWER|", error)
-					})
-			}
+		if (authenticated && isCorrectAnswer) {
+			const topicId = topic ? topic : termTopic
+			axios
+				.post(`/terms/correct/${topicId}`)
+				.then((res) => {
+					reduxDispatch(setAccountStatus({ accountStatus: res.data.accountStatus }))
+					localStorage.setItem("md_ac_u_s", res.data.accountStatus)
 
-			dispatch({
-				type: actions.SET_SELECTED_ANSWER,
-				payload: { selectedAnswer: index, answeredCorrect: isCorrectAnswer },
-			})
-			setShowNextButton(true)
-		},
-		[authenticated, requestNextTerm, term.id, topic]
-	)
+					if (res.data.accountStatus === "MDT-AS-US_PR_0000") navigate("/payment")
+
+					setCorrectAnsweredTerms(prevState => prevState === 10 ? 1 : prevState + 1)
+				})
+				.catch((error) => {
+					console.error("|ERR_SAVE_CORRECT_ANSWER|", error)
+				})
+		}
+
+		dispatch({
+			type: actions.SET_SELECTED_ANSWER,
+			payload: { selectedAnswer: index, answeredCorrect: isCorrectAnswer },
+		})
+		setShowNextButton(true)
+	}, [authenticated, requestNextTerm, term.id, topic])
 
 	const nextQuestion = () => {
 		answeredIdsRef.current[answeredTermsRef.current] = term.id
@@ -124,8 +141,14 @@ const Terms = () => {
 
 	/*--------EFFECTS--------*/
 	useEffect(() => {
-		if (authenticated && accountStatus === "MDT-AS-US_PR_0000") navigate("/payment")
+		if (authenticated && accountStatus === "MDT-AS-US_PR_0000")
+			navigate("/payment")
 	}, [authenticated, accountStatus])
+
+	useEffect(() => {
+		if (correctAnsweredTerms === 10)
+			validateUserRanking()
+	}, [correctAnsweredTerms])
 
 	useEffect(() => {
 		requestNextTerm()
@@ -154,22 +177,27 @@ const Terms = () => {
 								}}
 								style={{
 									backgroundColor:
-										selectedAnswer === null
-											? ""
-											: definition.correct_answer
-											? "#D9FFCC"
-											: i === selectedAnswer
-											? "#E6A4A4"
-											: "",
+										selectedAnswer === null ?
+											""
+											:
+											definition.correct_answer ?
+												"#D9FFCC"
+												:
+												i === selectedAnswer ?
+													"#E6A4A4"
+													:
+													"",
 									pointerEvents: selectedAnswer !== null ? "none" : "",
 									border:
-										selectedAnswer === null
-											? ""
-											: definition.correct_answer
-											? "solid 2px #39E600"
-											: i === selectedAnswer
-											? "solid 2px #ff0000"
-											: "",
+										selectedAnswer === null ?
+											""
+											: definition.correct_answer ?
+												"solid 2px #39E600"
+												:
+												i === selectedAnswer ?
+													"solid 2px #ff0000"
+													:
+													"",
 								}}>
 								<Text medium align="center">
 									{definition.answer}
@@ -196,18 +224,27 @@ const Terms = () => {
 					</Text>
 				</Grid>
 			</Grid>
-			{showNextButton && (
-				<Grid w100 onClick={() => nextQuestion()} padding="1em" className="terms__next_button">
-					<Text medium color="white">
-						Siguiente
-					</Text>
-					<img
-						alt="arrow next term"
-						src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg"
-					/>
-				</Grid>
-			)}
-		</Grid>
+			{
+				showNextButton && (
+					<Grid w100 onClick={nextQuestion} padding="1em" className="terms__next_button">
+						<Text medium color="white">
+							Siguiente
+						</Text>
+						<img
+							alt="arrow next term"
+							src="https://magiei2.s3.us-east-2.amazonaws.com/public/img/icons/arrow.svg"
+						/>
+					</Grid>
+				)
+			}
+			{
+				showRankingNotice &&
+				<RankingNotice
+					isWelcomeNotcie={false}
+					onClose={() => setShowRankingNotice(false)}
+				/>
+			}
+		</Grid >
 	)
 }
 

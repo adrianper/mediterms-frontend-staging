@@ -3,16 +3,17 @@ import authService from './authService'
 
 const user = JSON.parse(localStorage.getItem('user'))
 const userInitialState = {
+    name: "",
+    email: "",
     photoUrl: "",
-    name: '',
-    email: ''
+    educationalBackgroundComplete: false,
 }
 const initialState = {
-    user: { ...userInitialState,...user},
+    user: { ...userInitialState, ...user },
     authenticated: !!user,
+    accountStatus: localStorage.getItem("md_ac_u_s") || 'MDT-AS-US_FT_0000',
     verified: localStorage.getItem("md_v_u_s") || false,
     paymentStatus: false,
-    accountStatus: localStorage.getItem("md_ac_u_s") || 'MDT-AS-US_FT_0000',
     isLoading: false,
     message: '',
 }
@@ -45,7 +46,7 @@ const authSlice = createSlice({
     reducers: {
         reset: state => {
             state.user = null
-            state.accountInfo  = {}
+            state.accountInfo = {}
             state.authenticated = false
             state.verified = false
             state.paymentStatus = false
@@ -55,7 +56,7 @@ const authSlice = createSlice({
         },
         setUser: (state, action) => {
             // if(isNaN(action.payload)) return;
-            state.user = {...state.user, ...action.payload}
+            state.user = { ...state.user, ...action.payload }
         },
         setAccountStatus: (state, action) => {
             // if(isNaN(action.payload)) return;
@@ -105,6 +106,6 @@ const authSlice = createSlice({
     }
 })
 
-export const { reset,  setUser, setAccountStatus} = authSlice.actions
+export const { reset, setUser, setAccountStatus } = authSlice.actions
 
 export default authSlice.reducer
