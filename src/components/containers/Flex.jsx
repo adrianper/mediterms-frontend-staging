@@ -1,16 +1,13 @@
-import React, { forwardRef, memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import reactFastCompare from 'react-fast-compare'
 
-const Flex = (props, ref) => {
-    let { className, } = props
+const Flex = ({
+    children, className, style, padding, margin, direction,
+    align, justify, wrap, w100, h100, gap, ref,
+    ...rest
+}) => {
 
-    const {
-        children, style, padding, margin, direction,
-        align, justify, wrap, w100, h100, gap,
-        ...rest
-    } = props
-
-    const newStyle = useMemo(() => ({
+    const elementStyle = useMemo(() => ({
         display: 'flex',
         padding,
         margin,
@@ -24,13 +21,20 @@ const Flex = (props, ref) => {
         ...style
     }), [padding, margin, direction, align, justify, wrap, w100, h100, style])
 
-    className = className ? `${className} grid` : 'grid'
+    const elementClassNames = useMemo(() => {
+        let result = "flex"
+
+        if (className)
+            result += ` ${className}`
+
+        return result
+    }, [className])
 
     return (
-        <div ref={ref} {...{ ...rest, className, style: newStyle }}>
+        <div ref={ref} className={elementClassNames} style={elementStyle}{...rest}>
             {children}
         </div>
     )
 }
 
-export default memo(forwardRef(Flex), reactFastCompare)
+export default memo(Flex, reactFastCompare)
