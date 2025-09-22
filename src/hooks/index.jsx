@@ -1,5 +1,6 @@
 export { default as useClickOutside } from './useClickOutside'
 export { default as useComposeProviders } from './useComposeProviders'
+export { default as useDebounced } from './useDebounced'
 export { default as useLoadingAppContext } from './useLoadingAppContext'
 export { default as useMessageBoxContext } from './useMessageBoxContext'
 export { default as useOnResizeWindow } from './useOnResizeWindow'

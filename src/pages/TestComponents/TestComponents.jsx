@@ -13,6 +13,7 @@ import {
 	RadioButton,
 	TextField,
 	Toggle,
+	FilterTable,
 } from "components"
 
 import { IoIosAlarm } from "react-icons/io"
@@ -20,6 +21,7 @@ import { IoIosAlarm } from "react-icons/io"
 const TestComponents = () => {
 	const [pass, setPass] = useState("")
 	const [toggleState, setToggleState] = useState(true)
+	const [isLoading, setIsLoading] = useState(false)
 	const messageBoxRef = useRef()
 
 	const showMb = () => {
@@ -33,6 +35,15 @@ const TestComponents = () => {
 	const radioHandleChange = useCallback((v) => {
 		console.log(v)
 	}, [])
+
+	const handleChangeFilter = (filter) => {
+		setIsLoading(true)
+		setTimeout(() => {
+			console.log(filter)
+
+			setIsLoading(false)
+		}, 1000)
+	}
 
 	return (
 		<Fragment>
@@ -80,6 +91,36 @@ const TestComponents = () => {
 				<RadioButton likert inputs={[-3, -2, -1, 0, 1, 2, 3]} onChange={radioHandleChange} direction="column" />
 				<p>Toggle</p>
 				<Toggle value={toggleState} onChange={setToggleState} label1="Si" label2="No" />
+				<p>Filter Table</p>
+				<FilterTable
+					columns={[
+						{
+							name: 'age', displayName: 'Edad'
+						},
+						{ name: 'businessName', displayName: 'Nombre' },
+						{
+							name: 'amount', displayName: 'Monto', format: amount => Number(amount).toLocaleString('es-MX', {
+								style: 'currency',
+								currency: 'MXN'
+							}), sortMethod: (a, b, sortColumn, isAscSort) => {
+								if (Number(a[sortColumn]) < Number(b[sortColumn])) return isAscSort ? -1 : 1
+								if (Number(a[sortColumn]) > Number(b[sortColumn])) return isAscSort ? 1 : -1
+								return 0
+							}
+						},
+					]
+					}
+					rows={
+						[
+							{ age: "25", businessName: "Adrian", amount: "190" },
+							{ age: "22", businessName: "Diego", amount: "1770" },
+						]}
+					isLoadingRows={isLoading}
+					onChangeFilter={handleChangeFilter}
+					rowButtons={[{ icon: 'trash', onClick: row => alert("Delete" + JSON.stringify(row)) }]}
+					columnsTemplate='2fr 3fr 1fr'
+					onClickRow={row => alert(JSON.stringify(row))}
+				/>
 			</Grid>
 			<MessageBox ref={messageBoxRef} />
 		</Fragment>
