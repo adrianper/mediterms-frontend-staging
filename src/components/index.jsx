@@ -22,6 +22,8 @@ export { default as Loading } from './loading/Loading'
 
 // ---------------------------MODAL---------------------------
 export { default as MessageBox } from './modal/MessageBox'
+export { default as Modal } from './modal/Modal'
+export { default as Portal } from './modal/Portal/Portal'
 
 // ---------------------------BUTTON---------------------------
 export { default as Button } from './buttons/Button'

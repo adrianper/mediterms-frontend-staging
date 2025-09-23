@@ -1,4 +1,5 @@
 import axios from "axios"
+import { isAdminSubdomain } from "../../../scripts/generalVariables"
 
 const signup = async (userData) => {
     const response = await axios.post('/user/signup', userData)
@@ -18,7 +19,7 @@ const signup = async (userData) => {
 }
 
 const login = async (userData) => {
-    const response = await axios.post('/user/login', userData)
+    const response = await axios.post(isAdminSubdomain ? '/admin/login' : '/user/login', userData)
     if (response.data && !response.data.error) {
         localStorage.setItem('paymentStatus', response.data.paymentStatus)
         localStorage.setItem('user', JSON.stringify(response.data.user))

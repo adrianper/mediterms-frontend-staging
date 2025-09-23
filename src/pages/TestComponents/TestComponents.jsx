@@ -14,6 +14,7 @@ import {
 	TextField,
 	Toggle,
 	FilterTable,
+	Modal,
 } from "components"
 
 import { IoIosAlarm } from "react-icons/io"
@@ -22,6 +23,8 @@ const TestComponents = () => {
 	const [pass, setPass] = useState("")
 	const [toggleState, setToggleState] = useState(true)
 	const [isLoading, setIsLoading] = useState(false)
+	const [isModalOpen, setIsModalOpen] = useState(false)
+
 	const messageBoxRef = useRef()
 
 	const showMb = () => {
@@ -121,8 +124,21 @@ const TestComponents = () => {
 					columnsTemplate='2fr 3fr 1fr'
 					onClickRow={row => alert(JSON.stringify(row))}
 				/>
+				<p>Modal</p>
+				<Button style={{ justifySelf: "center" }} onClick={() => setIsModalOpen(true)}>
+					Open modal
+				</Button>
 			</Grid>
 			<MessageBox ref={messageBoxRef} />
+			{isModalOpen &&
+				<Modal>
+					<p size="6">Modal content</p>
+
+					<Button style={{ justifySelf: "center" }} onClick={() => setIsModalOpen(false)}>
+						Close
+					</Button>
+				</Modal>
+			}
 		</Fragment>
 	)
 }

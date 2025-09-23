@@ -1,4 +1,4 @@
-const isDevelopmentEnv = true
+const isDevelopmentEnv = false
 
 export const ENVS = isDevelopmentEnv
 	? {

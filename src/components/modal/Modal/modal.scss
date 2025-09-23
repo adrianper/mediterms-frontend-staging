@@ -1,0 +1,19 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    // background: var(--bg-color--white);
+    z-index: 1000;
+
+    .modal_content {
+        box-shadow: var(--card--shadow);
+        border-radius: 1rem;
+        // background-color: rgb(var(--app--bg--color));
+        background: var(--bg-color--white);
+    }
+}
