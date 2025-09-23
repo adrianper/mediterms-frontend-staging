@@ -96,6 +96,7 @@ const TestComponents = () => {
 				<Toggle value={toggleState} onChange={setToggleState} label1="Si" label2="No" />
 				<p>Filter Table</p>
 				<FilterTable
+					onClickAddBtn={alert}
 					columns={[
 						{
 							name: 'age', displayName: 'Edad'

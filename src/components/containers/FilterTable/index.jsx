@@ -19,6 +19,7 @@ const FilterTable = (props) => {
         onClickRow,
         rowButtons = [],
         columnsTemplate,
+        onClickAddBtn,
     } = props
 
     /*---------------------------------------STATE-----------------------------------------*/
@@ -73,6 +74,12 @@ const FilterTable = (props) => {
                     placeholder="Buscar"
                 />
                 <div className="layout_selector">
+                    {onClickAddBtn &&
+                        <Icon
+                            onClick={onClickAddBtn}
+                            // className={cardsLayout ? "active" : ""}
+                            icon="add" />
+                    }
                     <Icon
                         onClick={() => { setCardsLayout(true) }}
                         className={cardsLayout ? "active" : ""}
