@@ -17,6 +17,15 @@
         background-color: var(--text-color--white);
     }
 
+    &.button--error {
+        background-color: var(--bg-color--error);
+        color: var(--text-color--white);
+
+        &:hover{
+            background-color: var(--bg-color--error-alter);
+        }
+    }
+
     &.disabled {
         pointer-events: none;
         background-color: var(--bg-color--second-alter);

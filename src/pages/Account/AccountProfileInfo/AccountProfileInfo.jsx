@@ -52,7 +52,7 @@ const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
             })
     }, [])
 
-    const totalAnswers = topicWithTotal.find(({ topic_name }) => topic_name === "Total").total
+    const totalAnswers = topicWithTotal.find(({ topic_name }) => topic_name === "Total")?.total
 
     const imageClassName =
         auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === ""
