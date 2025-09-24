@@ -36,7 +36,7 @@ const EducationalBackground = () => {
                     careerId
                 } = response.data.user
 
-                if (educationalInstitutionId === 0) {
+                if (educationalInstitutionId == "0") {
                     programId = "0"
                 }
 
@@ -84,11 +84,11 @@ const EducationalBackground = () => {
                 programName
             }
 
-            if (educationalInstitutionId === "0")
+            if (educationalInstitutionId == "0")
                 delete educationalBackground.educationalInstitutionId
             else
                 delete educationalBackground.institutionName
-            if (programId === "0")
+            if (programId == "0")
                 delete educationalBackground.programId
             else
                 delete educationalBackground.programName
@@ -114,9 +114,9 @@ const EducationalBackground = () => {
             state === "" ||
             city === "" ||
             institution === "" ||
-            (institution === "0" && institutionName === "") ||
+            (institution == "0" && institutionName === "") ||
             program === "" ||
-            (program === "0" && programName === "") ||
+            (program == "0" && programName === "") ||
             career === ""
         ) {
             setError("Hay campos vacios o inválidos")
@@ -170,7 +170,7 @@ const EducationalBackground = () => {
             {isDirty &&
                 <>
                     <Button selfCenter onClick={handleClickSave}>Guardar</Button>
-                    <div className="separator"/>
+                    <div className="separator" />
                 </>
             }
         </Grid>

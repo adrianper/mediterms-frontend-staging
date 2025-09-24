@@ -74,11 +74,11 @@ const UserSignup = () => {
 			programName
 		}
 
-		if (educationalInstitutionId === "0")
+		if (educationalInstitutionId == "0")
 			delete educationalBackground.educationalInstitutionId
 		else
 			delete educationalBackground.institutionName
-		if (programId === "0")
+		if (programId == "0")
 			delete educationalBackground.programId
 		else
 			delete educationalBackground.programName
@@ -116,9 +116,9 @@ const UserSignup = () => {
 			stateId === "" ||
 			cityId === "" ||
 			educationalInstitutionId === "" ||
-			(educationalInstitutionId === "0" && institutionName === "") ||
+			(educationalInstitutionId == "0" && institutionName === "") ||
 			programId === "" ||
-			(programId === "0" && programName === "") ||
+			(programId == "0" && programName === "") ||
 			careerId === ""
 		) {
 			setError("Hay campos vacios o inválidos")
@@ -162,7 +162,7 @@ const UserSignup = () => {
 					<ComboBox
 						label="Institucion" options={institutionOptions} value={formData.educationalInstitutionId} onChange={v => handleChange(v, "educationalInstitutionId")}
 					/>
-					{formData.educationalInstitutionId === "0" &&
+					{formData.educationalInstitutionId == "0" &&
 						<TextField
 							label="Nombre de la institucion" value={formData.institutionName} onChange={(v) => handleChange(v, "institutionName")}
 						/>
@@ -171,7 +171,7 @@ const UserSignup = () => {
 					<ComboBox
 						label="Programa" options={programOptions} value={formData.programId} onChange={v => handleChange(v, "programId")}
 					/>
-					{formData.programId === "0" &&
+					{formData.programId == "0" &&
 
 						<TextField
 							label="Nombre del programa" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
