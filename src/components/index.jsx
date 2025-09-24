@@ -3,6 +3,7 @@ export { default as Accordion } from './containers/accordions/Accordion'
 export { default as Grid } from './containers/Grid'
 export { default as Flex } from './containers/Flex'
 export { default as FormHandler } from './containers/FormHandler/FormHandler'
+export { default as Slider } from './containers/Slider'
 export { default as FilterTable } from './containers/FilterTable'
 
 // ---------------------------IMAGERY--------------------------
@@ -16,6 +17,7 @@ export { default as RadioButton } from './inputs/RadioButton'
 export { default as TextField } from './inputs/TextField'
 export { default as Toggle } from './inputs/Toggle'
 export { default as ComboBox } from './inputs/ComboBox/ComboBox'
+export { default as RecordGroup } from './inputs/RecordGroup'
 
 // ---------------------------LOADING---------------------------
 export { default as Loading } from './loading/Loading'

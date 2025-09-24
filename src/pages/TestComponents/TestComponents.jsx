@@ -18,6 +18,7 @@ import {
 } from "components"
 
 import { IoIosAlarm } from "react-icons/io"
+import RecordGroupTest from "./RecordGroupTest"
 
 const TestComponents = () => {
 	const [pass, setPass] = useState("")
@@ -50,7 +51,7 @@ const TestComponents = () => {
 
 	return (
 		<Fragment>
-			<Grid w100 h100 centerItems columns="auto 1fr" gap="1em 2em" padding="1em">
+			<Grid w100 h100 centerItems style={{background: "white"}} columns="auto 1fr" gap="1em 2em" padding="1em">
 				<p>CharacterField</p>
 				<CharacterField length="6" />
 				<p>TextField</p>
@@ -87,7 +88,7 @@ const TestComponents = () => {
 					</p>
 				</Accordion>
 				<p>MessageBox</p>
-				<Button style={{ justifySelf: "center" }} onClick={showMb}>
+				<Button justifySelf="center" onClick={showMb}>
 					Show MB
 				</Button>
 				<p>Radio Button</p>
@@ -96,7 +97,7 @@ const TestComponents = () => {
 				<Toggle value={toggleState} onChange={setToggleState} label1="Si" label2="No" />
 				<p>Filter Table</p>
 				<FilterTable
-					onClickAddBtn={alert}
+					onClickAddBtn={() => setIsModalOpen(true)}
 					columns={[
 						{
 							name: 'age', displayName: 'Edad'
@@ -126,21 +127,26 @@ const TestComponents = () => {
 					onClickRow={row => alert(JSON.stringify(row))}
 				/>
 				<p>Modal</p>
-				<Button style={{ justifySelf: "center" }} onClick={() => setIsModalOpen(true)}>
+				<Button justifySelf="center" onClick={() => setIsModalOpen(true)}>
 					Open modal
 				</Button>
+				<p>RecordGroup</p>
+				<RecordGroupTest />
 			</Grid>
 			<MessageBox ref={messageBoxRef} />
 			{isModalOpen &&
 				<Modal>
-					<p size="6">Modal content</p>
+					<Grid gap="1em">
+						<h1>Modal content</h1>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, voluptates. Molestiae quae fuga sequi obcaecati. Rem eaque placeat, neque nostrum dolorem, fugiat est possimus voluptates maxime magni ut inventore nesciunt!</p>
 
-					<Button style={{ justifySelf: "center" }} onClick={() => setIsModalOpen(false)}>
-						Close
-					</Button>
+						<Button justifySelf="center" onClick={() => setIsModalOpen(false)}>
+							Close
+						</Button>
+					</Grid>
 				</Modal>
 			}
-		</Fragment>
+		</Fragment >
 	)
 }
 

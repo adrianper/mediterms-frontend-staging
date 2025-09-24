@@ -1,0 +1,41 @@
+.record_group {
+    border-color: var(--component--color--inactive);
+
+    .record_group__header {
+        border-color: var(--component--color--inactive);
+    }
+
+    .record_group__content {
+        .record_group__content__record {
+            border-color: var(--component--color--inactive);
+
+            &:hover {
+                background-color: var(--component--option--bg-color--hover);
+            }
+
+            .record_group__content__record__label {
+                color: var(--component--text-color);
+            }
+        }
+    }
+
+    &.record_group--status {
+        &--normal {
+            &:focus-within {
+                border-color: var(--component--color--active);
+
+                .record_group__header {
+                    border-color: var(--component--color--active);
+                }
+            }
+        }
+
+        &--error {
+            border-color: var(--color--red--1);
+
+            .record_group__header {
+                border-color: var(--color--red--1);
+            }
+        }
+    }
+}
