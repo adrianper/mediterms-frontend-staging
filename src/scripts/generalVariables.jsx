@@ -1,4 +1,4 @@
-const isDevelopmentEnv = false
+const isDevelopmentEnv = true
 
 export const ENVS = isDevelopmentEnv
 	? {
@@ -30,4 +30,4 @@ export const notValidTokenCodes = [
 	"FST_JWT_NO_AUTHORIZATION_IN_HEADER",
 ]
 
-export const isAdminSubdomain = /:\/\/([^\/]+)/.exec(window.location.href)[1].split(".")[0] === 'admin'
+export const isAdminSubdomain = true///:\/\/([^\/]+)/.exec(window.location.href)[1].split(".")[0] === 'admin'
