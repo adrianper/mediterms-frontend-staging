@@ -19,7 +19,7 @@ const RecordGroup = (props) => {
         onCloseForm,
         ref,
         style,
-        value = {},
+        value = [],
     } = props
 
     let { className = "" } = props
@@ -31,12 +31,14 @@ const RecordGroup = (props) => {
     const openForm = useCallback(
         (record = initialFormState) => {
             let lastRecordId = record.id || null
-            if (lastRecordId) {
-                lastRecordId = (value.filter(({ id }) => id < 0).pop()?.id || 0) - 1
-                record.isNewRecord = true
+            console.log("record----", record)
+            if (lastRecordId > 0) {
+                record.isNewRecord = false
                 record.id = lastRecordId
             } else {
-                record.isNewRecord = false
+                lastRecordId = (value.filter(({ id }) => id < 0).pop()?.id || 0) - 1
+                record.id = lastRecordId
+                record.isNewRecord = true
             }
 
             if (onOpenForm) onOpenForm(record)
