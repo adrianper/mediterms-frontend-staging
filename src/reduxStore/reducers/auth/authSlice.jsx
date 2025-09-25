@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
+import { isAdminSubdomain } from '../../../scripts/generalVariables'
 
-const user = JSON.parse(localStorage.getItem('user'))
+const user = JSON.parse(isAdminSubdomain ? "{}" : localStorage.getItem('user'))
+
 const userInitialState = {
     name: "",
     email: "",
