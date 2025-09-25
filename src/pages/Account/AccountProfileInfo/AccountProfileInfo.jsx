@@ -15,7 +15,7 @@ import EducationalBackground from "./EducationalBackground"
 import { DEFAULT_PROFILE_PHOTO, handleClickSocialMediaIcon } from "./AccountProfileInfo.utils"
 
 const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
-    const { auth } = useSelector((store) => store)
+    const auth = useSelector((store) => store.auth)
 
     const dispatch = useDispatch()
 

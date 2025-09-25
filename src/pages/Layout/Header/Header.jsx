@@ -9,7 +9,7 @@ import "./header.scss"
 const DEFAULT_PROFILE_PHOTO = "https://magiei-resources.s3.us-east-2.amazonaws.com/Icons/icon-mt-user.svg"
 
 const Header = () => {
-	const { auth } = useSelector((store) => store)
+	const auth = useSelector((store) => store.auth)
 
 	const imageClassName =
 		auth.user.photoUrl === DEFAULT_PROFILE_PHOTO || auth.user.photoUrl === ""
