@@ -52,6 +52,7 @@ body {
 
     --color--blue--5: #{$blue--5};
     --color--green--1: #{$green--1};
+    --color--white--2: #{$white--2};
 
     @include colorVariants(first, $blue--1);
     @include colorVariants(first-alter, $gray--2);

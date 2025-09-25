@@ -25,6 +25,9 @@ import {
 import {
 	AdminHome,
 	AdminLogin,
+	CareerManagement,
+	InstitutionsManagement,
+	TermsManagement,
 } from "@admin_pages"
 
 export const headerRoutes = ["account"]
@@ -147,7 +150,21 @@ export const adminRoutes = {
 	},
 	home: {
 		path: "/admin/home",
-		element: <AdminHome />
+		element: <AdminHome />,
+		children: {
+			careers: {
+				path: "/admin/home/careers",
+				element: <CareerManagement />
+			},
+			institutions: {
+				path: "/admin/home/institutions",
+				element: <InstitutionsManagement />
+			},
+			terms: {
+				path: "/admin/home/terms",
+				element: <TermsManagement />
+			},
+		}
 	},
 }
 
@@ -156,7 +173,7 @@ export const noRedirectPaths = [routes.account.path, routes.changePassword.path]
 export const renderRoute = ({ path, element, children }) => {
 	return (
 		<Route key={path} path={path} element={element}>
-			{children?.map(child => renderRoute(child))}
+			{children && Object.keys(children).map(key => renderRoute(children[key]))}
 		</Route>
 	)
 } 

@@ -1,2 +1,5 @@
 export { default as AdminHome } from "./Admin/AdminHome/AdminHome"
 export { default as AdminLogin } from "./Admin/AdminLogin/AdminLogin"
+export { default as CareerManagement } from "./Admin/AdminHome/CareerManagement"
+export { default as InstitutionsManagement } from "./Admin/AdminHome/InstitutionsManagement"
+export { default as TermsManagement } from "./Admin/AdminHome/TermsManagement"

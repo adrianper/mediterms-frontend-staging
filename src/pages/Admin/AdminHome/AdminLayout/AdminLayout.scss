@@ -1,0 +1,28 @@
+.admin_app_container {
+    background-color: white;
+
+    .admin__side_menu {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        background-color: rgb(var(--color--white--2));
+
+        .side_menu__section {
+            padding: 1rem;
+            min-height: 100px;
+            cursor: pointer;
+
+            &.active {
+                background-color: var(--bg-color--blue-alter);
+
+                .text {
+                    color: var(--component--color);
+                }
+            }
+
+            &:hover {
+                background-color: var(--component--option--bg-color--hover);
+            }
+        }
+    }
+}

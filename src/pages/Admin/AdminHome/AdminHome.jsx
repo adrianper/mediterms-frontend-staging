@@ -1,15 +1,9 @@
 
-import { Grid, Text } from "components"
-import TermsManagement from "./TermsManagement"
-import CareerManagement from "./CareerManagement"
-import InstitutionManagement from "./InstitutionsManagement"
+import AdminLayout from "./AdminLayout"
 
 const AdminHome = () => {
     return (
-        <Grid h100 style={{ backgroundColor: "white",  padding: "1rem"}}>
-            <Text>Admin Home</Text>
-            <InstitutionManagement />
-        </Grid>
+        <AdminLayout />
     )
 }
 

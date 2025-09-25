@@ -1,13 +1,13 @@
 import axios from "axios"
-import { Modal, Button, Grid, Text, TextField,  } from "components"
+import { Modal, Button, Grid, Text, TextField, } from "components"
 import { useCallback, useEffect, useState } from "react"
 import { ComboBox } from "../../../../components"
 import CampusesRecordGroup from "./CampusesRecordGroup"
 
-function InsititutionForm(props){
+function InsititutionForm(props) {
     const {
-        setIsModalOpen, 
-        formData, 
+        setIsModalOpen,
+        formData,
         setFormData,
         CREATE_INSTITUTION,
         UPDATE_INSTITUTION
@@ -62,14 +62,14 @@ function InsititutionForm(props){
 
     const onChangeHandler = useCallback((value, key) => {
         setFormData(datum => {
-            const newFormData = {...datum}
+            const newFormData = { ...datum }
             newFormData[key] = value
 
-            if( key === "stateId"){
+            if (key === "stateId") {
                 newFormData["cityId"] = ""
             }
 
-            if (key === "campuses"){
+            if (key === "campuses") {
                 newFormData["campuses"] = null
                 newFormData["campuses"] = value
             }
@@ -79,59 +79,59 @@ function InsititutionForm(props){
     const OnSubmit = (event) => {
         event.preventDefault()
         event.stopPropagation()
-        if(formData.id){
+        if (formData.id) {
             UPDATE_INSTITUTION(formData)
-        }else{
+        } else {
             CREATE_INSTITUTION(formData)
         }
-        setFormData({ id: "", name: ""})
+        setFormData({ id: "", name: "" })
         setIsModalOpen(false)
     }
 
     const onClose = () => {
-        setIsModalOpen(false)   
-        setFormData({ id: "", term: ""})   
+        setIsModalOpen(false)
+        setFormData({ id: "", term: "" })
     }
 
     return <Modal>
-            <form onSubmit={OnSubmit} style={{
-                justifyItems: "center",
-                display: "grid",
-                gridTemplateColumns: "1fr"
-            }}>
-                <Grid w100 padding="1.72em 1.1em" className="term_definition__form" gap="1.3em" maxWidth="22em">
-                    <Text size="5" align="center" bold>
-                        { formData.id ? "Actualizar" : "Crear " } Institucion
-                    </Text>
-                    <TextField
-                        label="Nombre" value={formData.name} onChange={(v) => onChangeHandler(v, "name")}
-                    />
-                    <ComboBox
-                        label="Estado" options={states} value={formData.stateId} onChange={v => onChangeHandler(v, "stateId")}
-                    />
-                    <ComboBox
-                        label="Ciudad" options={cities} value={formData.cityId} onChange={v => onChangeHandler(v, "cityId")}
-                    />
-                    <CampusesRecordGroup 
-                        externalFormData={formData.campuses}
-                        onChange={(v) => { 
-                            console.log("previous campuses", formData.campuses)
-                            console.log(v(formData.campuses || []))
-                            onChangeHandler(v(formData.campuses || []), "campuses")
-                        }}
-                    />
-                    <Grid w100 columns="1fr 1fr" gap="1rem">
-                        <Button type="submit"  >
-                            Guardar
-                        </Button>
-                        <Button variant="error" onClick={onClose}>
-                            Cerrar
-                        </Button>
-                    </Grid>
+        <form onSubmit={OnSubmit} style={{
+            justifyItems: "center",
+            display: "grid",
+            gridTemplateColumns: "1fr"
+        }}>
+            <Grid w100 padding="1.72em 1.1em" className="term_definition__form" gap="1.3em" maxWidth="22em">
+                <Text size="5" align="center" bold>
+                    {formData.id ? "Actualizar" : "Crear "} Institucion
+                </Text>
+                <TextField
+                    label="Nombre" value={formData.name} onChange={(v) => onChangeHandler(v, "name")}
+                />
+                <ComboBox
+                    label="Estado" options={states} value={formData.stateId} onChange={v => onChangeHandler(v, "stateId")}
+                />
+                <ComboBox
+                    label="Ciudad" options={cities} value={formData.cityId} onChange={v => onChangeHandler(v, "cityId")}
+                />
+                <CampusesRecordGroup
+                    externalFormData={formData.campuses}
+                    onChange={(v) => {
+                        console.log("previous campuses", formData.campuses)
+                        console.log(v(formData.campuses || []))
+                        onChangeHandler(v(formData.campuses || []), "campuses")
+                    }}
+                />
+                <Grid w100 columns="1fr 1fr" gap="1rem">
+                    <Button variant="error" onClick={onClose}>
+                        Cerrar
+                    </Button>
+                    <Button type="submit"  >
+                        Guardar
+                    </Button>
                 </Grid>
-            </form>
-        </Modal>
-   
+            </Grid>
+        </form>
+    </Modal>
+
 }
 
 export default InsititutionForm
