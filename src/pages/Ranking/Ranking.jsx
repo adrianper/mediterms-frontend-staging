@@ -76,7 +76,8 @@ const Ranking = () => {
                     seRankingUsers(nextRankingUsers)
                 else
                     seRankingUsers(currRankingUsers => [...currRankingUsers, ...nextRankingUsers])
-                setCurrentOffset(prevState => prevState + 10)
+
+                setCurrentOffset(offset + 10)
 
                 if (nextRankingUsers.length < 10)
                     setHasMore(false)
