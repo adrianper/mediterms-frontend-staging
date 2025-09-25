@@ -16,6 +16,7 @@ export default defineConfig(() => {
 			strictPort: true,
 		},
 		plugins: [react()],
+		base: '/mediterms-frontend-staging/',
 		resolve: {
 			alias: {
 				"@app_hooks": fileURLToPath(new URL("./src/app_hooks", import.meta.url)),
