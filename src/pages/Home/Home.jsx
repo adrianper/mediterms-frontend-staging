@@ -39,12 +39,11 @@ const Home = () => {
 
 			const rankingNoticeLastShown = localStorage.getItem("rankingNoticeLastShown")
 			const now = new Date()
-			const twoMinutes = 1000 * 60 * 1
-			// const oneDay = 1000 * 60 * 60 * 24
+			const oneDay = 1000 * 60 * 60 * 24
 
 			if (!currentUserRanking) return
 
-			if (!rankingNoticeLastShown || now - parseInt(rankingNoticeLastShown) > twoMinutes) {
+			if (!rankingNoticeLastShown || now - parseInt(rankingNoticeLastShown) > oneDay) {
 				setShowRankingNotice(true)
 				localStorage.setItem("rankingNoticeLastShown", Date.now().toString())
 			}
@@ -64,13 +63,18 @@ const Home = () => {
 					return
 				}
 				if (response.data.missingEducationalBackground) {
-					showMB(
-						"Tu perfil está incompleto",
-						"Por favor completa la información.",
-						"Continuar",
-						() => navigate(routes.account.path)
-					)
-					return
+					const now = new Date()
+					const oneDay = 1000 * 60 * 60 * 24
+					const missingDataMessageLastShown = localStorage.getItem("missingDataMessageLastShown")
+
+					if (!missingDataMessageLastShown || now - parseInt(rankingNoticeLastShown) > oneDay) {
+						showMB(
+							"Tu perfil está incompleto",
+							"Por favor completa la información.",
+							"Continuar",
+							() => navigate(routes.account.path)
+						)
+					}
 				}
 
 				getTopics()

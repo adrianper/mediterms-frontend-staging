@@ -70,7 +70,7 @@ const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
                 </PageLink>
                 <Grid>
                     <Text color="white">Ranking</Text>
-                    <Text color="white" size="9">{ranking}</Text>
+                    <Text color="white" size="9">{ranking || "-"}</Text>
                 </Grid>
                 <Grid itemsX="center" gap="0.7em" style={{ zIndex: 1 }}>
                     <input
