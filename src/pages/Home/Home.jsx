@@ -67,7 +67,7 @@ const Home = () => {
 					const oneDay = 1000 * 60 * 60 * 24
 					const missingDataMessageLastShown = localStorage.getItem("missingDataMessageLastShown")
 
-					if (!missingDataMessageLastShown || now - parseInt(rankingNoticeLastShown) > oneDay) {
+					if (!missingDataMessageLastShown || now - parseInt(missingDataMessageLastShown) > oneDay) {
 						showMB(
 							"Tu perfil está incompleto",
 							"Por favor completa la información.",
