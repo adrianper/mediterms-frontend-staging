@@ -21,7 +21,7 @@ const RankingUserCard = ({
 
     return (
         <Grid columns="auto 1fr auto" itemsY="center" className={`ranking_user_card ${className}`} gap="1rem" padding="1.2em 1.5em 1.2em 0">
-            <Grid columns="2rem 3rem" itemsY="center">
+            <Grid columns="2rem minmax(5rem, auto)" itemsY="center">
                 {rankingChangeContent}
                 <Text size="9" className="user_placement">{ranking}</Text>
             </Grid>

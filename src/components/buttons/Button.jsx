@@ -8,11 +8,17 @@ const Button = ({
     alignSelf = "",
     justifySelf = "",
     style = {},
+    selfCenter,
     disabled = false,
     variant,
     children,
     ...rest
 }) => {
+
+    if (selfCenter) {
+        justifySelf = 'center'
+        alignSelf = 'center'
+    }
 
     style = {
         ...style,

@@ -79,8 +79,7 @@ const Ranking = () => {
 
                 setCurrentOffset(offset + 10)
 
-                if (nextRankingUsers.length < 10)
-                    setHasMore(false)
+                setHasMore(!(nextRankingUsers.length < 10))
             }
         } catch (error) {
             console.error(error)
