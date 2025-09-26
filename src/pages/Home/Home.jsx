@@ -74,6 +74,7 @@ const Home = () => {
 							"Continuar",
 							() => navigate(routes.account.path)
 						)
+						localStorage.setItem("missingDataMessageLastShown", Date.now().toString())
 					}
 				}
 
