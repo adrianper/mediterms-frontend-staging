@@ -42,8 +42,8 @@ const ComboBoxList = (props) => {
 
     if (sortList) {
         optionsList = optionsList.sort((a, b) => {
-            if (a.key === "0") return -1
-            if (b.key === "0") return 1
+            if (a.key === "0") return 1
+            if (b.key === "0") return -1
             return options[a.key].localeCompare(options[b.key], "en", { sensitivity: "base" })
         })
     }
