@@ -70,7 +70,7 @@ const useEducationalBackgroundOptions = ({
                 try {
                     const response = await axios.get(`/general/institutions?cityId=${cityId}`)
                     if (response.data) {
-                        const newInsitutionOptions = { "0": "Otro" }
+                        const newInsitutionOptions = {}
                         response.data.response.forEach(state => newInsitutionOptions[state.id] = state.name)
                         setInstitutionOptions(newInsitutionOptions)
                     }
@@ -91,7 +91,7 @@ const useEducationalBackgroundOptions = ({
                 try {
                     const response = await axios.get(`/general/programs?educationalInstitutionId=${educationalInstitutionId}`)
                     if (response.data) {
-                        const newProgramOptions = { "0": "Otro" }
+                        const newProgramOptions = {}
                         response.data.response.forEach(state => newProgramOptions[state.id] = state.name)
                         setProgramOptions(newProgramOptions)
                     }

@@ -49,7 +49,7 @@ function CareerForm(props) {
                     label="Nombre" value={formData.name} onChange={(v) => onChangeHandler(v, "name")}
                 />
                 <Grid w100 columns="1fr 1fr" gap="1rem">
-                    <Button variant="error" onClick={onClose}>
+                    <Button variant="error" type="button" onClick={onClose}>
                         Cerrar
                     </Button>
                     <Button type="submit"  >

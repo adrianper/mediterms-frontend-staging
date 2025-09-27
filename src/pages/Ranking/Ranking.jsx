@@ -10,6 +10,7 @@ import { routes } from "routing/routes"
 
 import "./Ranking.scss"
 import { useEducationalBackgroundOptions } from "@app_hooks"
+import useAccountInfo from "../Account/AccountProfileInfo/useAccountInfo"
 
 const Ranking = () => {
     const [currentOffset, setCurrentOffset] = useState(0)
@@ -26,6 +27,8 @@ const Ranking = () => {
 
     const { stateOptions, cityOptions, institutionOptions, programOptions } = useEducationalBackgroundOptions(formData)
 
+    const { getAccountInfo } = useAccountInfo()
+
     const handleChange = (name, value) => {
         setFormData(prevState => {
             const result = { ...prevState, [name]: value }
@@ -33,19 +36,14 @@ const Ranking = () => {
                 case "stateId":
                     result.cityId = ""
                     result.educationalInstitutionId = ""
-                    result.institutionName = ""
                     result.programId = ""
-                    result.programName = ""
                     break
                 case "cityId":
                     result.educationalInstitutionId = ""
-                    result.institutionName = ""
                     result.programId = ""
-                    result.programName = ""
                     break
                 case "educationalInstitutionId":
                     result.programId = ""
-                    result.programName = ""
                     break
             }
             return result
@@ -95,6 +93,23 @@ const Ranking = () => {
     useEffect(() => {
         getRankingUsers()
     }, [formData.stateId, formData.cityId, formData.educationalInstitutionId, formData.programId])
+
+    useEffect(() => {
+        const setAccountInfo = async () => {
+            const accountInfo = await getAccountInfo()
+            console.log(accountInfo)
+            let {
+                stateId,
+                cityId,
+                educationalBackground: { educationalInstitutionId, programId },
+            } = accountInfo
+
+
+            setFormData(prevState => ({ ...prevState, stateId, cityId, educationalInstitutionId,programId }))
+        }
+
+        setAccountInfo()
+    }, [])
 
     return (
         <Grid w100 padding="1.14em 0.42em">

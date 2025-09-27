@@ -121,7 +121,7 @@ function InsititutionForm(props) {
                     }}
                 />
                 <Grid w100 columns="1fr 1fr" gap="1rem">
-                    <Button variant="error" onClick={onClose}>
+                    <Button variant="error" type="button" onClick={onClose}>
                         Cerrar
                     </Button>
                     <Button type="submit"  >

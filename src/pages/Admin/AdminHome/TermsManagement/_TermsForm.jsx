@@ -1,5 +1,6 @@
-import { Modal, Button, Grid, Text, TextField, ComboBox } from "components"
 import { useCallback } from "react"
+
+import { Modal, Button, Grid, Text, TextArea, TextField, ComboBox } from "components"
 
 function TermsForm(props) {
     const {
@@ -55,11 +56,12 @@ function TermsForm(props) {
                     label="Terma" options={topics} value={formData.topicId} onChange={v => onChangeHandler(v, "topicId")}
                 />
 
-                <TextField
-                    label="Definicion" value={formData.definition} onChange={(v) => onChangeHandler(v, "definition")}
+                <TextArea
+                    rows={8} label="Definicion" value={formData.definition} onChange={({ target: { value } }) => onChangeHandler(value, "definition")}
                 />
+
                 <Grid w100 columns="1fr 1fr" gap="1rem">
-                    <Button variant="error" onClick={onClose}>
+                    <Button variant="error" type="button" onClick={onClose}>
                         Cerrar
                     </Button>
                     <Button type="submit"  >

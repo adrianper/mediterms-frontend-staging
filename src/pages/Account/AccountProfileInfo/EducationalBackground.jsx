@@ -7,6 +7,7 @@ import { Button, ComboBox, Grid, Text, TextField } from "components"
 import { useEducationalBackgroundOptions } from "@app_hooks"
 
 import "./account_profile_info.scss"
+import useAccountInfo from "./useAccountInfo"
 
 const EducationalBackground = () => {
     const [isDirty, setIsDirty] = useState(false)
@@ -21,31 +22,11 @@ const EducationalBackground = () => {
     })
     const [error, setError] = useState("")
 
+    const { getAccountInfo } = useAccountInfo()
+
     const {
         stateOptions, cityOptions, institutionOptions, programOptions, careerOptions,
     } = useEducationalBackgroundOptions(formData)
-
-    const getAccountInfo = useCallback(async () => {
-        try {
-            const response = await axios.get("/user/account")
-            if (response.data) {
-                let {
-                    stateId,
-                    cityId,
-                    educationalBackground: { educationalInstitutionId, institutionName, programId, programName },
-                    careerId
-                } = response.data.user
-
-                if (educationalInstitutionId == "0") {
-                    programId = "0"
-                }
-
-                setFormData(prevState => ({ ...prevState, stateId, cityId, educationalInstitutionId, institutionName, programId, programName, careerId }))
-            }
-        } catch (error) {
-            console.error(error)
-        }
-    }, [])
 
     const handleChange = useCallback((value, name) => {
         setIsDirty(true)
@@ -121,13 +102,30 @@ const EducationalBackground = () => {
         ) {
             setError("Hay campos vacios o inválidos")
             return
+        } else {
+            setError("")
         }
 
         updateEducationalBackground()
     }
 
     useEffect(() => {
-        getAccountInfo()
+        const setAccountInfo = async () => {
+            const accountInfo = await getAccountInfo()
+            let {
+                stateId,
+                cityId,
+                educationalBackground: { educationalInstitutionId, institutionName, programId, programName },
+                careerId
+            } = accountInfo
+
+            if (educationalInstitutionId == "0") programId = "0"
+            if (programId === undefined) programId = "0"
+
+            setFormData(prevState => ({ ...prevState, stateId, cityId, educationalInstitutionId, institutionName, programId, programName, careerId }))
+        }
+
+        setAccountInfo()
     }, [])
 
     return (
@@ -141,7 +139,7 @@ const EducationalBackground = () => {
             />
 
             <ComboBox
-                label="Institucion" options={institutionOptions} value={formData.educationalInstitutionId} onChange={v => handleChange(v, "educationalInstitutionId")}
+                label="Institucion" options={{ "0": "Otro", ...institutionOptions }} value={formData.educationalInstitutionId} onChange={v => handleChange(v, "educationalInstitutionId")}
             />
             {formData.educationalInstitutionId == "0" &&
                 < TextField
@@ -150,11 +148,11 @@ const EducationalBackground = () => {
             }
 
             <ComboBox
-                label="Plantel" options={programOptions} value={formData.programId} onChange={v => handleChange(v, "programId")}
+                label="Programa" options={{ "0": "Otro", ...programOptions }} value={formData.programId} onChange={v => handleChange(v, "programId")}
             />
             {formData.programId == "0" &&
                 <TextField
-                    label="Nombre del plantel" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
+                    label="Nombre del programa" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
                 />
             }
 

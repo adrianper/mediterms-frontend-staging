@@ -85,7 +85,7 @@ const Login = () => {
 									Abrir una cuenta
 								</Text>
 							</PageLink>
-							<Text onClick={() => setRecoverPassword(true)} medium align="center" color="second">
+							<Text onClick={() => setRecoverPassword(true)} medium align="center" color="second" style={{ cursor: "pointer" }}>
 								Olvidé mi contraseña
 							</Text>
 						</Grid>

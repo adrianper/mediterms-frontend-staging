@@ -1,15 +1,22 @@
-.terms{
-    .terms__term_container{
+.terms {
+    .terms__term_container {
         background: var(--bg-color--white);
         border-radius: 1em;
         overflow: hidden;
-        .terms__definition_btn{
+
+        .terms__definition {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .terms__definition_btn {
             border: 2px solid var(--border-color--second);
             border-radius: 8px;
             cursor: pointer;
             user-select: none;
         }
-        .terms__result_banner{
+
+        .terms__result_banner {
             padding: 1em;
             user-select: none;
             align-self: end;
@@ -18,14 +25,17 @@
             width: calc(100% + 2em);
         }
     }
-    .terms__next_button{
+
+    .terms__next_button {
         background: var(--bg-color--black-alter);
         grid-auto-flow: column;
         gap: 0.5em;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
-        img{
+        cursor: pointer;
+
+        img {
             width: 0.7em;
             filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
         }

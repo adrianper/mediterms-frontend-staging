@@ -169,12 +169,12 @@ const UserSignup = () => {
 					}
 
 					<ComboBox
-						label="Plantel" options={programOptions} value={formData.programId} onChange={v => handleChange(v, "programId")}
+						label="Programa" options={programOptions} value={formData.programId} onChange={v => handleChange(v, "programId")}
 					/>
 					{formData.programId == "0" &&
 
 						<TextField
-							label="Nombre del plantel" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
+							label="Nombre del programa" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
 						/>
 					}
 

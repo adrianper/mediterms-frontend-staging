@@ -159,7 +159,7 @@ const Terms = () => {
 		<Grid className="terms" itemsX="center" padding="1.41em 0.62em" gap="1.14em">
 			<Grid w100 className="terms__term_container" gap="1.71em" padding="1.71em 0.62em">
 				{term && (
-					<Text bold align="center" size="5" className="terms__term">
+					<Text bold align="center" size="5" className="terms__definition">
 						{term.term}
 					</Text>
 				)}
