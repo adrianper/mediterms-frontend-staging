@@ -199,7 +199,7 @@ const Terms = () => {
 													:
 													"",
 								}}>
-								<Text medium align="center">
+								<Text medium align="center" className="terms__definition_btn__text">
 									{definition.answer}
 								</Text>
 							</Grid>
