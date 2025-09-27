@@ -148,11 +148,11 @@ const EducationalBackground = () => {
             }
 
             <ComboBox
-                label="Programa" options={{ "0": "Otro", ...programOptions }} value={formData.programId} onChange={v => handleChange(v, "programId")}
+                label="Plantel" options={{ "0": "Otro", ...programOptions }} value={formData.programId} onChange={v => handleChange(v, "programId")}
             />
             {formData.programId == "0" &&
                 <TextField
-                    label="Nombre del programa" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
+                    label="Nombre del plantel" value={formData.programName} onChange={(v) => handleChange(v, "programName")}
                 />
             }
 
