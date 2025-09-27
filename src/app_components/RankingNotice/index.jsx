@@ -29,8 +29,13 @@ const RankingNotice = ({
                 const rankingUsers = response.data.rankings.sort(({ ranking: rankA }, { ranking: rankB }) => rankA.toString().localeCompare(rankB.toString()))
                 const currentUserIndex = rankingUsers.findIndex(({ userName }) => userName === authUser.name)
                 const currentUser = rankingUsers[currentUserIndex]
-                currentUser.rankingChange = currentUser.ranking < localUserRanking ? "up" : currentUser.ranking > localUserRanking ? "down" : ""
-
+                
+                if (!localUserRanking || currentUser.ranking == localUserRanking) {
+                    currentUser.rankingChange
+                } else {
+                    currentUser.rankingChange = currentUser.ranking < localUserRanking ? "up" : "down"
+                }
+                
                 if (currentUser.ranking !== localUserRanking)
                     localStorage.setItem("localUserRanking", currentUser.ranking)
 

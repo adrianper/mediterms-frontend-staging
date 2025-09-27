@@ -117,21 +117,25 @@ const Ranking = () => {
                 <Grid w100 className="ranking_filters_container" gap="1rem">
                     <ComboBox
                         nullValue
+                        label="Estado"
                         placeholder="Todos los estados"
                         options={stateOptions}
                         value={formData.stateId} onChange={v => handleChange("stateId", v)} />
                     <ComboBox
                         nullValue
+                        label="Ciudad"
                         placeholder="Todas las ciudades"
                         options={cityOptions}
                         value={formData.cityId} onChange={v => handleChange("cityId", v)} />
                     <ComboBox
                         nullValue
+                        label="Institución"
                         placeholder="Todas las instituciones"
                         options={institutionOptions}
                         value={formData.educationalInstitutionId} onChange={v => handleChange("educationalInstitutionId", v)} />
                     <ComboBox
                         nullValue
+                        label="Plantel"
                         placeholder="Todos los planteles"
                         options={programOptions}
                         value={formData.programId} onChange={v => handleChange("programId", v)} />
