@@ -38,7 +38,7 @@ function TermsManagement(){
                await GET_ALL_TERMS(value)
             } }
             rowButtons={[{ icon: 'trash', onClick: row => DELETE_TERM(row.id) }]}
-            columnsTemplate='2fr 3fr 1fr'
+            columnsTemplate='1fr 1fr 4fr'
             onClickRow={row => {
                 setFormData(row)
                 setIsModalOpen(true)

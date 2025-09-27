@@ -27,9 +27,9 @@ function InstitutionManagement(){
             }}
             columns={[
                 { name: 'name', displayName: 'Institución'},
+                { name: "campuses", displayName: "Planteles"},
                 { name: "city", displayName: "Ciudad"},
                 { name: "state", displayName: "Estado"},
-                { name: "campuses", displayName: "Planteles"}
             ]
             }
             rows={institutions}
