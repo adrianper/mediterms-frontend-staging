@@ -1,13 +1,19 @@
 .ranking_user_card {
     $imageSize: 4rem;
     background-color: RGB(var(--color--blue--5));
+    gap: 1rem;
 
-    .user_placement {
-        justify-self: center;
+    .card_placement_container {
+        grid-template-columns: 2rem minmax(5rem, auto);
+
+        .user_placement {
+            justify-self: center;
+        }
     }
 
     .card_user_info {
         min-height: 100px;
+
         .user_picture {
             align-self: center;
             // overflow: hidden;
@@ -26,11 +32,17 @@
 
         .crown_icon {
             position: absolute;
-            bottom: 60%;
+            bottom: 70%;
             left: 50%;
-            transform: translateX(-50%);
             color: #FFD700;
+            transform: translateX(-50%) scaleX(1.2);
+            transform-origin: center;
         }
     }
+}
 
+@media (max-width: 425px) {
+    .ranking_user_card {
+        gap: 0.3rem;
+    }
 }

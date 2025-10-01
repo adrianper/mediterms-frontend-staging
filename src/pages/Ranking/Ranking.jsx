@@ -112,9 +112,9 @@ const Ranking = () => {
     }, [])
 
     return (
-        <Grid w100 padding="1.14em 0.42em">
+        <Grid w100 className="ranking_page" padding="1.14em 0.42em">
             <Grid className="ranking_container" padding="1.7em 1.85em" gap="2rem" itemsX="center">
-                <Grid w100 className="ranking_filters_container" gap="1rem">
+                <Grid w100 className="ranking_filters_container" gap="1rem" rows="auto auto" columns="1fr 1fr" direction="column">
                     <ComboBox
                         nullValue
                         label="Estado"

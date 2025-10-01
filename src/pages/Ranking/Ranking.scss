@@ -1,12 +1,21 @@
-.ranking_container {
-    background: var(--bg-color--white);
-    border-radius: 16px 16px 0 0;
+.ranking_page {
 
-    .ranking_filters_container {
-        max-width: 250px;
+    .ranking_container {
+        background: var(--bg-color--white);
+        border-radius: 16px 16px 0 0;
+
+        .ranking_filters_container {
+            max-width: 400px;
+        }
     }
-}
 
-.ranking_users_container {
-    max-width: 800px;
+    .ranking_users_container {
+        max-width: 800px;
+
+        .ranking_user_card {
+            .card_placement_container {
+                grid-template-columns: 0 minmax(5rem, auto);
+            }
+        }
+    }
 }

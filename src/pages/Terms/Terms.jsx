@@ -22,7 +22,6 @@ const Terms = () => {
 	const { term, selectedAnswer, answeredCorrect, fetchTermError, retryFetchTerm } = state
 	const [showNextButton, setShowNextButton] = useState(false)
 	const [showRankingNotice, setShowRankingNotice] = useState(false)
-	const [correctAnsweredTerms, setCorrectAnsweredTerms] = useState(0)
 
 	const { authenticated, accountStatus } = useSelector((store) => store.auth)
 
@@ -38,6 +37,15 @@ const Terms = () => {
 	const answeredIdsRef = useRef([])
 
 	/*--------FUNCTIONS--------*/
+	const initUserRanking = useCallback(async () => {
+		try {
+			const response = await axios.get("ranking/my-ranking")
+			localStorage.setItem("localUserRanking", response.data?.ranking)
+		} catch (error) {
+			console.error(error)
+		}
+	}, [])
+
 	const validateUserRanking = useCallback(async () => {
 		try {
 			const response = await axios.get("ranking/my-ranking")
@@ -119,7 +127,7 @@ const Terms = () => {
 
 					if (res.data.accountStatus === "MDT-AS-US_PR_0000") navigate("/payment")
 
-					setCorrectAnsweredTerms(prevState => prevState === 10 ? 1 : prevState + 1)
+					validateUserRanking()
 				})
 				.catch((error) => {
 					console.error("|ERR_SAVE_CORRECT_ANSWER|", error)
@@ -146,11 +154,7 @@ const Terms = () => {
 	}, [authenticated, accountStatus])
 
 	useEffect(() => {
-		if (correctAnsweredTerms === 10)
-			validateUserRanking()
-	}, [correctAnsweredTerms])
-
-	useEffect(() => {
+		initUserRanking()
 		requestNextTerm()
 	}, [])
 

@@ -170,14 +170,14 @@ const Payment = () => {
 											<Grid padding="1.42em" className="payment__price_container">
 												<Text>
 													Precio regular: <br />
-													<span className="payment__regular_price">${fullPrice} USD/año</span>
+													<span className="payment__regular_price">${fullPrice} USD/6 meses</span>
 												</Text>
 												<Text medium style={{ margin: "1.4em 0em 0.5em 0em" }}>
 													Promoción de inicio de semestre:
 												</Text>
 												<Text bold size="9">
 													{price}
-													<span style={{ fontSize: "24px", color: "#162127" }}>USD/año</span>
+													<span style={{ fontSize: "24px", color: "#162127" }}>USD/6 meses</span>
 												</Text>
 												<Text bold color="error" size="2">
 													Termina en: {days}d {hours}h {minutes}m {seconds}s

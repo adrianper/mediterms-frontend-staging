@@ -6,7 +6,7 @@ import { DEFAULT_PROFILE_PHOTO } from "../../Account/AccountProfileInfo/AccountP
 import "./RankingUserCard.scss"
 
 const RankingUserCard = ({
-    ranking, photoUrl, userName, institutionName, campusName, stateName, cityName, score, rankingChange, className = ""
+    ranking, photoUrl, userName, institutionName, careerName, campusName, stateName, cityName, score, rankingChange, className = ""
 }) => {
 
     const rankingChangeContent = useMemo(() => {
@@ -20,8 +20,8 @@ const RankingUserCard = ({
     }, [rankingChange])
 
     return (
-        <Grid columns="auto 1fr auto" itemsY="center" className={`ranking_user_card ${className}`} gap="1rem" padding="1.2em 1.5em 1.2em 0">
-            <Grid columns="2rem minmax(5rem, auto)" itemsY="center">
+        <Grid columns="auto 1fr auto" itemsY="center" className={`ranking_user_card ${className}`} padding="1.2em 1.5em 1.2em 0">
+            <Grid className="card_placement_container" itemsY="center">
                 {rankingChangeContent}
                 <Text size="9" className="user_placement">{ranking}</Text>
             </Grid>
@@ -29,12 +29,14 @@ const RankingUserCard = ({
                 <Grid className="user_picture">
                     <img src={photoUrl || DEFAULT_PROFILE_PHOTO} />
                     {ranking === 1 &&
-                        <FaCrown size="4rem" className="crown_icon" />
+                        <FaCrown size="50" className="crown_icon" />
                     }
                 </Grid>
                 <Grid>
                     <Text bold size="4" className="user_name">{userName}</Text>
-                    <Text size="2" className="user_institution">{institutionName}, {campusName}</Text>
+                    <Text size="2" className="user_institution">{careerName}</Text>
+                    <Text size="2" className="user_institution">{campusName}</Text>
+                    <Text size="2" className="user_institution">{institutionName}</Text>
                     <Text size="2" className="user_location">{cityName}, {stateName}</Text>
                 </Grid>
             </Flex>
