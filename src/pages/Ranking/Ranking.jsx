@@ -9,14 +9,13 @@ import RankingUserCard from "./RankingUserCard"
 import { routes } from "routing/routes"
 
 import "./Ranking.scss"
-import { useEducationalBackgroundOptions } from "@app_hooks"
-import useAccountInfo from "../Account/AccountProfileInfo/useAccountInfo"
+import { useAccountInfo, useEducationalBackgroundOptions } from "@app_hooks"
 
 const Ranking = () => {
     const [currentOffset, setCurrentOffset] = useState(0)
     const [hasMore, setHasMore] = useState(true)
     const [isLoading, setIsLoading] = useState(false)
-    const [rankingUsers, seRankingUsers] = useState([])
+    const [rankingUsers, setRankingUsers] = useState([])
 
     const [formData, setFormData] = useState({
         stateId: "",
@@ -71,9 +70,9 @@ const Ranking = () => {
                 const { rankings: nextRankingUsers } = response.data
 
                 if (offset === 0)
-                    seRankingUsers(nextRankingUsers)
+                    setRankingUsers(nextRankingUsers)
                 else
-                    seRankingUsers(currRankingUsers => [...currRankingUsers, ...nextRankingUsers])
+                    setRankingUsers(currRankingUsers => [...currRankingUsers, ...nextRankingUsers])
 
                 setCurrentOffset(offset + 10)
 
@@ -103,7 +102,6 @@ const Ranking = () => {
                 cityId,
                 educationalBackground: { educationalInstitutionId, programId },
             } = accountInfo
-
 
             setFormData(prevState => ({ ...prevState, stateId, cityId, educationalInstitutionId,programId }))
         }

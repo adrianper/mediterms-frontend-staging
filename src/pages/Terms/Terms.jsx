@@ -37,15 +37,6 @@ const Terms = () => {
 	const answeredIdsRef = useRef([])
 
 	/*--------FUNCTIONS--------*/
-	const initUserRanking = useCallback(async () => {
-		try {
-			const response = await axios.get("ranking/my-ranking")
-			localStorage.setItem("localUserRanking", response.data?.ranking)
-		} catch (error) {
-			console.error(error)
-		}
-	}, [])
-
 	const validateUserRanking = useCallback(async () => {
 		try {
 			const response = await axios.get("ranking/my-ranking")
@@ -154,7 +145,7 @@ const Terms = () => {
 	}, [authenticated, accountStatus])
 
 	useEffect(() => {
-		initUserRanking()
+		validateUserRanking()
 		requestNextTerm()
 	}, [])
 

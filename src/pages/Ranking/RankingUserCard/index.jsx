@@ -25,11 +25,11 @@ const RankingUserCard = ({
                 {rankingChangeContent}
                 <Text size="9" className="user_placement">{ranking}</Text>
             </Grid>
-            <Flex className="card_user_info" gap="1rem">
+            <Flex className="card_user_info" gap="1rem" align="center">
                 <Grid className="user_picture">
                     <img src={photoUrl || DEFAULT_PROFILE_PHOTO} />
                     {ranking === 1 &&
-                        <FaCrown size="50" className="crown_icon" />
+                        <FaCrown size="40" className="crown_icon" />
                     }
                 </Grid>
                 <Grid>

@@ -43,6 +43,9 @@ const Home = () => {
 
 			if (!currentUserRanking) return
 
+			if (localStorage.getItem("localUserRanking") != currentUserRanking)
+				localStorage.setItem("localUserRanking", currentUserRanking)
+
 			if (!rankingNoticeLastShown || now - parseInt(rankingNoticeLastShown) > oneDay) {
 				setShowRankingNotice(true)
 				localStorage.setItem("rankingNoticeLastShown", Date.now().toString())

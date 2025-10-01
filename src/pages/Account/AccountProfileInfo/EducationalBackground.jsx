@@ -4,10 +4,9 @@ import axios from "axios"
 
 import { Button, ComboBox, Grid, Text, TextField } from "components"
 
-import { useEducationalBackgroundOptions } from "@app_hooks"
+import { useAccountInfo, useEducationalBackgroundOptions } from "@app_hooks"
 
 import "./account_profile_info.scss"
-import useAccountInfo from "./useAccountInfo"
 
 const EducationalBackground = () => {
     const [isDirty, setIsDirty] = useState(false)
