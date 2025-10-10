@@ -8,7 +8,7 @@ export const ENVS = isDevelopmentEnv
 				"pk_test_51MQxscExfdqgYaIWZMyVRH3iKAWGC5V0edDA599q4KDvADnWyW5pFPTJYadjiTGe6udYGZwlQDzVPeu2zn2dXOQ100PU63iJAG",
 	  }
 	: {
-			hostUrl: "https://api.mediterms.app/",
+			hostUrl: "https://api-staging.mediterms.app/",
 			socketUrl: "https://fp-api.magiei.app",
 			stripePK:
 				"pk_live_51MQxscExfdqgYaIWLCQTtXpwTMTPy8WyE2lQD9qHyDTswIAncvaZPX9yxzTibhS94AnDOreoECpanSay0OO18Qja00PEDA7HeM",
