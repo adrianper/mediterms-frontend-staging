@@ -1,14 +1,8 @@
 .account {
-    .change_page_button {
-        .icon--arrow {
-            filter: var(--filter--white--1);
-        }
-    }
-
     .account__user_info {
+        padding: 1.7em 4.5em;
         background: var(--bg-color--white);
         border-radius: 16px;
-
     }
 
     .user_info__default {
@@ -61,5 +55,16 @@
     .account__total_bold {
         font-weight: bold;
         font-size: 16px;
+    }
+
+    @media (max-width: 480px) {
+        .account__user_info {
+            padding: 1.7em 2.5em;
+        }
+
+        .account__user_photo {
+            width: 6em;
+            height: 6em;
+        }
     }
 }

@@ -23,9 +23,9 @@ const RankingUserCard = ({
         <Grid columns="auto 1fr auto" itemsY="center" className={`ranking_user_card ${className}`} padding="1.2em 1.5em 1.2em 0">
             <Grid className="card_placement_container" itemsY="center">
                 {rankingChangeContent}
-                <Text size="9" className="user_placement">{ranking}</Text>
+                <Text className="user_placement">{ranking}</Text>
             </Grid>
-            <Flex className="card_user_info" gap="1rem" align="center">
+            <Flex className="card_user_info" align="center">
                 <Grid className="user_picture">
                     <img src={photoUrl || DEFAULT_PROFILE_PHOTO} />
                     {ranking === 1 &&
@@ -34,15 +34,15 @@ const RankingUserCard = ({
                 </Grid>
                 <Grid>
                     <Text bold size="4" className="user_name">{userName}</Text>
-                    <Text size="2" className="user_institution">{careerName}</Text>
-                    <Text size="2" className="user_institution">{campusName}</Text>
-                    <Text size="2" className="user_institution">{institutionName}</Text>
-                    <Text size="2" className="user_location">{cityName}, {stateName}</Text>
+                    <Text className="user_career">{careerName}</Text>
+                    <Text className="user_campus">{campusName}</Text>
+                    <Text className="user_institution">{institutionName}</Text>
+                    <Text className="user_location">{cityName}, {stateName}</Text>
                 </Grid>
             </Flex>
             <Grid gap="0.3em">
                 <Text bold>Puntos</Text>
-                <Text bold size="10" align="center" className="user_points">{score}</Text>
+                <Text bold align="center" className="user_points">{score}</Text>
             </Grid>
         </Grid>
     )

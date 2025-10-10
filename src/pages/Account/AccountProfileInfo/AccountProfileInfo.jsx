@@ -14,6 +14,8 @@ import EducationalBackground from "./EducationalBackground"
 
 import { DEFAULT_PROFILE_PHOTO, handleClickSocialMediaIcon } from "./AccountProfileInfo.utils"
 
+import "./account_profile_info.scss"
+
 const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
     const auth = useSelector((store) => store.auth)
 
@@ -61,16 +63,16 @@ const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
 
     return (
         <>
-            <Grid w100 columns="auto 1fr auto 1fr auto" itemsX="center" itemsY="center" style={{ maxHeight: "7.57em" }}>
+            <Grid w100 columns="auto 1fr auto 1fr auto" itemsX="center" itemsY="center" className="heading_info_container">
                 <PageLink to={routes.ranking.path}>
                     <Grid className="change_page_button">
                         <Text style={{ visibility: "hidden" }}>&nbsp;</Text>
-                        <Icon icon='arrow' direction="bottom" size='3' />
+                        <Icon icon='arrow' direction="bottom" />
                     </Grid>
                 </PageLink>
                 <Grid>
                     <Text color="white">Ranking</Text>
-                    <Text color="white" size="9">{ranking || "-"}</Text>
+                    <Text bold color="white" className="heading_info__text_value" align="center">{ranking || "-"}</Text>
                 </Grid>
                 <Grid itemsX="center" gap="0.7em" style={{ zIndex: 1 }}>
                     <input
@@ -86,15 +88,15 @@ const AccountProfileInfo = ({ topicWithTotal, ranking, setAccountPage }) => {
                 </Grid>
                 <Grid>
                     <Text color="white">Respuestas</Text>
-                    <Text color="white" size="9">{totalAnswers}</Text>
+                    <Text bold color="white" className="heading_info__text_value" align="center">{totalAnswers}</Text>
                 </Grid>
                 <Grid onClick={() => setAccountPage(2)} className="change_page_button">
                     <Text style={{ visibility: "hidden" }}>&nbsp;</Text>
-                    <Icon icon='arrow' size='3' />
+                    <Icon icon='arrow' />
                 </Grid>
             </Grid>
 
-            <Grid w100 gap="1.71em" itemsX="center" padding="1.71em 4.57em" className="account__user_info">
+            <Grid w100 gap="1.71em" itemsX="center" className="account__user_info">
                 <Grid>
                     <Text medium align="center">{auth.user.name}</Text>
                     <Text medium align="center">{auth.user.email}</Text>

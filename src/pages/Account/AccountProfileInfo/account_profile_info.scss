@@ -1,8 +1,47 @@
-.profile_info__educational_background {
-    max-width: 250px;
+.account {
+    .heading_info_container {
+        max-height: 7.57em;
 
-    .separator {
-        width: 100%;
-        border-top: 1px solid var(--border-color--blue-alter-2);
+        .change_page_button {
+            .icon--arrow {
+                width: 3em;
+                height: 3em;
+                filter: var(--filter--white--1);
+            }
+        }
+
+        .heading_info__text_value {
+            font-size: var(--text-size--9);
+        }
+
+        .profile_info__educational_background {
+            max-width: 250px;
+
+            .separator {
+                width: 100%;
+                border-top: 1px solid var(--border-color--blue-alter-2);
+            }
+        }
+
+    }
+}
+
+@media (max-width: 480px) {
+    .account {
+        .heading_info_container {
+            max-height: 4.5em;
+
+            .change_page_button {
+                .icon--arrow {
+                    width: 2em;
+                    height: 2em;
+                }
+            }
+
+            .heading_info__text_value {
+                font-size: var(--text-size--8);
+            }
+
+        }
     }
 }

@@ -66,19 +66,13 @@ const Home = () => {
 					return
 				}
 				if (response.data.missingEducationalBackground) {
-					const now = new Date()
-					const oneDay = 1000 * 60 * 60 * 24
-					const missingDataMessageLastShown = localStorage.getItem("missingDataMessageLastShown")
-
-					if (!missingDataMessageLastShown || now - parseInt(missingDataMessageLastShown) > oneDay) {
-						showMB(
-							"Tu perfil está incompleto",
-							"Por favor completa la información.",
-							"Continuar",
-							() => navigate(routes.account.path)
-						)
-						localStorage.setItem("missingDataMessageLastShown", Date.now().toString())
-					}
+					showMB(
+						"Tu perfil está incompleto",
+						"Por favor completa la información.",
+						"Continuar",
+						() => navigate(routes.account.path)
+					)
+					return
 				}
 
 				getTopics()

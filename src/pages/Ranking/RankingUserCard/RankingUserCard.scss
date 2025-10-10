@@ -11,7 +11,16 @@
         }
     }
 
+    .user_placement {
+        font-size: var(--text-size--9);
+    }
+
+    .user_points {
+        font-size: var(--text-size--10);
+    }
+
     .card_user_info {
+        gap: 1rem;
         min-height: 100px;
 
         .user_picture {
@@ -38,11 +47,46 @@
             transform: translateX(-50%) scaleX(1.4);
             transform-origin: center;
         }
+
+        .user_name {
+            font-size: var(--text-size--4);
+        }
+
+        .user_career,
+        .user_campus,
+        .user_institution,
+        .user_location {
+            font-size: var(--text-size--2);
+        }
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 480px) {
     .ranking_user_card {
         gap: 0.3rem;
+
+        .card_placement_container {
+            grid-template-columns: 2rem minmax(3rem, auto);
+        }
+
+        .user_placement,
+        .user_points {
+            font-size: var(--text-size--8);
+        }
+
+        .card_user_info {
+            gap: 0.3rem;
+
+            .user_name {
+                font-size: var(--text-size--3);
+            }
+        }
+
+        .user_career,
+        .user_campus,
+        .user_institution,
+        .user_location {
+            font-size: var(--text-size--1);
+        }
     }
 }
